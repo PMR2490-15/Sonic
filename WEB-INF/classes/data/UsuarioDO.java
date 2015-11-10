@@ -32,11 +32,11 @@ public class UsuarioDO {
         this._nome_usuario = _nome_usuario;
     }
 
-     public String getsenha() {
+     public String getSenha() {
         return _senha;
     }
 
-    public void setsenha(String _senha) {
+    public void setSenha(String _senha) {
         this._senha = _senha;
     }
 
