@@ -46,30 +46,30 @@
        if (usuario == null || usuario.getSenha().equals(password)) {
          // avisar usuario que o login nao pode ser efetuado
 %>
+
           Nome de usuário ou senha incorretos!
           <form action="./index.html" method="post">
           </form>
+          
 <%     } else {
-%>
-            <form action="./search.jsp" method="post">
-                <table>
-                    <tr>
-                        <td>Nome de usuário </td>
-                        <td><input type="text" name="Email" /> 
-                    </tr>
-                </table>
-                <input type="submit" name="Enviar email" value="sendResetPassword" />
-                <input type="submit" name="Cancelar" value="backToLogin" />
-            </form>
-            
-<%     } // login efetuado
-
+            session.setAttribute("nomeUsuario", nome);
+            session.setAttribute("idUsuario", usuario.getId());
+       } // login efetuado
      } // login
 
+     
      else if (action.equals("forgotPassword")) {
 %>
-
-
+        <form action="./search.jsp" method="post">
+            <table>
+                <tr>
+                    <td>Nome de usuário </td>
+                    <td><input type="text" name="Email" /> 
+                </tr>
+            </table>
+            <input type="submit" name="Enviar email" value="sendResetPassword" />
+            <input type="submit" name="Cancelar" value="backToLogin" />
+        </form>
 <%
      } // forgotPassword
 %>
