@@ -11,7 +11,7 @@ public class UsuarioData {
      String sql = "insert into usuario (nome, senha) values (?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
-     ps.setString(2, usuario.getsenha());
+     ps.setString(2, usuario.getSenha());
      int result = ps.executeUpdate();
   }
   
@@ -20,7 +20,7 @@ public class UsuarioData {
      String sql = "insert into usuario (nome, senha) values (?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
-     ps.setString(2, usuario.getsenha());
+     ps.setString(2, usuario.getSenha());
      int result = ps.executeUpdate();
   }
 
@@ -37,7 +37,7 @@ public class UsuarioData {
      String sql = "update usuario set nome=?, senha=? where id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
-     ps.setString(2, usuario.getsenha());
+     ps.setString(2, usuario.getSenha());
      ps.setInt(3, usuario.getId());
      int result = ps.executeUpdate();
   } // atualizar
@@ -52,7 +52,7 @@ public class UsuarioData {
      UsuarioDO usuario = new UsuarioDO();
      usuario.setId (rs.getInt("id"));
      usuario.setNome_Usuario (rs.getString("nome"));
-     usuario.setsenha(rs.getString("senha"));
+     usuario.setSenha(rs.getString("senha"));
      return usuario;
   } // buscar
   
@@ -66,7 +66,7 @@ public class UsuarioData {
      UsuarioDO usuario = new UsuarioDO();
      usuario.setId (rs.getInt("id"));
      usuario.setNome_Usuario (rs.getString("nome"));
-     usuario.setsenha(rs.getString("senha"));
+     usuario.setSenha(rs.getString("senha"));
      return usuario;
   } // buscar
 
