@@ -9,7 +9,7 @@ public class Usuario {
   public boolean incluir (UsuarioDO usuario) throws Exception{
 
      // validacao das regras de negocio
-     if ( (isEmpty(usuario.getNome_Usuario())) || ( isEmpty(usuario.getsenha())) ) {
+     if ( (isEmpty(usuario.getNome_Usuario())) || ( isEmpty(usuario.getSenha())) ) {
        return false;
      }
 
