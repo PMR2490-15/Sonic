@@ -78,6 +78,7 @@
 <%     } else {
             session.setAttribute("nomeUsuario", nome);
             session.setAttribute("idUsuario", usuario.getId());
+            pageContext.forward("main.jsp");
        } // login efetuado
      } // login
 
