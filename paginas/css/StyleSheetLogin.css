@@ -1,0 +1,139 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/10/2015, 18:10:22
+    Author     : Juliana
+*/
+
+body {
+        background-image: url("images/spm.jpg");
+}
+h1 {
+    font-family: cursive;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #950505;
+}
+
+#poli{
+    position: relative;
+    top: -30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    
+}
+
+p:nth-child(2) {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+#left{
+    position: relative;
+    float: left;
+    margin-top: 50px;
+    margin-left: 40px;
+    width: 45%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+#left2{
+    position: relative;
+    float: left;
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 45%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+#right{
+    position: relative;
+    float: right;
+    margin-top: 50px;
+    width: 45%;
+    height: 100px;    
+    margin-bottom: 10px;
+}
+
+#button{
+	border: 2px solid #000000;
+	float:left;
+	position: relative;
+	bottom: -20px;
+	border-radius: 5px;
+	background-color: yellow;
+	height: 30px;
+	width: 150px;
+	
+}
+
+#button p{
+	position: relative;
+	bottom: 10px;
+	font-size: 0.8em;
+	color: blue;
+	text-align: center;
+}
+
+.bold{
+	font-family: tahoma;
+	font-weight: bold;
+	font-size: 1.6em;
+	font-variant: small-caps;
+	color: blue;
+}
+
+#button a{
+    text-decoration: none;
+}
+
+#footer{
+    clear: both;
+    position: relative;
+    bottom: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 125px;
+   
+}
+
+#footer p{
+    padding-top: 90px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.charizard{
+    width:150px;
+    height:150px;
+}
+
+#charizard{
+    clear:right;
+    position: relative;
+    float: right;
+    width: 35%;
+    height:175px;    
+}
+
+.dk{
+    width: 150px;
+    height: 150px;
+}
+
+#dk{
+ position: relative;
+    float: right;
+    margin-top: 50px;
+    width: 45%;
+    height: 100px;    
+    margin-bottom: 10px;
+}
