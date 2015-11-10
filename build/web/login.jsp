@@ -1,3 +1,4 @@
+<%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
 <header>
@@ -21,54 +22,48 @@
 	  <form action="./search.jsp" method="post">
             <table>
               <tr>
-                 <td>Nome de usuario </td>
+                 <td>Nome de usuário </td>
                  <td><input type="text" name="nomeUsuario" />
-                 <td>Nome de usuario </td>
+                 <td>Nome de usuário </td>
                  <td><input type="password" password="senha" />  
               </tr>
             </table>
-            <input type="submit" name="pesquisar" password="pesquisar" />
-	    <input type="hidden" name="action" value="tryLogin" />
+            <input type="submit" name="Login" value="tryLogin" />
+	    <input type="submit" name="Esqueci minha senha" value="forgotPassword" />
           </form>
 
 <%        
-       } 
-
+       }
 %>
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%
      if (action.equals("tryLogin")) {
        String nome = request.getParameter("nomeUsuario");
+       String password = request.getParameter("senha");
        transacoes.Usuario tn = new transacoes.Usuario();
-       List contatos = tn.buscar(nome);
-       if ( (contatos == null) || (contatos.size() == 0)) {
-         // avisar usuario que nao ha' contatos com este nome
+       UsuarioDO usuario = tn.buscar(nome);
+       if (usuario == null || usuario.getSenha() != password) {
+         // avisar usuario que o login nao pode ser efetuado
 %>
-          Nenhum contato com este nome foi encontrado!
+          Nome de usuário ou senha incorretos!
           <form action="./index.html" method="post">
              <input type="submit" name="voltar" value="Voltar" />
           </form>
 <%     } else {
 %>
-          <table>
-             <tr>
-                <td>Nome</td>
-                <td>Telefone</td>
-             </tr>
-<%           for(int i = 0; i < contatos.size(); i++) {
-                ContatoDO contato = (ContatoDO)contatos.elementAt(i);
-%>              <tr>
-                   <td><%= contato.getNome() %></td>
-                   <td><%= contato.getTelefone() %></td>
-		   <td><a href=update.jsp?action=showEditForm&id=<%= contato.getId()%>>Editar</a>
-                </tr>        
-<%           } // for i      
-%>        </table>            
-<%     } // contatos retornados
+            
+            
+<%     } // login efetuado
 
-     } // pesquisar
+     } // login
 
+     else if (action.equals("forgotPassword")) {
+%>
+
+
+<%
+     } // forgotPassword
 %>
 <! ------------------------------------------------------------------->
 <!--   mostra formulario para atualizacao                           -->
