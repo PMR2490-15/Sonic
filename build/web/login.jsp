@@ -28,8 +28,8 @@
                  <td><input type="password" password="senha" />  
               </tr>
             </table>
-            <input type="submit" name="Login" value="tryLogin" />
-	    <input type="submit" name="Esqueci minha senha" value="forgotPassword" />
+            <input type="submit" name="tryLogin" value="Login :D" />
+	    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
           </form>
 
 <%        
