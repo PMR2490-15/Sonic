@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/10/2015, 18:10:22
+    Author     : Juliana
+*/
+
+/*
+* {
+    border: 1px dashed black;
+}
+*/
+
+body {
+        background-image: url("images/spm.jpg");
+}
+h1 {
+    font-family: cursive;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #950505;
+}
+
+h3{
+    text-align: center;
+}
+#poli{
+    position: relative;
+    top: -30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    
+}
+
+p:nth-child(2) {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+#left{
+    position: relative;
+    float: left;
+    margin-top: -50px;
+    margin-left: 40px;
+    width: 20%;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+#footer{
+    clear: both;
+    position: relative;
+    bottom: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 125px;
+   
+}
+
+#footer p{
+    padding-top: 150px;
+    font-weight: bold;
+    text-align: center;
+}
+.options{
+    text-align: center;
+    position: relative;
+    margin-left:20px;
+    top: -60px;
+    height: 25px;
+    width: 130px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: #0066FF;
+}
+
+div a{
+    text-decoration: none;
+    color: black;
+}
+#foto{
+	width:200px;
+	height:200px;
+}
+
+#lupa{
+	width:20px;
+	height:20px;
+}
+.conta{
+    text-align: center;
+    position: relative;
+    margin-left:20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #0066FF;
+}
