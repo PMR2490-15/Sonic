@@ -35,7 +35,7 @@
        if ( null == action ) {
           action = "showLoginForm";
 %>
-	  <form action="./search.jsp" method="post">
+	  <form action="./login.jsp" method="post">
             <table>
               <tr>
                  <td>Nome de usuário </td>
@@ -48,8 +48,8 @@
               <tr>
                   <td></td>
                   <td>
-                      <input type="submit" name="Login" value="tryLogin" />
-	    <input type="submit" name="Esqueci minha senha" value="forgotPassword" />
+                      <input type="submit" name="Login" value="Login :D" />
+	    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
                   </td>
               </tr>
             </table>
@@ -62,7 +62,7 @@
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%
-     if (action.equals("tryLogin")) {
+     if (action.equals("Login :D")) {
        String nome = request.getParameter("nomeUsuario");
        String password = request.getParameter("senha");
        transacoes.Usuario tn = new transacoes.Usuario();
@@ -83,7 +83,7 @@
      } // login
 
      
-     else if (action.equals("forgotPassword")) {
+    else if (action.equals("Esqueci minha senha :/")) {
 %>
         <form action="./search.jsp" method="post">
             <table>
@@ -97,7 +97,8 @@
         </form>
     
 <%
-     } // forgotPassword
+        
+    } // forgotPassword
 %>
 </div>
     </div>
