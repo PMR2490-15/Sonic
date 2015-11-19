@@ -88,8 +88,14 @@
         <div class="options"> 
             <a href="./insert.jsp">Editar Conta</a>
         </div> 
-    
 </div>  
+
+                        <%--Centro--%>
+        <div id="center">
+            
+        </div>
+        
+        <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
             <br>Escola Politécnida da USP</p>

@@ -82,6 +82,19 @@ p:nth-child(2) {
     background-color: #0066FF;
 }
 
+.optionsSelect{
+    text-align: center;
+    position: relative;
+    margin-left:40px;
+    top: -60px;
+    height: 25px;
+    width: 130px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: #58FAAC;
+}
+
 div a{
     text-decoration: none;
     color: black;
@@ -101,5 +114,16 @@ div a{
     margin-left:20px;
     border: 2px solid black;
     border-radius: 5px;
-    background-color: #0066FF;
+    background-color: #58FAAC;
+    //background-color: #0066FF;
+}
+
+#center{
+    position: relative;
+    float: left;
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 700px;
+    height: 400px;
+    margin-bottom: 10px;
 }

@@ -36,7 +36,7 @@
        if ( null == action ) {
           action = "showLoginForm";
 %>
-	  <form action="./gamer.jsp" method="post">
+	  <form action="./loja.jsp" method="post">
             <table>
               <tr>
                  <td>Nome de usuário </td>
