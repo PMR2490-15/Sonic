@@ -12,8 +12,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="Stylesheet" href="css/StyleSheetGamer.css"/>
-        <title>HttpSessionDemo - Pagina do Gamer</title>
+        <link type="text/css" rel="Stylesheet" href="css/StyleSheetLoja.css"/>
+        <title>HttpSessionDemo - Pagina da Loja</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
@@ -36,7 +36,7 @@
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./gamer.jsp">Minha Conta</a>
+                    <a href="./loja.jsp">Minha Conta</a>
                 </th>
             </tr>
         </thead>
@@ -44,11 +44,11 @@
             <form method="post" action=index.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Bem vindo <%= nome %> !!</h3>
+                        <h3>Loja <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Logo.png"></td>
+                    <td><img id="foto" src="images/Blastoise.png"></td>
                 </tr>
                 <tr>
                     <table>
@@ -78,9 +78,6 @@
         <div class="options">
             <a href="./insert.jsp">Inventário</a>
         </div> 
-        <div class="options">
-            <a href="./update.jsp">Wishlist</a>
-        </div>
         <div class="options">
             <a href="./remove.jsp">Comunicados</a>
         </div>
