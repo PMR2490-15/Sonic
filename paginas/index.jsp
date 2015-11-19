@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : index
     Created on : 01/10/2009, 18:29:29
@@ -5,9 +6,9 @@
 --%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
-<%@ page import="transacoes.Contato" %>
-<%@ page import="data.ContatoDO" %>
-<%@ page import="java.util.Vector" %>
+<%@page import="transacoes.Contato" %>
+<%@page import="data.ContatoDO" %>
+<%@page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,7 +36,7 @@
        if ( null == action ) {
           action = "showLoginForm";
 %>
-	  <form action="./login.jsp" method="post">
+	  <form action="./admin.jsp" method="post">
             <table>
               <tr>
                  <td>Nome de usuário </td>
@@ -49,6 +50,7 @@
                   <td></td>
                   <td>
                       <input type="submit" name="Login" value="Login :D" />
+                      <input type="hidden" name="action" value="gamer" />
 	    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
                   </td>
               </tr>
@@ -62,7 +64,8 @@
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%
-     if (action.equals("Login :D")) {
+
+     if (action.equals("gamer")) {/*
        String nome = request.getParameter("nomeUsuario");
        String password = request.getParameter("senha");
        transacoes.Usuario tn = new transacoes.Usuario();
@@ -70,16 +73,16 @@
        if (usuario == null || usuario.getSenha().equals(password)) {
          // avisar usuario que o login nao pode ser efetuado
 %>
-
+<%---
           Nome de usuário ou senha incorretos!
           <form action="./index.html" method="post">
           </form>
-          
-<%     } else {
-            session.setAttribute("nomeUsuario", nome);
-            session.setAttribute("idUsuario", usuario.getId());
-            pageContext.forward("main.jsp");
-       } // login efetuado
+     --%>    
+<%   //  }// else {
+           // session.setAttribute("nomeUsuario", nome);
+           // session.setAttribute("idUsuario", usuario.getId());*/
+            pageContext.forward("gamer.jsp");
+       //} // login efetuado
      } // login
 
      
@@ -89,7 +92,7 @@
             <table>
                 <tr>
                     <td>Nome de usuário </td>
-                    <td><input type="text" name="Email" /> 
+                    <td><input type="text" name="Email" /> </td
                 </tr>
             </table>
             <input type="submit" name="Enviar email" value="sendResetPassword" />
