@@ -7,7 +7,7 @@ public class Transacao {
   // connection data
   static final String ODBC_DRIVER = "com.mysql.jdbc.Driver";
 
-  static final String DSN = "jdbc:mysql://localhost:3306/test";
+  static final String DSN = "jdbc:mysql://localhost:3306/mpj";
   static final String USER = "aluno";
   static final String PWD = "epusp";
   
