@@ -38,13 +38,6 @@ public class ItemInventarioDO {
         _id = id;
     }
     
-    public int getId() {
-        return _id;
-    }
-    public void setId(int id) {
-        _id = id;
-    }
-    
     public int getEstado() {
         return _estado;
     }
