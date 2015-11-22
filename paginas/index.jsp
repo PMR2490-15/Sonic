@@ -36,11 +36,8 @@
        if ( null == action ) {
           action = "showLoginForm";
 %>
-<<<<<<< Updated upstream
 	  <form action="./loja.jsp" method="post">
-=======
 	  <form action="./login.jsp" method="post">
->>>>>>> Stashed changes
             <table>
               <tr>
                  <td>Nome de usuário </td>
@@ -54,10 +51,7 @@
                   <td></td>
                   <td>
                       <input type="submit" name="Login" value="Login :D" />
-<<<<<<< Updated upstream
                       <input type="hidden" name="action" value="gamer" />
-=======
->>>>>>> Stashed changes
 	    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
                   </td>
               </tr>
@@ -71,12 +65,8 @@
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%
-<<<<<<< Updated upstream
-
      if (action.equals("gamer")) {/*
-=======
      if (action.equals("Login :D")) {
->>>>>>> Stashed changes
        String nome = request.getParameter("nomeUsuario");
        String password = request.getParameter("senha");
        transacoes.Usuario tn = new transacoes.Usuario();
