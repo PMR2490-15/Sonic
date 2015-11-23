@@ -7,6 +7,11 @@ package data;
 import java.sql.*;
 import java.util.*;
 import utils.Transacao;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Juliana
@@ -15,10 +20,12 @@ public class ComunicadoData {
     
      public void incluir(ComunicadoDO comunicado, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into Comunicado (nome, telefone) values (?, ?)";
+     String sql = "insert into COMUNICADO (ID_REMETENTE, ID_DESTINATARIO, MENSAGEM,DATA_2) values (?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, comunicado.getComunicado());
-     //ps.setString(2, comunicado.getTelefone());
+     ps.setInt(1, comunicado.getIdrem());
+     ps.setInt(2, comunicado.getIdDest());
+     ps.setString(3, comunicado.getComunicado());
+     ps.setDate(4, formataData(comunicado.getData()) );
      int result = ps.executeUpdate();
   }
 
@@ -71,5 +78,58 @@ public class ComunicadoData {
      }
      return contatos;
   } // pesquisarPorNome
+  
+  // BAN: alterações a partir daqui
+  public Vector pesquisarPorRemetente(int user_id, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from COMUNICADO where ID_REMETENTE = ?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, user_id);
+     ResultSet rs = ps.executeQuery();
+     System.out.println("query executada");
+     Vector contatos = new Vector();
+     while (rs.next()) {
+        ComunicadoDO c = new ComunicadoDO();
+        c.setIdrem(rs.getInt("ID_REMETENTE"));
+        c.setIdDest(rs.getInt("ID_DESTINATARIO"));
+        c.setComunicado(rs.getString("MENSAGEM"));
+        c.setData(rs.getString("DATA_2"));
+        contatos.add(c);
+     }
+     return contatos;
+  } // pesquisarPorRemetente
+  
+  public Vector pesquisarPorDestinatario(int user_id, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from COMUNICADO where ID_DESTINATARIO = ?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, user_id);
+     ResultSet rs = ps.executeQuery();
+     System.out.println("query executada");
+     Vector contatos = new Vector();
+     while (rs.next()) {
+        ComunicadoDO c = new ComunicadoDO();
+        c.setIdrem(rs.getInt("ID_REMETENTE"));
+        c.setIdDest(rs.getInt("ID_DESTINATARIO"));
+        c.setComunicado(rs.getString("MENSAGEM"));
+        c.setData(rs.getString("DATA_2"));
+        contatos.add(c);
+     }
+     return contatos;
+  } // pesquisarPorDestinatario
+  
+  public static java.sql.Date formataData(String data) throws Exception {   
+        if (data == null || data.equals(""))  
+            return null;  
+          
+        java.sql.Date date = null;  
+        try {  
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+            date = new java.sql.Date( ((java.util.Date)formatter.parse(data)).getTime() );  
+        } catch (Exception e) {              
+            throw e;
+        }  
+        return date;  
+    }
     
 }

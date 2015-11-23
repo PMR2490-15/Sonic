@@ -58,7 +58,7 @@ public class UsuarioData {
   
   public UsuarioDO buscar(String nomeUsuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "select * from usuario where  username=?";
+     String sql = "select * from usuario where  nome=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, nomeUsuario);
      ResultSet rs = ps.executeQuery();

@@ -79,7 +79,7 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicado.jsp">Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
