@@ -9,55 +9,49 @@ import data.*;
 import java.util.*;
 
 public class ItemInventario {
-
-  public boolean incluir (Classe_Item item) throws Exception{
-
-     // validacao das regras de negocio
-     if(isEmpty(item.getNome()) )  {
-       return false;
-     }
+    public boolean incluir (ItemInventarioDO item) throws Exception{
 
      // efetuando a transacao
      Transacao tr = new Transacao();
      try {
 
        tr.begin();
-        ItemInventarioData item = new ItemData();
-        item.incluir(item, tr);
+         ItemInventarioData item_data = new ItemInventarioData();
+         item_data.incluir(item, tr);
        tr.commit();
        return true;
        
      } catch(Exception e) {
          tr.rollback();
-         System.out.println("erro ao incluir " + item.getNome());
+         System.out.println("erro ao incluir " + item.getItemId());
          e.printStackTrace();
      }
      return false;
   } // incluir
 
-  public boolean atualizar(Classe_Item item) throws Exception {
+  public boolean atualizar(ItemInventarioDO item) throws Exception {
      Transacao tr = new Transacao();
 	 try{
 	   // inserir validacoes de regras de negocio
 	   tr.begin();
-  	     ItemData item_data = new ItemData();
+  	     ItemInventarioData item_data = new ItemInventarioData();
 	     item_data.atualizar(item, tr);
 	   tr.commit();
 	   return true;
 	 } catch (Exception e) {
 	   tr.rollback();
-	   System.out.println("erro ao atualizar" + item.getNome());
+	   System.out.println("erro ao atualizar" + item.getItemId());
 	   e.printStackTrace();
 	 }
 	 return false;
   } // atualizar
 
-  public Classe_Item buscar(int idobj) throws Exception{
+  public ItemInventarioDO buscar(int idobj) throws Exception{
      Transacao tr = new Transacao();
 	 try{
 	   tr.beginReadOnly();
-  	     ItemData item_data = new ItemData();
-	     Classe_Item i = item_data.buscar(idobj, tr);
+  	     ItemInventarioData item_data = new ItemInventarioData();
+	     ItemInventarioDO i = item_data.buscarID(idobj, tr);
 	   tr.commit();
 	   return i;
 	 } catch (Exception e) {
@@ -68,15 +62,15 @@ public class ItemInventario {
 	 return null;
   } // buscar
 
-  public Vector pesquisar(String nome) {
+  public List pesquisar(String nome) {
      if ( isEmpty(nome) )
         return null;
 
      Transacao tr = new Transacao();
      try {
 	     tr.beginReadOnly();
-           ItemData item_data = new ItemData();
-           Vector v = item_data.pesquisarPorNome(nome, tr);
+           ItemInventarioData item_data = new ItemInventarioData();
+           List v = item_data.pesquisaNome(nome, tr);
 		 tr.commit();
 		 return v;
      } catch(Exception e) {
@@ -95,16 +89,15 @@ public class ItemInventario {
   }
 
   public static void main(String[] args) {
-      Item i = new Item();
-      Classe_Item item = new Classe_Item();
+      ItemInventario i = new ItemInventario();
+      ItemInventarioDO item = new ItemInventarioDO();
   
       try {
             item = i.buscar(2);
-		System.out.println(item.getNome());
+		System.out.println(item.getItemId());
       } catch(Exception e) {
           e.printStackTrace();
       }
   } // main
-
 
 } // Item
