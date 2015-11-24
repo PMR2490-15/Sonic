@@ -1,10 +1,13 @@
 
 <%-- 
-    Document   : gamer.jsp
-    Created on : 01/10/2009, 18:45:32
-    Author     : MB
+    Document   : loja.jsp
 --%>
 
+<%@page import="data.UsuarioDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.Loja" %>
+<%@ page import="data.LojaDO" %>
+<%@ page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,17 +16,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="Stylesheet" href="css/StyleSheetLoja.css"/>
-        <title>HttpSessionDemo - Pagina da Loja</title>
+        <title>Pagina da Loja</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
+    if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
+    int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Loja lojatn = new Loja();
+    LojaDO loja = new LojaDO();
+    loja = lojatn.buscar(lojaID);
+    String nome = loja.getNome();
+    //String nome = Integer.toString(lojaID);
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -41,14 +47,14 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=index.jsp>
+            <form method="post" action=loja.jsp>
                 <tr>
                     <td align="center">
                         <h3>Loja <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Blastoise.png"></td>
+                    <td><img id="foto" src=<%= loja.getFoto()%>></td>
                 </tr>
                 <tr>
                     <table>
@@ -79,19 +85,63 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp">Comunicados</a>
+            <a href="./remove.jsp">Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./lojaUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Editar Conta</a>
         </div> 
 </div>  
 
     <%--centro--%>
 <div id="center">
-    
+    <table>
+        <tr>
+               <h4>Dados da loja</h4>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>CNPJ:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=loja.getCNPJ()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>e-mail:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=loja.getEmail()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Telefone 1:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=loja.getTelefone_1()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Telefone 2:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=loja.getTelefone_2()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Site:</hdl>
+            </td>
+            <td align="left">
+                <hd><a href=<%=loja.getURL()%>><%=loja.getURL()%></a></hd>
+            </td>
+        </tr>
+    </table>
 </div>
     
 <%-- Rodape --%>

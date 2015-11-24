@@ -6,8 +6,7 @@
 --%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
-<%@page import="transacoes.Contato" %>
-<%@page import="data.ContatoDO" %>
+<%@page import="transacoes.Usuario" %>
 <%@page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -32,60 +31,92 @@
     <div id="left"> 
         
         <div id="left2">
-<%          String action = request.getParameter("action");
-    if ( null == action ) {
-        action = "showLoginForm";
+<%            String action = request.getParameter("action");
+       if ( null == action ) {
+          action = "showLoginForm";
 %>
-        <form action="./loja.jsp" method="post">
-        <form action="./login.jsp" method="post">
+	  <form action="./index.jsp" method="post">
             <table>
-            <tr>
-                <td>Nome de usuário </td>
-                <td><input type="text" name="nomeUsuario" />
-            </tr>
-            <tr>
-                <td>Senha </td>
-                <td><input type="password" password="senha" />  
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" name="action" value="Login :D" />
-                    <input type="hidden" name="action" value="gamer" />
-                    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
-                </td>
-            </tr>
+              <tr>
+                 <td>Nome de usuário </td>
+                 <td><input type="text" name="nomeUsuario" />
+              </tr>
+              <tr>
+                 <td>Senha </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>
+                      <input type="submit" name="action" value="Login :D" />
+                      <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
+                      <input type="submit" name="action" value="loja" />
+                      <input type="submit" name="action" value="gamer" />
+                      <input type="submit" name="action" value="admin" />
+                  </td>
+              </tr>
             </table>
             
-        </form>
+          </form>
 
 <%        
-    }
+       }
 %>
-<!-------------------------------------------------------------------------->
+<! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
+<%  
+     if (action.equals("loja")) {
+       int id = 500; //simular ID
+       session.setAttribute("User_ID", Integer.toString(id));
+       pageContext.forward("loja.jsp");
+     }
+     
+     if (action.equals("admin")) {
+       pageContext.forward("admin.jsp");
+     }
+
+     if (action.equals("gamer")) {
+         pageContext.forward("gamer.jsp");
+       }
+     if (action.equals("Login :D")){
+       String username = request.getParameter("nomeUsuario");
+       String password = request.getParameter("senha");
+       Usuario tn = new Usuario();
+       UsuarioDO usuario = tn.buscar(username);
+       if (usuario == null || !password.equals((String)usuario.getSenha())) {
+%>         
+           Nome de usuário ou senha incorretos!
+          <form action="./index.html" method="post">
+          </form>
 <%
-    if (action.equals("gamer")) {/*
-    if (action.equals("Login :D")) {// LOGIN AQUI!
-        String nome = request.getParameter("nomeUsuario");
-        String password = request.getParameter("senha");
-        transacoes.Usuario tn = new transacoes.Usuario();
-        UsuarioDO usuario = tn.buscar(nome);
-        if (usuario == null || ! usuario.getSenha().equals(password)) {
-            // avisar usuario que o login nao pode ser efetuado*/
+       }else{
+           if(usuario.getTipo() == 1){
+               pageContext.forward("gamer.jsp");
+           }
+           if(usuario.getTipo() == 2){
+               session.setAttribute("User_ID", Integer.toString(usuario.getId()));
+               pageContext.forward("loja.jsp");
+           }
+           if(usuario.getTipo() == 3){
+               pageContext.forward("admin.jsp");
+           }
+       }
+     
+         // avisar usuario que o login nao pode ser efetuado
 %>
 <%---
-            Nome de usuário ou senha incorretos!
-            <form action="./index.html" method="post">
-            </form>
+          Nome de usuário ou senha incorretos!
+          <form action="./index.html" method="post">
+          </form>
      --%>    
-<%      /*} else {
-            session.setAttribute("nomeUsuario", nome);
-            session.setAttribute("idUsuario", usuario.getId());*/
-        pageContext.forward("gamer.jsp");
-        } // login efetuado
-    //} // Login
-    
+<%   //  }// else {
+           // session.setAttribute("nomeUsuario", nome);
+           // session.setAttribute("idUsuario", usuario.getId());*/
+           // pageContext.forward("gamer.jsp");
+       //} // login efetuado
+     } // login
+
+     
     else if (action.equals("Esqueci minha senha :/")) {
 %>
         <form action="./search.jsp" method="post">

@@ -50,7 +50,7 @@ public class LojaDO {
         return URL;
     }
     
-     public String getSuspenso_ate(){
+    public String getSuspenso_ate(){
         return Suspenso_ate;
     }
      
@@ -59,43 +59,43 @@ public class LojaDO {
     }
     
     // Sets
-    void setID(int _ID){
+    public void setID(int _ID){
         ID = _ID;
     }
     
-    void setNome(String _Nome){
+    public void setNome(String _Nome){
         Nome = _Nome;
     }
     
-    void setCNPJ(int _CNPJ){
+    public void setCNPJ(int _CNPJ){
         CNPJ = _CNPJ;
     }
     
-    void setEmail(String _Email){
+    public void setEmail(String _Email){
         Email = _Email;
     }
     
-    void setTelefone_1(int _Telefone_1){
+    public void setTelefone_1(int _Telefone_1){
         Telefone_1 = _Telefone_1;
     }
     
-    void setTelefone_2(int _Telefone_2){
+    public void setTelefone_2(int _Telefone_2){
         Telefone_2 = _Telefone_2;
     }
     
-   void setFoto(String _Foto){
+   public void setFoto(String _Foto){
         Foto = _Foto;
     }
     
-    void setURL(String _URL){
+    public void setURL(String _URL){
         URL = _URL;
     }
     
-    void setSuspenso_ate(String _Suspenso_ate){
+    public void setSuspenso_ate(String _Suspenso_ate){
         Suspenso_ate = _Suspenso_ate;
     }
      
-    void setAtivo(boolean _Ativo){
+    public void setAtivo(boolean _Ativo){
         Ativo = _Ativo;
     }
 }

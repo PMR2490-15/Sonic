@@ -36,7 +36,7 @@ public class LojaData {
 
     public void excluir(int idobj, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from Loja where id=?";
+        String sql = "delete from Loja where USUARIO_ID=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, idobj);
         int result = ps.executeUpdate();
@@ -44,7 +44,7 @@ public class LojaData {
 
     public void atualizar(LojaDO Loja, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update Loja set NOME=?, CNPJ=?, EMAIL=?, TELEFONE_1=?, TELEFONE_2=?, FOTO=?, URL=?, SUSPENSO_ATE=?, ATIVO=? where id=?";
+        String sql = "update Loja set NOME=?, CNPJ=?, EMAIL=?, TELEFONE_1=?, TELEFONE_2=?, FOTO=?, URL=?, SUSPENSO_ATE=?, ATIVO=? where USUARIO_ID=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, Loja.getNome());
         ps.setInt(2, Loja.getCNPJ());
@@ -61,13 +61,13 @@ public class LojaData {
 
     public LojaDO buscar(int idobj, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from Loja where ID=?";
+        String sql = "select * from Loja where USUARIO_ID=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, idobj);
         ResultSet rs = ps.executeQuery();
         rs.next();
         LojaDO loja = new LojaDO();
-        loja.setID(rs.getInt("ID"));
+        loja.setID(rs.getInt("USUARIO_ID"));
         loja.setNome(rs.getString("NOME"));
         loja.setCNPJ(rs.getInt("CNPJ"));
         loja.setEmail(rs.getString("EMAIL"));
@@ -90,7 +90,7 @@ public class LojaData {
         Vector Lojas = new Vector();
         while (rs.next()) {
             LojaDO loja = new LojaDO();
-            loja.setID(rs.getInt("ID"));
+            loja.setID(rs.getInt("USUARIO_ID"));
             loja.setNome(rs.getString("NOME"));
             loja.setCNPJ(rs.getInt("CNPJ"));
             loja.setEmail(rs.getString("EMAIL"));

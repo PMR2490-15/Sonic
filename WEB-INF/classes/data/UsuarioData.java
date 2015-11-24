@@ -8,7 +8,7 @@ public class UsuarioData {
 
   public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into usuario (nome, senha) values (?, ?)";
+     String sql = "insert into usuario (username, senha) values (?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
      ps.setString(2, usuario.getSenha());
@@ -17,7 +17,7 @@ public class UsuarioData {
   
   public void alterarsenha(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into usuario (nome, senha) values (?, ?)";
+     String sql = "insert into usuario (username, senha) values (?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
      ps.setString(2, usuario.getSenha());
@@ -34,7 +34,7 @@ public class UsuarioData {
 
   public void atualizar(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update usuario set nome=?, senha=? where id=?";
+     String sql = "update usuario set username=?, senha=? where id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
      ps.setString(2, usuario.getSenha());
@@ -44,29 +44,30 @@ public class UsuarioData {
 
   public UsuarioDO buscar(int idobj, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "select * from usuario where  id=?";
+     String sql = "select * from usuario where id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, idobj);
      ResultSet rs = ps.executeQuery();
      rs.next();
      UsuarioDO usuario = new UsuarioDO();
      usuario.setId (rs.getInt("id"));
-     usuario.setNome_Usuario (rs.getString("nome"));
+     usuario.setNome_Usuario (rs.getString("username"));
      usuario.setSenha(rs.getString("senha"));
      return usuario;
   } // buscar
   
   public UsuarioDO buscar(String nomeUsuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "select * from usuario where  nome=?";
+     String sql = "select * from usuario where username=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, nomeUsuario);
      ResultSet rs = ps.executeQuery();
      rs.next();
      UsuarioDO usuario = new UsuarioDO();
-     usuario.setId (rs.getInt("id"));
-     usuario.setNome_Usuario (rs.getString("nome"));
+     usuario.setId(rs.getInt("id"));
+     usuario.setNome_Usuario(rs.getString("username"));
      usuario.setSenha(rs.getString("senha"));
+     usuario.setTipo(rs.getInt("tipo"));
      return usuario;
   } // buscar
 
