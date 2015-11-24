@@ -15,7 +15,7 @@
         // Nome do admin logado
         String nome = (String)(session.getAttribute("nomeUsuario"));
         // Item de inventario do anuncio
-        int itemInvId = (int)session.getParameter("idItemInventario");
+        int itemInvId = Integer.valueOf(session.getParameter("idItemInventario"));
         ItemInventario item = new ItemInventario();
         ItemInventarioDO it = item.buscar(itemInvId);
         
