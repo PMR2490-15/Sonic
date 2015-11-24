@@ -4,16 +4,12 @@
  * and open the template in the editor.
  */
 package data;
-/**
- *
- * @author leonardo.monteiro
- */
 
 import java.sql.*;
 import java.util.*;
 import utils.Transacao;
 
-public class Classe_Item_Data {
+public class ItemData {
     
   public void incluir(Classe_Item item, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();

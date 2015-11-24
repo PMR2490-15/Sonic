@@ -8,10 +8,12 @@ public class UsuarioData {
 
   public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into usuario (username, senha) values (?, ?)";
+     String sql = "insert into usuario (username, senha, pergunta, resposta) values (?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
      ps.setString(2, usuario.getSenha());
+     ps.setString(3, usuario.getPergunta());
+     ps.setString(4, usuario.getResposta());
      int result = ps.executeUpdate();
   }
   
@@ -26,7 +28,7 @@ public class UsuarioData {
 
   public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "delete from agenda where id=?";
+     String sql = "delete from usuario where id=?";
      PreparedStatement ps = con.prepareStatement(sql);
 	 ps.setInt(1, usuario.getId());
      int result = ps.executeUpdate();
@@ -68,6 +70,8 @@ public class UsuarioData {
      usuario.setNome_Usuario(rs.getString("username"));
      usuario.setSenha(rs.getString("senha"));
      usuario.setTipo(rs.getInt("tipo"));
+     usuario.setPergunta(rs.getString("pergunta"));
+     usuario.setResposta(rs.getString("resposta"));
      return usuario;
   } // buscar
 

@@ -1,0 +1,100 @@
+<%-- 
+    Secao deve conter a variavel "idItemInventario" para
+    resgatar o item de inventario visualisado aqui.
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>HttpSessionDemo - Anúncio</title>
+    </head>
+    <body>
+<%
+        // Nome do admin logado
+        String nome = (String)(session.getAttribute("nomeUsuario"));
+        // Item de inventario do anuncio
+        int itemInvId = (int)session.getParameter("idItemInventario");
+        ItemInventario item = new ItemInventario();
+        ItemInventarioDO it = item.buscar(itemInvId);
+        
+%>
+        <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
+        <div id="poli">
+            <h1>POLI GAMES</h1>
+        </div>
+<div id="left">
+    <table border="1px"  style="none">
+        <thead>
+            <tr>
+                <th align="center" class="conta">
+                    <a href="./admin.jsp">Pagina Inicial</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <form method="post" action=admin.jsp>
+                <tr>
+                    <td align="center">
+                        <h3>Administrador <%= session.getAttribute("nomeUsuario") %> !!</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img id="foto" src="images/Venusaur.png"></td>
+                </tr>
+                <tr>
+                    <table>
+                        <tr>
+                            <td><input type="text" name="usuario" /></td>
+                        <td align="right"><img id="lupa" src="images/lupa.png"></td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <td align="right"> 
+                        <input type="submit" name="enviar" value="Buscar Usuário"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
+                </tr>
+                <tr>
+                    <table>
+                        <td><input type="text" name="usuario" /></td>
+                        <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
+                    </table>
+                </tr>
+                <tr>
+                    <td align="right"> 
+                        <input type="submit" name="enviar" value="Banir Usuário"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+</div>
+<div>
+        <div class="options">
+            <a href="./insert.jsp">Cadastrar Item</a>
+        </div> 
+        <div class="options">
+            <a href="./remove.jsp">Comunicados</a>
+        </div>
+        <div class="options"> 
+            <a href="./insert.jsp">Editar Conta</a>
+        </div> 
+</div>  
+
+                        <%--Centro--%>
+        <div id="center">
+            
+        </div>
+        
+        <%-- Rodape --%>
+        <div id="footer">
+            <p>PMR2490 - Sistemas de Informação
+            <br>Escola Politécnida da USP</p>
+        </div>
+        </div>
+    </body>
+</html>

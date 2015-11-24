@@ -8,7 +8,7 @@ import utils.*;
 import data.*;
 import java.util.*;
 
-public class Item {
+public class ItemInventario {
 
   public boolean incluir (Classe_Item item) throws Exception{
 
@@ -22,8 +22,8 @@ public class Item {
      try {
 
        tr.begin();
-         ItemData item_data = new ItemData();
-         item_data.incluir(item, tr);
+        ItemInventarioData item = new ItemData();
+        item.incluir(item, tr);
        tr.commit();
        return true;
        
