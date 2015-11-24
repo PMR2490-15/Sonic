@@ -32,61 +32,60 @@
     <div id="left"> 
         
         <div id="left2">
-<%            String action = request.getParameter("action");
-       if ( null == action ) {
-          action = "showLoginForm";
+<%          String action = request.getParameter("action");
+    if ( null == action ) {
+        action = "showLoginForm";
 %>
-	  <form action="./loja.jsp" method="post">
-	  <form action="./login.jsp" method="post">
+        <form action="./loja.jsp" method="post">
+        <form action="./login.jsp" method="post">
             <table>
-              <tr>
-                 <td>Nome de usuário </td>
-                 <td><input type="text" name="nomeUsuario" />
-              </tr>
-              <tr>
-                 <td>Senha </td>
-                 <td><input type="password" password="senha" />  
-              </tr>
-              <tr>
-                  <td></td>
-                  <td>
-                      <input type="submit" name="Login" value="Login :D" />
-                      <input type="hidden" name="action" value="gamer" />
-	    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
-                  </td>
-              </tr>
+            <tr>
+                <td>Nome de usuário </td>
+                <td><input type="text" name="nomeUsuario" />
+            </tr>
+            <tr>
+                <td>Senha </td>
+                <td><input type="password" password="senha" />  
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="action" value="Login :D" />
+                    <input type="hidden" name="action" value="gamer" />
+                    <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
+                </td>
+            </tr>
             </table>
             
-          </form>
+        </form>
 
 <%        
-       }
+    }
 %>
-<! ------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%
-     if (action.equals("gamer")) {/*
-     if (action.equals("Login :D")) {
-       String nome = request.getParameter("nomeUsuario");
-       String password = request.getParameter("senha");
-       transacoes.Usuario tn = new transacoes.Usuario();
-       UsuarioDO usuario = tn.buscar(nome);
-       if (usuario == null || usuario.getSenha().equals(password)) {
-         // avisar usuario que o login nao pode ser efetuado
+    if (action.equals("gamer")) {/*
+    if (action.equals("Login :D")) {// LOGIN AQUI!
+        String nome = request.getParameter("nomeUsuario");
+        String password = request.getParameter("senha");
+        transacoes.Usuario tn = new transacoes.Usuario();
+        UsuarioDO usuario = tn.buscar(nome);
+        if (usuario == null || ! usuario.getSenha().equals(password)) {
+            // avisar usuario que o login nao pode ser efetuado*/
 %>
 <%---
-          Nome de usuário ou senha incorretos!
-          <form action="./index.html" method="post">
-          </form>
+            Nome de usuário ou senha incorretos!
+            <form action="./index.html" method="post">
+            </form>
      --%>    
-<%   //  }// else {
-           // session.setAttribute("nomeUsuario", nome);
-           // session.setAttribute("idUsuario", usuario.getId());*/
-            pageContext.forward("gamer.jsp");
-       //} // login efetuado
-     } // login
-
-     
+<%      /*} else {
+            session.setAttribute("nomeUsuario", nome);
+            session.setAttribute("idUsuario", usuario.getId());*/
+        pageContext.forward("gamer.jsp");
+        } // login efetuado
+    //} // Login
+    
     else if (action.equals("Esqueci minha senha :/")) {
 %>
         <form action="./search.jsp" method="post">
