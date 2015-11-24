@@ -15,37 +15,54 @@ public class UsuarioDO {
     private String _nome_usuario;
     private String _senha;
     private int _tipo;
+    private String _pergunta;
+    private String _resposta;
 
     public int getId() {
         return _id;
     }
 
-    public void setId(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        _id = id;
     }
 
     public String getNome_Usuario() {
         return _nome_usuario;
     }
 
-    public void setNome_Usuario(String _nome_usuario) {
-        this._nome_usuario = _nome_usuario;
+    public void setNome_Usuario(String nome_usuario) {
+        _nome_usuario = nome_usuario;
     }
 
      public String getSenha() {
         return _senha;
     }
 
-    public void setSenha(String _senha) {
-        this._senha = _senha;
+    public void setSenha(String senha) {
+        _senha = senha;
     }
 
     public int getTipo() {
         return _tipo;
     }
 
-    public void setTipo(int _tipo) {
-        this._tipo = _tipo;
+    public void setTipo(int tipo) {
+        _tipo = tipo;
     }
     
+    public String getPergunta() {
+        return _pergunta;
+    }
+    
+    public void setPergunta(String pergunta) {
+        _pergunta = pergunta;
+    }
+    
+    public String getResposta() {
+        return _resposta;
+    }
+    
+    public void setResposta(String resposta) {
+        _resposta = resposta;
+    }
 }
