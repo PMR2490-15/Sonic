@@ -1,7 +1,13 @@
 <%-- 
     Secao deve conter a variavel "idItemInventario" para
-    resgatar o item de inventario visualisado aqui.
+    resgatar o item de inventario visualisado aqui!!!
 --%>
+
+<%@page import="data.ItemDO"%>
+<%@page import="data.ItemInventarioDO"%>
+<%@page import="java.util.List"%>
+<%@page import="transacoes.Item" %>
+<%@page import="transacoes.ItemInventario" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,9 +22,10 @@
         String nome = (String)(session.getAttribute("nomeUsuario"));
         // Item de inventario do anuncio
         int itemInvId = Integer.valueOf(session.getParameter("idItemInventario"));
-        ItemInventario item = new ItemInventario();
-        ItemInventarioDO it = item.buscar(itemInvId);
-        
+        ItemInventario tn = new ItemInventario();
+        Item tn2 = new Item();
+        ItemInventarioDO itemInv = tn.buscar(itemInvId);
+        ItemDO item = tn2.buscar(itemInv.getItemId());
 %>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
         <div id="poli">
@@ -87,7 +94,7 @@
 
                         <%--Centro--%>
         <div id="center">
-            
+            <h4></h4>
         </div>
         
         <%-- Rodape --%>

@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Item {
 
-  public boolean incluir (Classe_Item item) throws Exception{
+  public boolean incluir (ItemDO item) throws Exception{
 
      // validacao das regras de negocio
      if(isEmpty(item.getNome()) )  {
@@ -35,7 +35,7 @@ public class Item {
      return false;
   } // incluir
 
-  public boolean atualizar(Classe_Item item) throws Exception {
+  public boolean atualizar(ItemDO item) throws Exception {
      Transacao tr = new Transacao();
 	 try{
 	   // inserir validacoes de regras de negocio
@@ -52,12 +52,12 @@ public class Item {
 	 return false;
   } // atualizar
 
-  public Classe_Item buscar(int idobj) throws Exception{
+  public ItemDO buscar(int idobj) throws Exception{
      Transacao tr = new Transacao();
 	 try{
 	   tr.beginReadOnly();
   	     ItemData item_data = new ItemData();
-	     Classe_Item i = item_data.buscar(idobj, tr);
+	     ItemDO i = item_data.buscar(idobj, tr);
 	   tr.commit();
 	   return i;
 	 } catch (Exception e) {
@@ -96,7 +96,7 @@ public class Item {
 
   public static void main(String[] args) {
       Item i = new Item();
-      Classe_Item item = new Classe_Item();
+      ItemDO item = new ItemDO();
   
       try {
             item = i.buscar(2);

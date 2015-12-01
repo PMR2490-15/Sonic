@@ -11,7 +11,7 @@ import utils.Transacao;
 
 public class ItemData {
     
-  public void incluir(Classe_Item item, Transacao tr) throws Exception {
+  public void incluir(ItemDO item, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "insert into ITEM (NOME,TIPO,PRODUTORA,LANCAMENTO) values (?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
@@ -23,7 +23,7 @@ public class ItemData {
      int result = ps.executeUpdate();
   }
 
-  public void excluir(Classe_Item item, Transacao tr) throws Exception {
+  public void excluir(ItemDO item, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "delete from ITEM where id = ?";
      PreparedStatement ps = con.prepareStatement(sql);
@@ -31,7 +31,7 @@ public class ItemData {
      int result = ps.executeUpdate();
   } // excluir
 
-  public void atualizar(Classe_Item item, Transacao tr) throws Exception {
+  public void atualizar(ItemDO item, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "update ITEM set nome=?, tipo=?, produtora=?,lancamento=? where id=?";
      PreparedStatement ps = con.prepareStatement(sql);
@@ -43,14 +43,14 @@ public class ItemData {
      int result = ps.executeUpdate();
   } // atualizar
 
-  public Classe_Item buscar(int idobj, Transacao tr) throws Exception {
+  public ItemDO buscar(int idobj, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "select * from item where  id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, idobj);
      ResultSet rs = ps.executeQuery();
      rs.next();
-     Classe_Item item = new Classe_Item();
+     ItemDO item = new ItemDO();
      item.setId (rs.getInt("id"));
      item.setNome (rs.getString("nome"));
      item.setTipo(rs.getInt("tipo"));
@@ -68,7 +68,7 @@ public class ItemData {
      System.out.println("query executada");
      Vector Items = new Vector();
      while (rs.next()) {
-        Classe_Item i = new Classe_Item();
+        ItemDO i = new ItemDO();
         i.setId (rs.getInt("id"));
         i.setNome (rs.getString("nome"));
         System.out.println(" got " + i.getNome());

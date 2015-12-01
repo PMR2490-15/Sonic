@@ -2,10 +2,6 @@ package data;
 
 import java.sql.Connection;
 
-/**
- *
- * @author lurosset
- */
 public class ItemInventarioDO {
     private int _usuarioId;
     private int _itemId;
