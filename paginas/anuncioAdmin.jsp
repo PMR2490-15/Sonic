@@ -8,6 +8,8 @@
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Item" %>
 <%@page import="transacoes.ItemInventario" %>
+<%@page import="transacoes.Usuario" %>
+<%@page import="transacoes.Gamer" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +28,16 @@
         Item tn2 = new Item();
         ItemInventarioDO itemInv = tn.buscar(itemInvId);
         ItemDO item = tn2.buscar(itemInv.getItemId());
+        
+        
+        float preco = itemInv.getPreco();
+        String estado;
+        if(itemInv.getEstado() == 1)
+            estado = "novo";
+        else if(itemInv.getEstado() == 2)
+            estado = "como novo";
+        else
+            estado = "usado";
 %>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
         <div id="poli">
@@ -94,7 +106,12 @@
 
                         <%--Centro--%>
         <div id="center">
-            <h4></h4>
+            <h4 align="center"><%item.getNome();%></h4>
+            <div id="gameFoto">
+            </div>
+            <div id="anuncio">
+                <h5 align="center">Estado:
+            </div>
         </div>
         
         <%-- Rodape --%>

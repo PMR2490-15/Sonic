@@ -4,7 +4,7 @@ import utils.*;
 import data.*;
 import java.util.*;
 
-public class Contato {
+public class exemplo_Contato {
 
   public boolean incluir (ContatoDO contato) throws Exception{
 
@@ -91,7 +91,7 @@ public class Contato {
   }
 
   public static void main(String[] args) {
-      Contato c = new Contato();
+      exemplo_Contato c = new exemplo_Contato();
       ContatoDO contato = new ContatoDO();
       try {
 	    contato = c.buscar(6);

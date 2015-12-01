@@ -13,7 +13,7 @@ public class ItemInventarioData {
     public void incluir(ItemInventarioDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "insert into ITEM_INVENTARIO (usid, itid, id, estado, preco, tipo_transacao, preco_promo, limite_promo)"
-                + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+                + " values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(2, item.getItemId());
         ps.setInt(1, item.getUsuarioId());
@@ -21,8 +21,6 @@ public class ItemInventarioData {
         ps.setInt(4, item.getEstado());
         ps.setInt(5, item.getPreco());
         ps.setInt(6, item.getTipoTransacao());
-        ps.setInt(7, item.getPrecoPromo());
-        ps.setInt(8, item.getLimitePromo());
         int result = ps.executeUpdate();
     }
     
@@ -37,7 +35,7 @@ public class ItemInventarioData {
     
     public void atualizar(ItemInventarioDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update ITEM_INVENTARIO set USID=?, ITID=?, ID=?, ESTADO=?, PRECO=?, TIPO_TRANSACAO=?, PRECO_PROMO=?, LIMITE_PROMO=?";
+        String sql = "update ITEM_INVENTARIO set USID=?, ITID=?, ID=?, ESTADO=?, PRECO=?, TIPO_TRANSACAO=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, item.getUsuarioId());
         ps.setInt(2, item.getItemId());
@@ -45,8 +43,6 @@ public class ItemInventarioData {
         ps.setInt(4, item.getEstado());
         ps.setInt(5, item.getPreco());
         ps.setInt(6, item.getTipoTransacao());
-        ps.setInt(7, item.getPrecoPromo());
-        ps.setInt(8, item.getLimitePromo());
         int result = ps.executeUpdate();
     }
     
@@ -64,19 +60,17 @@ public class ItemInventarioData {
         item.setId(rs.getInt("estado"));
         item.setId(rs.getInt("preco"));
         item.setId(rs.getInt("tipo_transacao"));
-        item.setId(rs.getInt("preco_promo"));
-        item.setId(rs.getInt("limite_promo"));
         return item;
     }
     
-    public Vector pesquisaNome(String nome, Transacao tr) throws Exception{
+    public List<ItemInventarioDO> pesquisaNome(String nome, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "QUERY PRA PEGAR OS ITEM_INVENTARIO COM O NOME CERTO ?";
+        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.NOME like \"%?%\"";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nome);
         ResultSet rs = ps.executeQuery();
         System.out.println("query executada");
-        Vector itens = new Vector();
+        List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
            item.setUsuarioId(rs.getInt("usid"));
@@ -85,21 +79,19 @@ public class ItemInventarioData {
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getInt("preco"));
            item.setTipoTransacao(rs.getInt("tipo_transacao"));
-           item.setPrecoPromo(rs.getInt("preco_promo"));
-           item.setLimitePromo(rs.getInt("limite_promo"));
            itens.add(item);
         }
         return itens;
     }
     
-    public Vector pesquisaTipo(int tipo, Transacao tr) throws Exception{
+    public List<ItemInventarioDO> pesquisaTipo(int tipo, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "COLOCAR AQUI A QUERY ?";
+        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.TIPO = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, tipo);
         ResultSet rs = ps.executeQuery();
         System.out.println("query executada");
-        Vector itens = new Vector();
+        List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
            item.setUsuarioId(rs.getInt("usid"));
@@ -108,21 +100,19 @@ public class ItemInventarioData {
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getInt("preco"));
            item.setTipoTransacao(rs.getInt("tipo_transacao"));
-           item.setPrecoPromo(rs.getInt("preco_promo"));
-           item.setLimitePromo(rs.getInt("limite_promo"));
            itens.add(item);
         }
         return itens;
     }
     
-    public Vector pesquisaProdutora(String prod, Transacao tr) throws Exception{
+    public List<ItemInventarioDO> pesquisaProdutora(String prod, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "IDEM ?";
+        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.PRODUTORA like \"?\"";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, prod);
         ResultSet rs = ps.executeQuery();
         System.out.println("query executada");
-        Vector itens = new Vector();
+        List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
            item.setUsuarioId(rs.getInt("usid"));
@@ -131,8 +121,6 @@ public class ItemInventarioData {
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getInt("preco"));
            item.setTipoTransacao(rs.getInt("tipo_transacao"));
-           item.setPrecoPromo(rs.getInt("preco_promo"));
-           item.setLimitePromo(rs.getInt("limite_promo"));
            itens.add(item);
         }
         return itens;

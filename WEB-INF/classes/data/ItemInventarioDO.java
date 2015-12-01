@@ -55,20 +55,6 @@ public class ItemInventarioDO {
         _tipoTransacao = tipo;
     }
     
-    public int getPrecoPromo() {
-        return _precoPromo;
-    }
-    public void setPrecoPromo(int preco) {
-        _precoPromo = preco;
-    }
-    
-    public int getLimitePromo() {
-        return _limitePromo;
-    }
-    public void setLimitePromo(int limite) {
-        _limitePromo = limite;
-    }
-    
     /*
     public BLOB? getFoto() {
         return _foto;

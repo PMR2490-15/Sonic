@@ -1,58 +1,59 @@
 package transacoes;
+
 import utils.*;
 import data.*;
 import java.util.*;
 
-public class Item {
-
-    public boolean incluir (ItemDO item) throws Exception{
-
+public class Gamer {
+    
+    public boolean incluir (GamerDO gamer) throws Exception{
+        
         // validacao das regras de negocio
         if(isEmpty(item.getNome()) )  {
             return false;
         }
-
+        
         // efetuando a transacao
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                ItemData item_data = new ItemData();
-                item_data.incluir(item, tr);
+                GamerData gamerData = new GamerData();
+                gamerData.incluir(gamer, tr);
             tr.commit();
             return true;
        
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("erro ao incluir " + item.getNome());
+            System.out.println("erro ao incluir " + gamer.getNome());
             e.printStackTrace();
         }
         return false;
     } // incluir
-
-    public boolean atualizar(ItemDO item) throws Exception {
+    
+    public boolean atualizar(GamerDO gamer) throws Exception {
         Transacao tr = new Transacao();
 	try{
             // inserir validacoes de regras de negocio
             tr.begin();
-                ItemData item_data = new ItemData();
-                item_data.atualizar(item, tr);
+                GamerData gamer_data = new GamerData();
+                gamer_data.atualizar(gamer, tr);
             tr.commit();
             return true;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("erro ao atualizar" + item.getNome());
+            System.out.println("erro ao atualizar" + gamer.getNome());
             e.printStackTrace();
 	}
 	return false;
     } // atualizar
-
-    public ItemDO buscar(int idobj) throws Exception{
+    
+    public GamerDO buscar(int idobj) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    ItemData item_data = new ItemData();
-	    ItemDO i = item_data.buscar(idobj, tr);
+  	    GamerData gamer_data = new GamerData();
+	    GamerDO i = gamer_data.buscar(idobj, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
@@ -63,15 +64,15 @@ public class Item {
 	return null;
     } // buscar
 
-    public List<ItemDO> pesquisar(String nome) {
+    public List<GamerDO> pesquisar(String nome) {
         if ( isEmpty(nome) )
         return null;
 
         Transacao tr = new Transacao();
         try {
 	    tr.beginReadOnly();
-            ItemData item_data = new ItemData();
-            List<ItemDO> list = item_data.pesquisarPorNome(nome, tr);
+            GamerData gamer_data = new GamerData();
+            List<GamerDO> list = gamer_data.pesquisarPorNome(nome, tr);
             tr.commit();
             return list;
         } catch(Exception e) {
@@ -100,5 +101,22 @@ public class Item {
             e.printStackTrace();
         }
     } // main
+}//Gamer
 
-} // Item
+
+/*
+    SQL de Criacao do Banco de Dados
+
+  USUARIO_ID INTEGER UNSIGNED NOT NULL,
+  NOME VARCHAR(45) NULL,
+  CPF INTEGER UNSIGNED NULL,
+  EMAIL VARCHAR(45) NULL,
+  TELEFONE INTEGER UNSIGNED NULL,
+  CIDADE VARCHAR(45) NULL,
+  FOTO BLOB NULL,
+  SUSPENSO_ATE DATE NULL,
+  ATIVO BOOL NULL,
+  PRIMARY KEY(USUARIO_ID),
+  INDEX GAMER_FKIndex1(USUARIO_ID)
+    
+*/
