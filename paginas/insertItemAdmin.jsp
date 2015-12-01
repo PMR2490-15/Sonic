@@ -39,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=admin.jsp>
+            <form method="post" action=insertItemAdmin.jsp>
                 <tr>
                     <td align="center">
                         <h3>Administrador <%= nome %> !!</h3>
@@ -92,7 +92,53 @@
 
                         <%--Centro--%>
         <div id="center">
-            
+            <form action="./insetItemAdmin.jsp" method="post">
+            <table>
+                <tr>
+                    <td>
+                     <label for="nome">Nome: </label>
+                    </td>
+                    <td align="left">
+                     <input type="text" name="nomeItem">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                     <label for="produtora">Produtora: </label>
+                    </td>
+                    <td align="left">
+                     <input type="text" name="prodtora">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                     <label>Lançamento: </label>
+                    </td>
+                    <td align="left">
+                     <input type="text" name="dia" size="2" maxlength="2" value="dd"> 
+                    <input type="text" name="mes" size="2" maxlength="2" value="mm"> 
+                    <input type="text" name="ano" size="4" maxlength="4" value="aaaa">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <label for="tipo">Tipo:</label>
+                    </td>
+                    <td align="left">
+                    <select name="tipo"> 
+                    <option value="1">ROM</option> 
+                    <option value="2">CONSOLE</option> 
+                    <option value="3">ACESSORIO</option> 
+                    <option value="4">OUTRO</option>                      
+                   </select>
+                   </td>
+                  </tr>                  
+                  <tr>
+                      <td><input type="submit" name="" value="Enviar"></td>
+                  </tr>
+                
+            </table>
+            </form>
         </div>
         
         <%-- Rodape --%>
