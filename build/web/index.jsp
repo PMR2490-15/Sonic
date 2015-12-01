@@ -85,10 +85,32 @@
        UsuarioDO usuario = tn.buscar(username);
        if (usuario == null || !password.equals((String)usuario.getSenha())) {
 %>         
-           Nome de usuário ou senha incorretos!
-          <form action="./index.html" method="post">
+<p style="color:red"> <em>NOME OU SENHA DE USUÁRIO INCORRETO!</em></p>
+           <form action="./index.jsp" method="post">
+            <table>
+              <tr>
+                 <td>Nome de usuário </td>
+                 <td><input type="text" name="nomeUsuario" />
+              </tr>
+              <tr>
+                 <td>Senha </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>
+                      <input type="submit" name="action" value="Login :D" />
+                      <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
+                      <input type="submit" name="action" value="loja" />
+                      <input type="submit" name="action" value="gamer" />
+                      <input type="submit" name="action" value="admin" />
+                  </td>
+              </tr>
+            </table>
+            
           </form>
 <%
+       
        }else{
            if(usuario.getTipo() == 1){
                pageContext.forward("gamer.jsp");
@@ -123,7 +145,7 @@
             <table>
                 <tr>
                     <td>Nome de usuário </td>
-                    <td><input type="text" name="Email" /> </td
+                    <td><input type="text" name="Email" /> </td>
                 </tr>
             </table>
             <input type="submit" name="Enviar email" value="sendResetPassword" />
@@ -149,6 +171,6 @@
 	<p>PMR2490 - Sistemas de Informação
         <br>Escola Politécnida da USP</p>
     </div>
-    
+        </div>    
     </body>
 </html>
