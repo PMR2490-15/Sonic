@@ -5,11 +5,15 @@
 
 <%@page import="data.ItemDO"%>
 <%@page import="data.ItemInventarioDO"%>
+<%@page import="data.GamerDO"%>
+<%@page import="data.LojaDO"%>
+<%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Item" %>
 <%@page import="transacoes.ItemInventario" %>
 <%@page import="transacoes.Usuario" %>
 <%@page import="transacoes.Gamer" %>
+<%@page import="transacoes.Loja" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,14 +28,34 @@
         String nome = (String)(session.getAttribute("nomeUsuario"));
         // Item de inventario do anuncio
         int itemInvId = Integer.valueOf(session.getParameter("idItemInventario"));
-        ItemInventario tn = new ItemInventario();
-        Item tn2 = new Item();
-        ItemInventarioDO itemInv = tn.buscar(itemInvId);
-        ItemDO item = tn2.buscar(itemInv.getItemId());
+        ItemInventario tnII = new ItemInventario();
+        Item tnI = new Item();
+        ItemInventarioDO itemInv = tnII.buscar(itemInvId);
+        ItemDO item = tnI.buscar(itemInv.getItemId());
+        GamerDO gamer;
+        LojaDO loja;
         
+        String nomeDono, estado, tipo;
+        Usuario tnU = new Usuario();
+        UsuarioDO user = tnU.buscar(itemInv.getUsuarioId());
+        if (user.getTipo() == 1) {
+            Gamer tnG = new Gamer();
+            gamer = tnG.buscar(user.getId());
+            nomeDono = gamer.getNome();
+        }
+        else {
+            Loja tnL = new Loja();
+            loja = tnL.buscar(user.getId());
+            nomeDono = loja.getNome();
+        }
         
-        float preco = itemInv.getPreco();
-        String estado;
+        if(itemInv.getTipoTransacao() == 1)
+            tipo = "venda";
+        else if(itemInv.getTipoTransacao() == 2)
+            tipo = "troca";
+        else
+            tipo = "venda & troca";
+        
         if(itemInv.getEstado() == 1)
             estado = "novo";
         else if(itemInv.getEstado() == 2)
@@ -106,11 +130,29 @@
 
                         <%--Centro--%>
         <div id="center">
-            <h4 align="center"><%item.getNome();%></h4>
+            <h4 align="center"><% item.getNome(); %></h4>
             <div id="gameFoto">
             </div>
             <div id="anuncio">
-                <h5 align="center">Estado:
+                <table border="px" style="none">
+                    <tr>
+                        <td align="left"><em>Preço:</em></td>
+                        <td align="right"><em><% String.valueOf(itemInv.getPreco()); %></em></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><em>Estado:</em></td>
+                        <td align="right"><em><% estado.toString(); %></em></td>
+                    </tr>
+                    <tr>
+                        <td align="left">(atual) <em>Proprietário:</em></td>
+                        <td align="right"><em><% nomeDono.toString(); %></em>
+                    </tr>
+                    <tr>
+                        <td align="left"><em>Disponível para:</em></td>
+                        <td align="right"><em><% tipo.toString(); %></em></td>
+                    </tr>
+                    <%-- Admins nao podem comprar... entao sem botao aqui --%>
+                </table>
             </div>
         </div>
         
