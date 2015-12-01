@@ -34,7 +34,7 @@
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./admin.jsp">Pagina Inicial</a>
+                    <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
                 </th>
             </tr>
         </thead>
@@ -51,26 +51,26 @@
                 <tr>
                     <table>
                         <tr>
-                            <td><input type="text" name="usuario" /></td>
+                            <td><input type="text" name="item" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
                 </tr>
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
+                        <input type="submit" name="enviar" value="Buscar Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>
                 <tr>
                     <table>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="item" /></td>
                         <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
                     </table>
                 </tr>
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Banir Usuário"/>
+                        <input type="submit" name="enviar" value="Excluir Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>
@@ -80,7 +80,7 @@
 </div>
 <div>
         <div class="options">
-            <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
+            <a href="./admin.jsp">Pagina Inicial</a>
         </div> 
         <div class="options">
             <a href="./remove.jsp">Comunicados</a>
