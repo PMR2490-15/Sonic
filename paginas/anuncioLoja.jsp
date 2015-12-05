@@ -153,15 +153,32 @@
                 <td align="right"><em><% tipo.toString(); %></em></td>
             </tr>
             <tr>
-                <input type="submit" name="action" value="Comprar!" />
+<%
+                if(itemInv.getTipoTransacao() == 1){
+%>
+                    <td><input type="submit" name="action" value="Comprar!" /></td>
+<%
+                }
+                else if(itemInv.getTipoTransacao() == 2){
+%>
+                    <td><input type="submit" name="action" value="Trocar!" /></td>
+<%
+                }
+                else {
+%>
+                    <td><input type="submit" name="action" value="Comprar!" /></td>
+                    <td><input type="submit" name="action" value="Trocar!" /></td>
+<%
+                }
+                if(session.getAttribute("action").equals("Comprar!"))
+                    pageContext.forward("confirmarCompra.jsp");
+                else if(session.getAttribute("action").equals("Trocar!"))
+                    pageContext.forward("cproporTroca.jsp");
+%>
             </tr>
         </table>
     </div>
 </div>
-<%
-if(session.getAttribute("action").equals("Comprar!"))
-    pageContext.forward("confirmarCompra.jsp");
-%>
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
