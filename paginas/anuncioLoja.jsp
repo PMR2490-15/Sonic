@@ -2,7 +2,6 @@
     Secao deve conter a variavel "idItemInventario" para
     resgatar o item de inventario visualisado aqui!!!
 --%>
-
 <%@page import="data.ItemDO"%>
 <%@page import="data.ItemInventarioDO"%>
 <%@page import="data.GamerDO"%>
@@ -17,12 +16,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>HttpSessionDemo - Anúncio</title>
     </head>
-    <body>
+    
 <%
         // Nome do admin logado
         String nome = (String)(session.getAttribute("nomeUsuario"));
@@ -65,52 +64,46 @@
         else
             estado = "usado";
 %>
-        <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
-        <div id="poli">
-            <h1>POLI GAMES</h1>
-        </div>
+<%-- cabeçalho--%>
+    <div id="poli">
+        <h1>POLI GAMES</h1>
+    </div>
+    
+<%-- Tabela do lado esquerdo --%>
 <div id="left">
     <table border="1px"  style="none">
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./admin.jsp">Pagina Inicial</a>
+                    <a href="./loja.jsp">Minha Conta</a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=admin.jsp>
+            <form method="post" action=loja.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Administrador <%= session.getAttribute("nomeUsuario") %> !!</h3>
+                        <h3>Loja <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Venusaur.png"></td>
+            <!--        <td><img id="foto" src=<%//= loja.getFoto()%>></td> -->
                 </tr>
                 <tr>
                     <table>
                         <tr>
-                            <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="usuario" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
-                </tr>
+                </tr>                                
                 <tr>
                     <td align="right"> 
                         <input type="submit" name="enviar" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
-                </tr>
-                <tr>
-                    <table>
-                        <td><input type="text" name="usuario" /></td>
-                        <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
-                    </table>
-                </tr>
-                <tr>
-                    <td align="right"> 
-                        <input type="submit" name="enviar" value="Banir Usuário"/>
+                    <td align="left"> 
+                        <input type="submit" name="enviar" value="Buscar Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>
@@ -118,48 +111,58 @@
         </tbody>
     </table>
 </div>
+                    
+<%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Cadastrar Item</a>
+            <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
             <a href="./remove.jsp">Comunicados</a>
         </div>
+        <div class="options">
+            <a href="./search.jsp">Histórico</a>
+        </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./lojaUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Editar Conta</a>
         </div> 
 </div>  
 
-                        <%--Centro--%>
-        <div id="center">
-            <input type="hidden" name="idVisitado" value="<% user.getId(); %>" />
-            <h4 align="center"><% item.getNome(); %></h4>
-            <div id="gameFoto">
-            </div>
-            <div id="anuncio">
-                <table border="px" style="none">
-                    <tr>
-                        <td align="left"><em>Preço:</em></td>
-                        <td align="right"><em>R$<% String.valueOf(itemInv.getPreco()); %>,00</em></td>
-                    </tr>
-                    <tr>
-                        <td align="left"><em>Estado:</em></td>
-                        <td align="right"><em><% estado.toString(); %></em></td>
-                    </tr>
-                    <tr>
-                        <td align="left">(atual) <em>Proprietário:</em></td>
-                        <td align="right"><em><a href="<% linkPerfil.toString(); %>"><% nomeDono.toString(); %><a/></em>
-                    </tr>
-                    <tr>
-                        <td align="left"><em>Disponível para:</em></td>
-                        <td align="right"><em><% tipo.toString(); %></em></td>
-                    </tr>
-                    <%-- Admins nao podem comprar... entao sem botao aqui --%>
-                </table>
-            </div>
-        </div>
-        
-        <%-- Rodape --%>
+    <%--centro--%>
+<div id="center">
+    <input type="hidden" name="idVisitado" value="<% user.getId(); %>" />
+    <h4 align="center"><% item.getNome(); %></h4>
+    <div id="gameFoto">
+    </div>
+    <div id="anuncio">
+        <table border="px" style="none">
+            <tr>
+                <td align="left"><em>Preço:</em></td>
+                <td align="right"><em>R$<% String.valueOf(itemInv.getPreco()); %>,00</em></td>
+            </tr>
+            <tr>
+                <td align="left"><em>Estado:</em></td>
+                <td align="right"><em><% estado.toString(); %></em></td>
+            </tr>
+            <tr>
+                <td align="left">(atual) <em>Proprietário:</em></td>
+                <td align="right"><em><a href="<% linkPerfil.toString(); %>"><% nomeDono.toString(); %><a/></em>
+            </tr>
+            <tr>
+                <td align="left"><em>Disponível para:</em></td>
+                <td align="right"><em><% tipo.toString(); %></em></td>
+            </tr>
+            <tr>
+                <input type="submit" name="action" value="Comprar!" />
+            </tr>
+        </table>
+    </div>
+</div>
+<%
+if(session.getAttribute("action").equals("Comprar!"))
+    pageContext.forward("confirmarCompra.jsp");
+%>
+<%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
             <br>Escola Politécnida da USP</p>

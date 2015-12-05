@@ -1,8 +1,3 @@
-
-<%-- 
-    Document   : loja.jsp
---%>
-
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Loja" %>
