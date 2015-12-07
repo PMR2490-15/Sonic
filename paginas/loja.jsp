@@ -56,7 +56,7 @@
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="busca" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
@@ -149,11 +149,11 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
 </div>
     
 <%  
-     if (action.equals("Buscar Usuário")) {
+     if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
        pageContext.forward("admin.jsp");
      }
      
-     if (action.equals("Buscar Item")) {
+     if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
        String Buscar=request.getParameter("busca");
        session.setAttribute("buscar", Buscar);
        pageContext.forward("buscar_item.jsp");

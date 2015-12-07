@@ -62,7 +62,7 @@
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="busca" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>

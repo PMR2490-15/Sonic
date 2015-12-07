@@ -103,6 +103,10 @@
                         <input type="submit" name="enviar" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
+                    <td align="left"> 
+                        <input type="submit" name="enviar" value="Buscar Item"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
                 </tr>
                 <tr>
                     <table>
