@@ -91,15 +91,15 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicadoLoja.jsp">Comunicados</a>
+            <a href="./comunicadoLoja.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./lojaUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Editar Conta</a>
         </div> 
-</div>  
+</div>    
 
 <%--centro--%>
 <div id="center">

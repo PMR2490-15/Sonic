@@ -17,7 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="Stylesheet" href="css/StyleSheetGamer.css"/>
-        <title>HttpSessionDemo - Pagina do Gamer</title>
+        <title>Pagina do Gamer</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">

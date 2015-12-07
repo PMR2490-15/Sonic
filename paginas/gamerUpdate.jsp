@@ -99,7 +99,7 @@
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./atualizarGamer.jsp">Editar Conta</a>
+            <a href="./gamerUpdate.jsp">Editar Conta</a>
         </div> 
 </div> 
 

@@ -78,7 +78,7 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
+            <a href="./comunicadoLoja.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>

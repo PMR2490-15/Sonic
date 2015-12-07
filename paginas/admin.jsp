@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="Stylesheet" href="css/StyleSheetAdmin.css"/>
-        <title>HttpSessionDemo - Pagina do Admin</title>
+        <title>Pagina do Admin</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
