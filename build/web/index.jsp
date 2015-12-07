@@ -65,10 +65,14 @@
      }
      
      if (action.equals("admin")) {
+         int id = 1000; //simular ID
+         session.setAttribute("User_ID", Integer.toString(id));
        pageContext.forward("admin.jsp");
      }
 
      if (action.equals("gamer")) {
+         int id = 3; //simular ID
+         session.setAttribute("User_ID", Integer.toString(id));
          pageContext.forward("gamer.jsp");
        }
      if (action.equals("Login :D")){
@@ -106,6 +110,7 @@
        
        }else{
            if(usuario.getTipo() == 1){
+               session.setAttribute("User_ID", Integer.toString(usuario.getId()));
                pageContext.forward("gamer.jsp");
            }
            if(usuario.getTipo() == 2){
@@ -113,6 +118,7 @@
                pageContext.forward("loja.jsp");
            }
            if(usuario.getTipo() == 3){
+               session.setAttribute("User_ID", Integer.toString(usuario.getId()));
                pageContext.forward("admin.jsp");
            }
        }

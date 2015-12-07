@@ -5,6 +5,10 @@
     Author     : MB
 --%>
 
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="transacoes.Gamer" %>
+<%@ page import="data.GamerDO" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,12 +22,17 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
+    if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
+    
+     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+     
+    Gamer gamertn = new Gamer();
+    
+    GamerDO gamer = new GamerDO();
+    gamer = gamertn.buscar(gamerID);
+    String nome = gamer.getNome();
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -44,7 +53,7 @@
             <form method="post" action=index.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Bem vindo <%= nome %> !!</h3>
+                        <h3>Bem vindo <%=nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +91,7 @@
             <a href="./update.jsp">Wishlist</a>
         </div>
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp">Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>

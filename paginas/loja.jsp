@@ -19,10 +19,11 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    String action = request.getParameter("action");
-    action = "idle";
+    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    
     Loja lojatn = new Loja();
+    
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
@@ -81,7 +82,7 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
+            <a href="./comunicadoLoja.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>

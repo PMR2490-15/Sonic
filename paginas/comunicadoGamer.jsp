@@ -9,8 +9,8 @@
 <%@ page import="java.util.Vector" %>
 <%@ page import="data.ComunicadoDO" %>
 <%@ page import="data.UsuarioDO" %>
-<%@ page import="transacoes.Loja" %>
-<%@ page import="data.LojaDO" %>
+<%@ page import="transacoes.Gamer" %>
+<%@ page import="data.GamerDO" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.util.Date , java.text.DateFormat ,java.text.SimpleDateFormat" %>
          
@@ -29,11 +29,12 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
-    Loja lojatn = new Loja();
-    LojaDO loja = new LojaDO();
-    loja = lojatn.buscar(lojaID);
-    String nome = loja.getNome();
+    int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    
+    Gamer gamertn = new Gamer();
+    GamerDO gamer = new GamerDO();
+    gamer = gamertn.buscar(gamerID);
+    String nome = gamer.getNome();
 %>
 
 <%-- cabeçalho--%>
@@ -47,7 +48,7 @@
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./loja.jsp">Minha Conta</a>
+                    <a href="./gamer.jsp">Minha Conta</a>
                 </th>
             </tr>
         </thead>
@@ -55,11 +56,11 @@
             <form method="post" action=index.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Loja <%= nome %> !!</h3>
+                        <h3>Bem vindo <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Blastoise.png"></td>
+                    <td><img id="foto" src="images/Logo.png"></td>
                 </tr>
                 <tr>
                     <table>
@@ -90,7 +91,10 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp">Comunicados</a>
+            <a href="./update.jsp">Wishlist</a>
+        </div>
+        <div class="options">
+            <a href="./comunicadoGamer.jsp">Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
@@ -122,7 +126,7 @@
                 <%
                       if (action.equals("showMsgForm")) {
                 %>
-                <form action="./comunicado.jsp" method="post">
+                <form action="./comunicadoGamer.jsp" method="post">
                     <table>
                         <tr>
                             <td>Nome</td>
@@ -151,7 +155,7 @@
                     if (null == user) {
                 %>
                 Usuário inexistente
-                <form action="./comunicado.jsp" method="post">
+                <form action="./comunicadoGamer.jsp" method="post">
                     <input type="submit" name="voltar" value="Retornar" />
                 </form>
                 <%
@@ -164,7 +168,7 @@
 
                     transacoes.Comunicado tn_new = new transacoes.Comunicado();
                     data.ComunicadoDO novo_comunicado = new data.ComunicadoDO();
-                    novo_comunicado.setIdrem(lojaID);
+                    novo_comunicado.setIdrem(gamerID);
                     novo_comunicado.setIdDest(dest_id);
                     novo_comunicado.setComunicado(request.getParameter("msg"));
                     novo_comunicado.setData(data_atual);
@@ -180,13 +184,13 @@
                         // avisar usuario que transacao foi feita com sucesso
                 %>
                 Mensagem enviada com sucesso!
-                <form action="./comunicado.jsp" method="post">
+                <form action="./comunicadoGamer.jsp" method="post">
                     <input type="submit" name="voltar" value="Enviar outra" />
                 </form>
                 <%     } else {
                 %>
                 Erro ao enviar mensagem
-                <form action="./comunicado.jsp" method="post">
+                <form action="./comunicadoGamer.jsp" method="post">
                     <input type="submit" name="retry" value="Retornar" />
                 </form>
                 <%     }
@@ -217,7 +221,7 @@
 
                 <!--   faz a pesquisa e mostra os resultados                              -->
                 <%
-                    Vector msg_rem = tn_comunicado.pesquisarPorRemetente(lojaID);
+                    Vector msg_rem = tn_comunicado.pesquisarPorRemetente(gamerID);
                     if ((msg_rem == null) || (msg_rem.size() == 0)) {
                 %>
                 Sociopata
@@ -266,7 +270,7 @@
 
                 <!--   faz a pesquisa e mostra os resultados                              -->
                 <%
-                    Vector msg_dest = tn_comunicado.pesquisarPorDestinatario(lojaID);
+                    Vector msg_dest = tn_comunicado.pesquisarPorDestinatario(gamerID);
                     if ((msg_dest == null) || (msg_dest.size() == 0)) {
                 %>
                 Ninguém quer conversar com você.
