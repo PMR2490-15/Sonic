@@ -154,13 +154,11 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
     
 <%  
      if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-       pageContext.forward("admin.jsp");
+       pageContext.forward("buscarUsuarioLoja.jsp");
      }
      
      if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-       String Buscar=request.getParameter("busca");
-       session.setAttribute("buscar", Buscar);
-       pageContext.forward("buscar_item.jsp");
+       pageContext.forward("buscarItemLoja.jsp");
      }
 %>  
                 
