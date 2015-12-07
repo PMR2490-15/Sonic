@@ -107,7 +107,7 @@
                 <hdl>CNPJ:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newcnpj" value=<%= Integer.toString(loja.getCNPJ())%> />
+                <input type="text" name="newcnpj" value=<%= loja.getCNPJ()%> />
             </td>
         </tr>
         <tr>
@@ -164,7 +164,7 @@
        Loja newlojatn = new Loja();
        newloja.setID(loja.getID());
        newloja.setNome((String)request.getParameter("newnome"));
-       newloja.setCNPJ(Integer.parseInt(request.getParameter("newcnpj")));
+       newloja.setCNPJ((String)request.getParameter("newcnpj"));
        newloja.setEmail((String)request.getParameter("newemail"));
        newloja.setTelefone_1(request.getParameter("newtel1"));
        newloja.setTelefone_2(request.getParameter("newtel2"));

@@ -8,7 +8,7 @@ import java.util.*;
 public class LojaDO {
     private int ID;
     private String Nome;
-    private int CNPJ;
+    private String CNPJ;
     private String Email;
     private String Telefone_1;
     private String Telefone_2;
@@ -26,7 +26,7 @@ public class LojaDO {
         return Nome;
     }
     
-    public int getCNPJ(){
+    public String getCNPJ(){
         return CNPJ;
     }
     
@@ -67,7 +67,7 @@ public class LojaDO {
         Nome = _Nome;
     }
     
-    public void setCNPJ(int _CNPJ){
+    public void setCNPJ(String _CNPJ){
         CNPJ = _CNPJ;
     }
     

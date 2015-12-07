@@ -19,7 +19,7 @@ public class LojaData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, Loja.getID());
         ps.setString(2, Loja.getNome());
-        ps.setInt(3, Loja.getCNPJ());
+        ps.setString(3, Loja.getCNPJ());
         ps.setString(4, Loja.getEmail());
         ps.setString(5, Loja.getTelefone_1());
         ps.setString(6, Loja.getTelefone_2());
@@ -47,7 +47,7 @@ public class LojaData {
         String sql = "update Loja set NOME=?, CNPJ=?, EMAIL=?, TELEFONE_1=?, TELEFONE_2=?, FOTO=?, URL=?, SUSPENSO_ATE=?, ATIVO=? where USUARIO_ID=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, Loja.getNome());
-        ps.setInt(2, Loja.getCNPJ());
+        ps.setString(2, Loja.getCNPJ());
         ps.setString(3, Loja.getEmail());
         ps.setString(4, Loja.getTelefone_1());
         ps.setString(5, Loja.getTelefone_2());
@@ -69,7 +69,7 @@ public class LojaData {
         LojaDO loja = new LojaDO();
         loja.setID(rs.getInt("USUARIO_ID"));
         loja.setNome(rs.getString("NOME"));
-        loja.setCNPJ(rs.getInt("CNPJ"));
+        loja.setCNPJ(rs.getString("CNPJ"));
         loja.setEmail(rs.getString("EMAIL"));
         loja.setTelefone_1(rs.getString("TELEFONE_1"));
         loja.setTelefone_2(rs.getString("TELEFONE_2"));
@@ -92,7 +92,7 @@ public class LojaData {
             LojaDO loja = new LojaDO();
             loja.setID(rs.getInt("USUARIO_ID"));
             loja.setNome(rs.getString("NOME"));
-            loja.setCNPJ(rs.getInt("CNPJ"));
+            loja.setCNPJ(rs.getString("CNPJ"));
             loja.setEmail(rs.getString("EMAIL"));
             loja.setTelefone_1(rs.getString("TELEFONE_1"));
             loja.setTelefone_2(rs.getString("TELEFONE_2"));
