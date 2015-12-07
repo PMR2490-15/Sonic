@@ -139,20 +139,12 @@
 
      
     else if (action.equals("Esqueci minha senha :/")) {
-%>
-        <form action="./search.jsp" method="post">
-            <table>
-                <tr>
-                    <td>Nome de usuário </td>
-                    <td><input type="text" name="Email" /> </td>
-                </tr>
-            </table>
-            <input type="submit" name="Enviar email" value="sendResetPassword" />
-            <input type="submit" name="Cancelar" value="backToLogin" />
-        </form>
-    
-<%
-        
+        String nomeUsuario = (String)session.getAttribute("nomeUsuario");
+        Usuario tn = new Usuario();
+        UsuarioDO usuario = tn.buscar(nomeUsuario);
+        if (!usuario.equals(null)) {
+            pageContext.forward("recuperarSenha.jsp");
+        }
     } // forgotPassword
 %>
 </div>

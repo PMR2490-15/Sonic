@@ -56,13 +56,13 @@ public class GamerData {
         rs.next();
         GamerDO gamer = new GamerDO();
         gamer.setUsuario_Id (rs.getInt("usuario_id"));
-        gamer.setNome("nome");
-        gamer.setCpf("cpf");
-        gamer.setEmail("email");
-        gamer.setTelefone("telefone");
-        gamer.setCidade("cidade");
-        gamer.setSuspenso_ate("suspenso_ate");
-        gamer.setAtivo("ativo");
+        gamer.setNome(rs.getString("nome"));
+        gamer.setCpf(rs.getString("cpf"));
+        gamer.setEmail(rs.getString("email"));
+        gamer.setTelefone(rs.getString("telefone"));
+        gamer.setCidade(rs.getString("cidade"));
+        gamer.setSuspenso_ate(rs.getString("suspenso_ate"));
+        gamer.setAtivo(rs.getString("ativo"));
         return gamer;
     } // buscar
 

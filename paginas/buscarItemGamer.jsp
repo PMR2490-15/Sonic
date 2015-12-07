@@ -1,7 +1,7 @@
 <%-- 
-    Document   : buscar_item
-    Created on : 22/11/2015, 12:15:39
-    Author     : Giovanni
+    Document   : buscarItemGamer.jsp
+    Created on : Dec 7, 2015, 8:42:29 AM
+    Author     : lurosset
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
