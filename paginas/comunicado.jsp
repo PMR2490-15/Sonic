@@ -9,6 +9,9 @@
 <%@ page import="java.util.Vector" %>
 <%@ page import="data.ComunicadoDO" %>
 <%@ page import="data.UsuarioDO" %>
+<%@ page import="transacoes.Loja" %>
+<%@ page import="data.LojaDO" %>
+<%@ page import="java.util.Vector" %>
 <%@ page import="java.util.Date , java.text.DateFormat ,java.text.SimpleDateFormat" %>
          
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -23,14 +26,14 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
+    if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
-    
-    int login_id = 12;
+    int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Loja lojatn = new Loja();
+    LojaDO loja = new LojaDO();
+    loja = lojatn.buscar(lojaID);
+    String nome = loja.getNome();
 %>
 
 <%-- cabeçalho--%>
@@ -161,7 +164,7 @@
 
                     transacoes.Comunicado tn_new = new transacoes.Comunicado();
                     data.ComunicadoDO novo_comunicado = new data.ComunicadoDO();
-                    novo_comunicado.setIdrem(login_id);
+                    novo_comunicado.setIdrem(lojaID);
                     novo_comunicado.setIdDest(dest_id);
                     novo_comunicado.setComunicado(request.getParameter("msg"));
                     novo_comunicado.setData(data_atual);
@@ -214,7 +217,7 @@
 
                 <!--   faz a pesquisa e mostra os resultados                              -->
                 <%
-                    Vector msg_rem = tn_comunicado.pesquisarPorRemetente(login_id);
+                    Vector msg_rem = tn_comunicado.pesquisarPorRemetente(lojaID);
                     if ((msg_rem == null) || (msg_rem.size() == 0)) {
                 %>
                 Sociopata
@@ -263,7 +266,7 @@
 
                 <!--   faz a pesquisa e mostra os resultados                              -->
                 <%
-                    Vector msg_dest = tn_comunicado.pesquisarPorDestinatario(login_id);
+                    Vector msg_dest = tn_comunicado.pesquisarPorDestinatario(lojaID);
                     if ((msg_dest == null) || (msg_dest.size() == 0)) {
                 %>
                 Ninguém quer conversar com você.

@@ -19,12 +19,13 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
+    String action = request.getParameter("action");
+    action = "idle";
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Loja lojatn = new Loja();
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
-    //String nome = Integer.toString(lojaID);
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -80,7 +81,7 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
@@ -139,6 +140,18 @@
     </table>
 </div>
     
+<%  
+     if (action.equals("Buscar Usuário")) {
+       pageContext.forward("admin.jsp");
+     }
+     
+     if (action.equals("Buscar Item")) {
+       String Buscar=request.getParameter("busca");
+       session.setAttribute("buscar", Buscar);
+       pageContext.forward("buscar_item.jsp");
+     }
+%>  
+                
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
