@@ -164,7 +164,6 @@
 
 
 <div id="center">
-    <%= perfilUsuario.getTipo() %>
 <%  if (tipo == 3){ %>
     <table border="1px"  style="none">
         <thead>
