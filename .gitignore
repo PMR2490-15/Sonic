@@ -3,3 +3,14 @@
 /build/
 >>>>>>> origin/master
 /dist/
+build/web/WEB-INF/classes/FiltroLogin.class
+
+*.class
+
+*.class
+
+build/web/WEB-INF/classes/FiltroLogin.class
+
+*.properties
+
+*.xml
