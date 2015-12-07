@@ -66,6 +66,10 @@
                 </tr>
                 <tr>
                     <td align="right"> 
+                        <input type="submit" name="enviar" value="Buscar Item"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
+                    <td align="right"> 
                         <input type="submit" name="enviar" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>

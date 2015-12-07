@@ -35,11 +35,8 @@
                 }
                 String action = request.getParameter("action");
                 action = "idle";
-                
                 int adminID = Integer.parseInt((String) session.getAttribute("User_ID"));
-                
                 Administrador admintn = new Administrador();
-                
                 AdministradorDO admin = new AdministradorDO();
                 admin = admintn.buscar(adminID);
                 String nome = admin.getNome();
@@ -51,66 +48,40 @@
             </div>
 
             <%-- Tabela do lado esquerdo --%>
-            <div id="left">
-                <table border="1px"  style="none">
-                    <thead>
+<div id="left">
+    <table border="1px"  style="none">
+        <thead>
+            <tr>
+                <th align="center" class="conta">
+                    <a href="./admin.jsp">Pagina Inicial</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <form method="post" action=admin.jsp>
+                <tr>
+                    <td align="center">
+                        <h3>Administrador <%= nome %> !!</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img id="foto" src="images/Venusaur.png"></td>
+                </tr>
+                <tr>
+                    <table>
                         <tr>
-                            <th align="center" class="conta">
-                                <a href="./admin.jsp">Pagina Inicial</a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <form method="post" action=admin.jsp>
-                        <tr>
-                            <td align="center">
-                                <h3>Administrador <%= nome%> !!</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img id="foto" src="images/Venusaur.png"></td>
-                        </tr>
-                        <tr>
-                        <table>
-                            <tr>
-                                <td><input type="text" name="usuario" /></td>
-                                <td align="right"><img id="lupa" src="images/lupa.png"></td>
-                            </tr>
-                        </table>
-                        </tr>
-                        <tr>
-                            <td align="right"> 
-                                <input type="submit" name="enviar" value="Buscar Usuário"/>
-                                <input type="hidden" name="campo_controle" />
-                            </td>
-                        </tr>
-                        <tr>
-                        <table>
                             <td><input type="text" name="usuario" /></td>
-                            <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
-                        </table>
+                        <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
-<<<<<<< Updated upstream
-                        <tr>
-                            <td align="right"> 
-                                <input type="submit" name="enviar" value="Banir Usuário"/>
-                                <input type="hidden" name="campo_controle" />
-                            </td>
-                        </tr>
-                    </form>
-                    </tbody>
-                </table>
-            </div>
-=======
                     </table>
                 </tr>
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
+                        <input type="submit" name="enviar" value="Buscar Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
-                    <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
+                    <td align="right"> 
+                        <input type="submit" name="enviar" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>
@@ -130,37 +101,17 @@
         </tbody>
     </table>
 </div>
-<%
-if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-    pageContext.forward("buscarItemAdmin");
-}
-else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-    pageContext.forward("buscarUsuarioAdmin");
-}
-%>
 <div>
         <div class="options">
             <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
         </div> 
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoAdmin.jsp">Comunicados</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./adminUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Editar Conta</a>
         </div> 
-</div>  
-<%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
-<div>
-    <div class="options">
-        <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
-    </div> 
-    <div class="options">
-        <a href="./comunicadoAdmin.jsp">Comunicados</a>
-    </div>
-    <div class="options"> 
-        <a href="./insert.jsp">Editar Conta</a>
-    </div> 
-</div>  
+</div>
 
 <%--Centro--%>
 <div id="center">
