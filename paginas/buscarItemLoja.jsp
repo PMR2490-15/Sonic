@@ -1,3 +1,5 @@
+<%@page import="data.LojaDO"%>
+<%@page import="transacoes.Loja"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="data.ItemDO"%>

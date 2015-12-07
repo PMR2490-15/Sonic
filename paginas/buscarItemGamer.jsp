@@ -89,7 +89,7 @@
 
 <div id="center">
 <%
-    String busca = (String)session.getAttribute("enviar");
+    String busca = (String)session.getAttribute("busca");
     String estado, preco, tipo, action;
     int size;
     List<ItemInventarioDO> listItemInv = new ArrayList<ItemInventarioDO>();

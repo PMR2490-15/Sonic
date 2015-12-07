@@ -28,24 +28,51 @@
        if ( null == action ) {
           action = "showLoginForm";
 %>
-	  <form action="./index.jsp" method="post">
+	  <form action="./caadastroCliente.jsp" method="post">
             <table>
               <tr>
-                 <td>Nome de usuário </td>
-                 <td><input type="text" name="nomeUsuario" />
+                 <td>Tipo de Usuário </td>
+                 <td align="left">
+                    <select name="tipo"> 
+                    <option value="1">Loja</option> 
+                    <option value="2">Gamer</option>                                           
+                   </select>
+                   </td>
               </tr>
               <tr>
-                 <td>Senha </td>
+                 <td>Nome </td>
                  <td><input type="password" name="senha" />  
               </tr>
               <tr>
+                 <td>CPF </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                 <td>CNPJ </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                 <td>Cidade </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                 <td>Email </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                 <td>Telefone 1 </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              <tr>
+                 <td>Telefone 2 </td>
+                 <td><input type="password" name="senha" />  
+              </tr>
+              
+              <tr>
                   <td></td>
                   <td>
-                      <input type="submit" name="action" value="Login :D" />
-                      <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
-                      <input type="submit" name="action" value="loja" />
-                      <input type="submit" name="action" value="gamer" />
-                      <input type="submit" name="action" value="admin" />
+                      <input type="submit" name="action" value="Enviar" />
+                      
                   </td>
               </tr>
             </table>
@@ -150,10 +177,7 @@
 </div>
     </div>
     <div id="right">
-        <h3>Cadastre-se!</h3>
-        <div id="button">
-            <p> <a href="./cadastroCliente.jsp"><span class="bold">Clique Aqui!</span></a></p>
-        </div>
+        
     </div>
         <div id="charizard"> 
             <%--        <img  class="charizard" src="images/Logo.png"> --%>
