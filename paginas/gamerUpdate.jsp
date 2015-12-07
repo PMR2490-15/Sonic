@@ -3,6 +3,12 @@
     Created on : 06.12.2015, 17:09:20
     Author     : Rafael
 --%>
+
+<%@page import="data.UsuarioDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.Gamer" %>
+<%@ page import="data.GamerDO" %>
+<%@ page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,26 +16,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="Stylesheet" href="css/StyleSheetGamer.css"/>
-        <title>HttpSessionDemo - Pagina do Gamer</title>
+        <link type="text/css" rel="Stylesheet" href="css/StyleSheetLoja.css"/>
+        <title>Pagina do Gamer - Editar Conta</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
-       pageContext.forward("index.jsp");
+    //if ( session.getAttribute("User_ID") == null) {
+      // pageContext.forward("index.jsp");
+    //}
+    String action = request.getParameter("action");
+    if(action == null){
+        action="Idle";
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
+    //int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Gamer gamertn = new Gamer();
+    GamerDO gamer = new GamerDO();
+    //gamer = gamertn.buscar(gamerID);
+    String nome = gamer.getNome();
+    //String nome = Integer.toString(gamerID);
 %>
-<%     
-       String action = request.getParameter("action");
-       if ( null == action ) {
-          action = "showUpdateform";
-%>
-
-
 <%-- cabeçalho--%>
     <div id="poli">
         <h1>POLI GAMES</h1>
@@ -96,69 +102,91 @@
             <a href="./atualizarGamer.jsp">Editar Conta</a>
         </div> 
 </div> 
+
+    <%--centro--%>
 <div id="center">
-<%     
-      
-%>
-     
-     
-          <form action="./update.jsp" method="post">
-             <table>
-               <tr>
-                  <td>Nome:</td>
-                  <td><input type="text" name="nome" />
-                  <td>Nome Atual:</td>
-                  
-               </tr>
-               <tr>
-                  <td>CPF:</td>
-                  <td><input type="text" name="cpf" />
-                  <td>CPF Atual:</td>
-                  
-              
-               </tr>
-               <tr>
-                  <td>Email:</td>
-                  <td><input type="text" name="email" />
-                  <td>Email atual:</td>
-                  
-              
-               </tr>
-               <tr>
-                  <td>Telfone:</td>
-                  <td><input type="text" name="telefone" />
-                   <td>Telfone Atual:</td>
-                  
-                  
-               </tr>
-               <tr>
-                  <td>Cidade:</td>
-                  <td><input type="text" name="cidade" />
-                  <td>Cidade Atual:</td>
-                  
-                  
-               </tr>
-             </table>
-             <input type="submit" name="action" value="atualizar" />
-	     <a href="gamer.jsp">Voltar</a>
-          </form>      
-    
-    <%
-        if(action.equals("Atualizar")) {
-           %>
-             <table>
-               <tr>
-                  <td>Contato Atualizado</td>
-               </tr>
-            </table>
-              
-    <%     
-            }
+    <table>
+        <tr>
+               <h4>Dados do Gamer</h4>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Nome:</hdl>
+            </td>
+            <td align="center">
+                <input type="text" name="newnome" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>CPF:</hdl>
+            </td>
+            <td align="center">
+                <input type="text" name="newcnpj" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>e-mail:</hdl>
+            </td>
+            <td align="center">
+                <input type="text" name="newemail" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Telefone:</hdl>
+            </td>
+            <td align="center">
+                <input type="text" name="newtel1"  />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td align="center">
+                <input type="submit"  value="Salvar"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <div class="voltar">
+                    <a href="./gamer.jsp">Voltar</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    </form>
+<%
+        
+        System.out.println("agora foi " + action);
+        if(action.equals("Salvar")){
+            System.out.println("agora foi");
+       GamerDO newgamer = new GamerDO();
+       Gamer newgamertn = new Gamer();
+       newgamer.setUsuario_Id(gamer.getUsuario_Id());
+       newgamer.setNome((String)request.getParameter("newnome"));
+       newgamer.setCpf(Integer.parseInt(request.getParameter("newcpf")));
+       newgamer.setEmail((String)request.getParameter("newemail"));
+       newgamer.setTelefone(Integer.parseInt(request.getParameter("newtel")));
+       //newloja.setFoto((String)request.getParameter("newfoto"));
+       if((String)request.getParameter("newfoto") == null){
+           newgamer.setFoto(gamer.getFoto());
+       } else{
+           newgamer.setFoto((String)request.getParameter("newfoto"));
        }
-    %>
-    
+       newgamer.setSuspenso_ate(gamer.getSuspenso_ate());
+       newgamer.setAtivo(gamer.getAtivo());
+       newgamertn.atualizar(newgamer);
+       //session.setAttribute("User_ID", Integer.toString(gamerID));
+       pageContext.forward("gamer.jsp");
+              
+            }
+        
+%>
 </div>
-%>        
+               
+    
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
