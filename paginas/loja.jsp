@@ -20,6 +20,10 @@
        pageContext.forward("index.jsp");
     }
     
+    if ( session.getAttribute("enviar") == null) {
+       session.setAttribute("enviar", "algo");
+    }
+    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
     
     Loja lojatn = new Loja();

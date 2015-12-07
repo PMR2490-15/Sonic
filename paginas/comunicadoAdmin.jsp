@@ -105,7 +105,7 @@
                     <a href="./comunicadoAdmin.jsp">Comunicados</a>
                 </div>
                 <div class="options"> 
-                    <a href="./insert.jsp">Editar Conta</a>
+                    <a href="./adminUpdate.jsp">Editar Conta</a>
                 </div> 
             </div>
 

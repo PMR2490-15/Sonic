@@ -78,17 +78,18 @@
         </tbody>
     </table>
 </div>
+<%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./admin.jsp">Pagina Inicial</a>
+            <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
         </div> 
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoAdmin.jsp">Comunicados</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./adminUpdate.jsp">Editar Conta</a>
         </div> 
-</div>  
+</div> 
 
                         <%--Centro--%>
         <div id="center">

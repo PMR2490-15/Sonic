@@ -13,7 +13,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+   "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -23,88 +23,50 @@
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
-            <%
-                if (session.getAttribute("User_ID") == null) {
-                    pageContext.forward("index.jsp");
-                }
-                String action = request.getParameter("action");
-                action = "idle";
-                
-                int adminID = Integer.parseInt((String) session.getAttribute("User_ID"));
-                
-                Administrador admintn = new Administrador();
-                
-                AdministradorDO admin = new AdministradorDO();
-                admin = admintn.buscar(adminID);
-                String nome = admin.getNome();
-            %>
+<%
+    if ( session.getAttribute("User_ID") == null) {
+       pageContext.forward("index.jsp");
+    }
+    int adminID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Administrador admintn = new Administrador();
+    AdministradorDO admin = new AdministradorDO();
+    admin = admintn.buscar(adminID);
+    String nome = admin.getNome();
+%>
 
-            <%-- cabeçalho--%>
-            <div id="poli">
-                <h1>POLI GAMES</h1>
-            </div>
-
-            <%-- Tabela do lado esquerdo --%>
-            <div id="left">
-                <table border="1px"  style="none">
-                    <thead>
+        <div id="poli">
+            <h1>POLI GAMES</h1>
+        </div>
+<div id="left">
+    <table border="1px"  style="none">
+        <thead>
+            <tr>
+                <th align="center" class="conta">
+                    <a href="./admin.jsp">Pagina Inicial</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <form method="post" action=admin.jsp>
+                <tr>
+                    <td align="center">
+                        <h3>Administrador <%= nome %> !!</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img id="foto" src="images/Venusaur.png"></td>
+                </tr>
+                <tr>
+                    <table>
                         <tr>
-                            <th align="center" class="conta">
-                                <a href="./admin.jsp">Pagina Inicial</a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <form method="post" action=admin.jsp>
-                        <tr>
-                            <td align="center">
-                                <h3>Administrador <%= nome%> !!</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img id="foto" src="images/Venusaur.png"></td>
-                        </tr>
-                        <tr>
-                        <table>
-                            <tr>
-                                <td><input type="text" name="usuario" /></td>
-                                <td align="right"><img id="lupa" src="images/lupa.png"></td>
-                            </tr>
-                        </table>
-                        </tr>
-                        <tr>
-                            <td align="right"> 
-                                <input type="submit" name="enviar" value="Buscar Usuário"/>
-                                <input type="hidden" name="campo_controle" />
-                            </td>
-                        </tr>
-                        <tr>
-                        <table>
                             <td><input type="text" name="usuario" /></td>
-                            <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
-                        </table>
+                        <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
-<<<<<<< Updated upstream
-                        <tr>
-                            <td align="right"> 
-                                <input type="submit" name="enviar" value="Banir Usuário"/>
-                                <input type="hidden" name="campo_controle" />
-                            </td>
-                        </tr>
-                    </form>
-                    </tbody>
-                </table>
-            </div>
-=======
                     </table>
                 </tr>
                 <tr>
                     <td align="right"> 
                         <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
-                    </td>
-                    <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>
@@ -124,51 +86,28 @@
         </tbody>
     </table>
 </div>
-<%
-if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-    pageContext.forward("buscarItemAdmin");
-}
-else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-    pageContext.forward("buscarUsuarioAdmin");
-}
-%>
 <div>
         <div class="options">
             <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
         </div> 
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoAdmin.jsp">Comunicados</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./adminUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Editar Conta</a>
         </div> 
 </div>  
->>>>>>> Stashed changes
 
-            <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
-            <div>
-                <div class="options">
-                    <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
-                </div> 
-                <div class="options">
-                    <a href="./comunicadoAdmin.jsp">Comunicados</a>
-                </div>
-                <div class="options"> 
-                    <a href="./insert.jsp">Editar Conta</a>
-                </div> 
-            </div>  
-
-
-            <%--Centro--%>
-            <div id="center">
-
-            </div>
-
-            <%-- Rodape --%>
-            <div id="footer">
-                <p>PMR2490 - Sistemas de Informação
-                    <br>Escola Politécnida da USP</p>
-            </div>
+                        <%--Centro--%>
+        <div id="center">
+            
+        </div>
+        
+        <%-- Rodape --%>
+        <div id="footer">
+            <p>PMR2490 - Sistemas de Informação
+            <br>Escola Politécnida da USP</p>
+        </div>
         </div>
     </body>
 </html>

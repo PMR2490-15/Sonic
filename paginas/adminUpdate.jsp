@@ -46,7 +46,7 @@
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./admin.jsp">Minha Conta</a>
+                    <a href="./admin.jsp"<%session.setAttribute("User_ID", Integer.toString(adminID));%>>Minha Conta</a>
                 </th>
             </tr>
         </thead>
@@ -59,15 +59,7 @@
                 </tr>
                 <tr>
                     <td><img id="foto" src="images/Venusaur.png"></td>
-                </tr>                        
-                <tr>
-                    <td align="left"> 
-                        Trocar foto
-                        <input type="text" name="newfoto" value=<%=admin.getFoto()%>  />
-                        <!--<input type="file" name="newfoto" accept="image/*" />-->
-                    </td>
-                </tr>
-         
+                </tr>                                
         </tbody>
     </table>
 </div>
@@ -75,13 +67,10 @@
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
+            <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(adminID));%>>Comunicados</a>
-        </div>
-        <div class="options">
-            <a href="./search.jsp">Histórico</a>
+            <a href="./comunicadoAdmin.jsp">Comunicados</a>
         </div>
         <div class="options"> 
             <a href="./adminUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Editar Conta</a>
@@ -92,7 +81,7 @@
 <div id="center">
     <table>
         <tr>
-               <h4>Dados da admin</h4>
+               <h4>Dados do Administrador</h4>
         </tr>
         <tr>
             <td align="right">
@@ -107,7 +96,7 @@
                 <hdl>CPF:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newcnpj" value=<%= Integer.toString(admin.getCNPJ())%> />
+                <input type="text" name="newcpf" value=<%= admin.getCPF()%> />
             </td>
         </tr>
         <tr>
@@ -123,7 +112,7 @@
                 <hdl>Telefone:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel1" value=<%= Integer.toString(admin.getTelefone_1())%> />
+                <input type="text" name="newtel" value=<%= admin.getTelefone()%> />
             </td>
         </tr>
         <tr>
@@ -146,21 +135,11 @@
    if(action.equals("Salvar")){
        AdministradorDO newadmin = new AdministradorDO();
        Administrador newadmintn = new Administrador();
-       newadmin.setID(admin.getID());
+       newadmin.setUsuarioId(admin.getUsuarioId());
        newadmin.setNome((String)request.getParameter("newnome"));
-       newadmin.setCNPJ(Integer.parseInt(request.getParameter("newcnpj")));
+       newadmin.setCPF((request.getParameter("newcpf")));
        newadmin.setEmail((String)request.getParameter("newemail"));
-       newadmin.setTelefone_1(Integer.parseInt(request.getParameter("newtel1")));
-       newadmin.setTelefone_2(Integer.parseInt(request.getParameter("newtel2")));
-       newadmin.setURL((String)request.getParameter("newurl"));
-       //newadmin.setFoto((String)request.getParameter("newfoto"));
-       if((String)request.getParameter("newfoto") == null){
-           newadmin.setFoto(admin.getFoto());
-       } else{
-           newadmin.setFoto((String)request.getParameter("newfoto"));
-       }
-       newadmin.setSuspenso_ate(admin.getSuspenso_ate());
-       newadmin.setAtivo(admin.getAtivo());
+       newadmin.setTelefone((request.getParameter("newtel")));
        newadmintn.atualizar(newadmin);
        session.setAttribute("User_ID", Integer.toString(adminID));
        pageContext.forward("admin.jsp");

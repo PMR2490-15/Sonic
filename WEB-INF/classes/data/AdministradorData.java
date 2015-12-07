@@ -39,7 +39,7 @@ public class AdministradorData {
 
   public void atualizar(AdministradorDO administrador, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "delete from Administrador set nome=?, cpf=?, email=?, telefone=? where usuario_id=?";
+     String sql = "update Administrador set nome=?, cpf=?, email=?, telefone=? where usuario_id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, administrador.getNome());
      ps.setString(2, administrador.getCPF());
@@ -51,16 +51,16 @@ public class AdministradorData {
 
   public AdministradorDO buscar(int idobj, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "select * from Administrador where  usuario_id=?";
+     String sql = "select * from Administrador where usuario_id=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, idobj);
      ResultSet rs = ps.executeQuery();
      rs.next();
      AdministradorDO administrador = new AdministradorDO();
      administrador.setUsuarioId(rs.getInt("usuario_id"));
-     administrador.setNome (rs.getString("nome"));
-     administrador.setCPF (rs.getString("cpf"));
-     administrador.setEmail (rs.getString("email"));
+     administrador.setNome(rs.getString("nome"));
+     administrador.setCPF(rs.getString("cpf"));
+     administrador.setEmail(rs.getString("email"));
      administrador.setTelefone(rs.getString("telefone"));
      return administrador;
   } // buscar

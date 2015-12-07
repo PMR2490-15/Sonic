@@ -22,7 +22,7 @@ public class AdministradorDO {
   } // getId
 
   public void setUsuarioId(int id) {
-    id = Usuario_id;
+    Usuario_id=id;
   } // setId
   
   public String getNome() {
