@@ -84,6 +84,7 @@
                             <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
                         </table>
                         </tr>
+<<<<<<< Updated upstream
                         <tr>
                             <td align="right"> 
                                 <input type="submit" name="enviar" value="Banir Usuário"/>
@@ -94,6 +95,51 @@
                     </tbody>
                 </table>
             </div>
+=======
+                    </table>
+                </tr>
+                <tr>
+                    <td align="right"> 
+                        <input type="submit" name="enviar" value="Buscar Usuário"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
+                </tr>
+                <tr>
+                    <table>
+                        <td><input type="text" name="usuario" /></td>
+                        <td align="left"><img id="lupa" src="images/Super_Hammer.png"></td>
+                    </table>
+                </tr>
+                <tr>
+                    <td align="right"> 
+                        <input type="submit" name="enviar" value="Banir Usuário"/>
+                        <input type="hidden" name="campo_controle" />
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+</div>
+<%
+if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
+    pageContext.forward("buscarItemAdmin");
+}
+else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
+    pageContext.forward("buscarUsuarioAdmin");
+}
+%>
+<div>
+        <div class="options">
+            <a href="./insertItemAdmin.jsp">Cadastrar Item</a>
+        </div> 
+        <div class="options">
+            <a href="./remove.jsp">Comunicados</a>
+        </div>
+        <div class="options"> 
+            <a href="./insert.jsp">Editar Conta</a>
+        </div> 
+</div>  
+>>>>>>> Stashed changes
 
             <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
             <div>
