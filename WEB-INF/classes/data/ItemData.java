@@ -8,7 +8,7 @@ public class ItemData {
     
     public void incluir(ItemDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into ITEM (NOME,TIPO,PRODUTORA,LANCAMENTO) values (?, ?, ?, ?)";
+        String sql = "insert into ITEM (NOME,TIPO,PRODUTORA,LANCAMENTO) values (?, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, item.getNome());
         ps.setInt(2, item.getTipo());
@@ -20,7 +20,7 @@ public class ItemData {
 
     public void excluir(ItemDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from ITEM where id = ?";
+        String sql = "delete from ITEM where id = ?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, item.getId());
         int result = ps.executeUpdate();
@@ -28,7 +28,7 @@ public class ItemData {
 
     public void atualizar(ItemDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update ITEM set nome=?, tipo=?, produtora=?,lancamento=? where id=?";
+        String sql = "update ITEM set nome=?, tipo=?, produtora=?,lancamento=? where id=?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, item.getNome());
         ps.setInt(2,item.getTipo());
@@ -40,7 +40,7 @@ public class ItemData {
 
     public ItemDO buscar(int idobj, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from item where  id=?";
+        String sql = "select * from item where  id=?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, idobj);
         ResultSet rs = ps.executeQuery();
@@ -56,7 +56,7 @@ public class ItemData {
 
     public List<ItemDO> pesquisarPorNome(String nome, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from item where nome like ?";
+        String sql = "select * from item where nome like \"%?%\";";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nome);
         ResultSet rs = ps.executeQuery();

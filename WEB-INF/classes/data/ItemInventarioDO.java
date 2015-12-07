@@ -7,7 +7,7 @@ public class ItemInventarioDO {
     private int _itemId;
     private int _id;
     private int _estado;
-    private int _preco;
+    private String _preco;
     private int _tipoTransacao;
     private int _precoPromo;
     private int _limitePromo;
@@ -41,10 +41,10 @@ public class ItemInventarioDO {
         _estado = estado;
     }
     
-    public int getPreco() {
+    public String getPreco() {
         return _preco;
     }
-    public void setPreco(int preco) {
+    public void setPreco(String preco) {
         _preco = preco;
     }
     

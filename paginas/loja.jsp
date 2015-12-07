@@ -75,7 +75,14 @@
         </tbody>
     </table>
 </div>
-                    
+<%
+if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
+    pageContext.forward("buscarItemLoja");
+}
+else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
+    pageContext.forward("buscarUsuarioLoja");
+}
+%>
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">

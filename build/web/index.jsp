@@ -42,7 +42,7 @@
                   <td></td>
                   <td>
                       <input type="submit" name="action" value="Login :D" />
-                      <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
+                      <input type="submit" name="action" value="Esqueci minha senha :/" />
                       <input type="submit" name="action" value="loja" />
                       <input type="submit" name="action" value="gamer" />
                       <input type="submit" name="action" value="admin" />
