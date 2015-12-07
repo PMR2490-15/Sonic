@@ -9,7 +9,7 @@ public class Gamer {
     public boolean incluir (GamerDO gamer) throws Exception{
         
         // validacao das regras de negocio
-        if(isEmpty(item.getNome()) )  {
+        if(isEmpty(gamer.getNome()) )  {
             return false;
         }
         

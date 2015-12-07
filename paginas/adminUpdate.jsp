@@ -1,12 +1,12 @@
 
 <%-- 
-    Document   : lojaUpdate.jsp
+    Document   : adminUpdate.jsp
 --%>
 
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
-<%@ page import="transacoes.Loja" %>
-<%@ page import="data.LojaDO" %>
+<%@ page import="transacoes.Administrador" %>
+<%@ page import="data.AdministradorDO" %>
 <%@ page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,7 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="Stylesheet" href="css/StyleSheetLoja.css"/>
-        <title>Pagina da Loja - Editar Conta</title>
+        <title>Pagina da Administrador - Editar Conta</title>
     </head>
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
@@ -28,12 +28,12 @@
     if(action == null){
         action="Idle";
     }
-    int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
-    Loja lojatn = new Loja();
-    LojaDO loja = new LojaDO();
-    loja = lojatn.buscar(lojaID);
-    String nome = loja.getNome();
-    //String nome = Integer.toString(lojaID);
+    int adminID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Administrador admintn = new Administrador();
+    AdministradorDO admin = new AdministradorDO();
+    admin = admintn.buscar(adminID);
+    String nome = admin.getNome();
+    //String nome = Integer.toString(adminID);
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -46,24 +46,24 @@
         <thead>
             <tr>
                 <th align="center" class="conta">
-                    <a href="./loja.jsp">Minha Conta</a>
+                    <a href="./admin.jsp">Minha Conta</a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=lojaUpdate.jsp>
+            <form method="post" action=adminUpdate.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Loja <%= nome %> !!</h3>
+                        <h3>Administrador <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src=<%= loja.getFoto()%>></td>
+                    <td><img id="foto" src="images/Venusaur.png"></td>
                 </tr>                        
                 <tr>
                     <td align="left"> 
                         Trocar foto
-                        <input type="text" name="newfoto" value=<%=loja.getFoto()%>  />
+                        <input type="text" name="newfoto" value=<%=admin.getFoto()%>  />
                         <!--<input type="file" name="newfoto" accept="image/*" />-->
                     </td>
                 </tr>
@@ -78,13 +78,13 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>
+            <a href="./comunicado.jsp"<%session.setAttribute("User_ID", Integer.toString(adminID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./lojaUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Editar Conta</a>
+            <a href="./adminUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Editar Conta</a>
         </div> 
 </div>  
 
@@ -92,22 +92,22 @@
 <div id="center">
     <table>
         <tr>
-               <h4>Dados da loja</h4>
+               <h4>Dados da admin</h4>
         </tr>
         <tr>
             <td align="right">
                 <hdl>Nome:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newnome" value=<%= loja.getNome()%> />
+                <input type="text" name="newnome" value=<%= admin.getNome()%> />
             </td>
         </tr>
         <tr>
             <td align="right">
-                <hdl>CNPJ:</hdl>
+                <hdl>CPF:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newcnpj" value=<%= Integer.toString(loja.getCNPJ())%> />
+                <input type="text" name="newcnpj" value=<%= Integer.toString(admin.getCNPJ())%> />
             </td>
         </tr>
         <tr>
@@ -115,31 +115,15 @@
                 <hdl>e-mail:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newemail" value=<%= loja.getEmail()%> />
+                <input type="text" name="newemail" value=<%= admin.getEmail()%> />
             </td>
         </tr>
         <tr>
             <td align="right">
-                <hdl>Telefone 1:</hdl>
+                <hdl>Telefone:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel1" value=<%= Integer.toString(loja.getTelefone_1())%> />
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <hdl>Telefone 2:</hdl>
-            </td>
-            <td align="center">
-                <input type="text" name="newtel2" value=<%= Integer.toString(loja.getTelefone_2())%> />
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <hdl>Site:</hdl>
-            </td>
-            <td align="center">
-                <input type="text" name="newurl" value=<%=loja.getURL()%> />
+                <input type="text" name="newtel1" value=<%= Integer.toString(admin.getTelefone_1())%> />
             </td>
         </tr>
         <tr>
@@ -152,7 +136,7 @@
         <tr>
             <td align="left">
                 <div class="voltar">
-                    <a href="./loja.jsp">Voltar<%session.setAttribute("User_ID", Integer.toString(lojaID));%></a>
+                    <a href="./admin.jsp">Voltar<%session.setAttribute("User_ID", Integer.toString(adminID));%></a>
                 </div>
             </td>
         </tr>
@@ -160,26 +144,26 @@
     </form>
 <%
    if(action.equals("Salvar")){
-       LojaDO newloja = new LojaDO();
-       Loja newlojatn = new Loja();
-       newloja.setID(loja.getID());
-       newloja.setNome((String)request.getParameter("newnome"));
-       newloja.setCNPJ(Integer.parseInt(request.getParameter("newcnpj")));
-       newloja.setEmail((String)request.getParameter("newemail"));
-       newloja.setTelefone_1(Integer.parseInt(request.getParameter("newtel1")));
-       newloja.setTelefone_2(Integer.parseInt(request.getParameter("newtel2")));
-       newloja.setURL((String)request.getParameter("newurl"));
-       //newloja.setFoto((String)request.getParameter("newfoto"));
+       AdministradorDO newadmin = new AdministradorDO();
+       Administrador newadmintn = new Administrador();
+       newadmin.setID(admin.getID());
+       newadmin.setNome((String)request.getParameter("newnome"));
+       newadmin.setCNPJ(Integer.parseInt(request.getParameter("newcnpj")));
+       newadmin.setEmail((String)request.getParameter("newemail"));
+       newadmin.setTelefone_1(Integer.parseInt(request.getParameter("newtel1")));
+       newadmin.setTelefone_2(Integer.parseInt(request.getParameter("newtel2")));
+       newadmin.setURL((String)request.getParameter("newurl"));
+       //newadmin.setFoto((String)request.getParameter("newfoto"));
        if((String)request.getParameter("newfoto") == null){
-           newloja.setFoto(loja.getFoto());
+           newadmin.setFoto(admin.getFoto());
        } else{
-           newloja.setFoto((String)request.getParameter("newfoto"));
+           newadmin.setFoto((String)request.getParameter("newfoto"));
        }
-       newloja.setSuspenso_ate(loja.getSuspenso_ate());
-       newloja.setAtivo(loja.getAtivo());
-       newlojatn.atualizar(newloja);
-       session.setAttribute("User_ID", Integer.toString(lojaID));
-       pageContext.forward("loja.jsp");
+       newadmin.setSuspenso_ate(admin.getSuspenso_ate());
+       newadmin.setAtivo(admin.getAtivo());
+       newadmintn.atualizar(newadmin);
+       session.setAttribute("User_ID", Integer.toString(adminID));
+       pageContext.forward("admin.jsp");
    }        
 %>
 </div>
