@@ -21,8 +21,8 @@ public class LojaData {
         ps.setString(2, Loja.getNome());
         ps.setInt(3, Loja.getCNPJ());
         ps.setString(4, Loja.getEmail());
-        ps.setInt(5, Loja.getTelefone_1());
-        ps.setInt(6, Loja.getTelefone_2());
+        ps.setString(5, Loja.getTelefone_1());
+        ps.setString(6, Loja.getTelefone_2());
         ps.setString(7, Loja.getFoto());
         ps.setString(8, Loja.getURL());
         ps.setString(9, Loja.getSuspenso_ate());
@@ -49,8 +49,8 @@ public class LojaData {
         ps.setString(1, Loja.getNome());
         ps.setInt(2, Loja.getCNPJ());
         ps.setString(3, Loja.getEmail());
-        ps.setInt(4, Loja.getTelefone_1());
-        ps.setInt(5, Loja.getTelefone_2());
+        ps.setString(4, Loja.getTelefone_1());
+        ps.setString(5, Loja.getTelefone_2());
         ps.setString(6, Loja.getFoto());
         ps.setString(7, Loja.getURL());
         ps.setString(8, Loja.getSuspenso_ate());
@@ -71,8 +71,8 @@ public class LojaData {
         loja.setNome(rs.getString("NOME"));
         loja.setCNPJ(rs.getInt("CNPJ"));
         loja.setEmail(rs.getString("EMAIL"));
-        loja.setTelefone_1(rs.getInt("TELEFONE_1"));
-        loja.setTelefone_2(rs.getInt("TELEFONE_2"));
+        loja.setTelefone_1(rs.getString("TELEFONE_1"));
+        loja.setTelefone_2(rs.getString("TELEFONE_2"));
         loja.setFoto(rs.getString("FOTO"));
         loja.setURL(rs.getString("URL"));
         loja.setSuspenso_ate(rs.getString("SUSPENSO_ATE"));
@@ -94,8 +94,8 @@ public class LojaData {
             loja.setNome(rs.getString("NOME"));
             loja.setCNPJ(rs.getInt("CNPJ"));
             loja.setEmail(rs.getString("EMAIL"));
-            loja.setTelefone_1(rs.getInt("TELEFONE_1"));
-            loja.setTelefone_2(rs.getInt("TELEFONE_2"));
+            loja.setTelefone_1(rs.getString("TELEFONE_1"));
+            loja.setTelefone_2(rs.getString("TELEFONE_2"));
             loja.setFoto(rs.getString("FOTO"));
             loja.setURL(rs.getString("URL"));
             loja.setSuspenso_ate(rs.getString("SUSPENSO_ATE"));

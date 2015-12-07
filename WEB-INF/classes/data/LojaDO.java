@@ -10,8 +10,8 @@ public class LojaDO {
     private String Nome;
     private int CNPJ;
     private String Email;
-    private int Telefone_1;
-    private int Telefone_2;
+    private String Telefone_1;
+    private String Telefone_2;
     private String Foto;
     private String URL;
     private String Suspenso_ate;
@@ -34,11 +34,11 @@ public class LojaDO {
         return Email;
     }
     
-    public int getTelefone_1(){
+    public String getTelefone_1(){
         return Telefone_1;
     }
     
-    public int getTelefone_2(){
+    public String getTelefone_2(){
         return Telefone_2;
     }
     
@@ -75,11 +75,11 @@ public class LojaDO {
         Email = _Email;
     }
     
-    public void setTelefone_1(int _Telefone_1){
+    public void setTelefone_1(String _Telefone_1){
         Telefone_1 = _Telefone_1;
     }
     
-    public void setTelefone_2(int _Telefone_2){
+    public void setTelefone_2(String _Telefone_2){
         Telefone_2 = _Telefone_2;
     }
     
