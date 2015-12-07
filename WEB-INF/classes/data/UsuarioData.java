@@ -55,6 +55,7 @@ public class UsuarioData {
      usuario.setId (rs.getInt("id"));
      usuario.setNome_Usuario (rs.getString("username"));
      usuario.setSenha(rs.getString("senha"));
+     usuario.setTipo(rs.getInt("tipo"));
      return usuario;
   } // buscar
   

@@ -22,17 +22,17 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    //if ( session.getAttribute("User_ID") == null) {
-      // pageContext.forward("index.jsp");
-    //}
+    if ( session.getAttribute("User_ID") == null) {
+       pageContext.forward("index.jsp");
+    }
     String action = request.getParameter("action");
     if(action == null){
         action="Idle";
     }
-    //int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Gamer gamertn = new Gamer();
     GamerDO gamer = new GamerDO();
-    //gamer = gamertn.buscar(gamerID);
+    gamer = gamertn.buscar(gamerID);
     String nome = gamer.getNome();
     //String nome = Integer.toString(gamerID);
 %>
@@ -166,9 +166,9 @@
        Gamer newgamertn = new Gamer();
        newgamer.setUsuario_Id(gamer.getUsuario_Id());
        newgamer.setNome((String)request.getParameter("newnome"));
-       newgamer.setCpf(Integer.parseInt(request.getParameter("newcpf")));
+       newgamer.setCpf(request.getParameter("newcpf"));
        newgamer.setEmail((String)request.getParameter("newemail"));
-       newgamer.setTelefone(Integer.parseInt(request.getParameter("newtel")));
+       newgamer.setTelefone(request.getParameter("newtel"));
        //newloja.setFoto((String)request.getParameter("newfoto"));
        if((String)request.getParameter("newfoto") == null){
            newgamer.setFoto(gamer.getFoto());

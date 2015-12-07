@@ -6,6 +6,10 @@
 
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
+<%@ page import="transacoes.Loja" %>
+<%@ page import="transacoes.Gamer" %>
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="transacoes.Administrador" %>
 <%@ page import="data.AdministradorDO" %>
 <%@ page import="data.LojaDO" %>
 <%@ page import="data.GamerDO" %>
@@ -47,27 +51,41 @@
     String cidade = null;
     String site = null;
     
-//    int tipo = Integer.parseInt(request.getParameter("Tipo"));
-    int tipo = 3;
-    if (tipo == 3)
-    {
+    if ( session.getAttribute("User_ID") == null) {
+       pageContext.forward("index.jsp");
+    }
+    String action = request.getParameter("action");
+    if(action == null){
+        action="Idle";
+    }
+    int ID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    //int tipo = 2;
+    Usuario usuariotn = new Usuario();
+    UsuarioDO perfilUsuario = new UsuarioDO();
+    perfilUsuario = usuariotn.buscar(ID);
+    int tipo = perfilUsuario.getTipo();
+    if (tipo == 3){
+        Administrador administradortn = new Administrador(); 
         AdministradorDO perfil = new AdministradorDO();
+        perfil = administradortn.buscar(ID);
         nome = perfil.getNome();
         email = perfil.getEmail();
         telefone = perfil.getTelefone();
     }
-    if (tipo == 2)
-    {
+    if (tipo == 2){
+        Loja lojatn = new Loja();
         LojaDO perfil = new LojaDO();
+        perfil = lojatn.buscar(ID);
         nome = perfil.getNome();
         email = perfil.getEmail();
         telefone = (String)perfil.getTelefone_1();
         telefone2 = (String)perfil.getTelefone_2();
         site = perfil.getURL();
     }
-    if (tipo == 1)
-    {
+    if (tipo == 1){
+        Gamer gamertn = new Gamer();
         GamerDO perfil = new GamerDO();
+        perfil = gamertn.buscar(ID);
         nome = perfil.getNome();
         email = perfil.getEmail();
         telefone = perfil.getTelefone();
@@ -146,8 +164,8 @@
 
 
 <div id="center">
-<%  if (tipo == 3)
-    { %>
+    <%= perfilUsuario.getTipo() %>
+<%  if (tipo == 3){ %>
     <table border="1px"  style="none">
         <thead>
             <tr>
@@ -177,8 +195,7 @@
         </tbody>
     </table>
 <%  }
-    if (tipo == 2)
-    { %>
+    if (tipo == 2){ %>
     <table>
         <thead>
             <tr>
@@ -223,8 +240,7 @@
         </tbody>
     </table>
 <%  }
-    if (tipo == 1)
-    { %>
+    if (tipo == 1){ %>
     <table>
         <thead>
             <tr>

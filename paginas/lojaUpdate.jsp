@@ -123,7 +123,7 @@
                 <hdl>Telefone 1:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel1" value=<%= Integer.toString(loja.getTelefone_1())%> />
+                <input type="text" name="newtel1" value=<%= loja.getTelefone_1()%> />
             </td>
         </tr>
         <tr>
@@ -131,7 +131,7 @@
                 <hdl>Telefone 2:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel2" value=<%= Integer.toString(loja.getTelefone_2())%> />
+                <input type="text" name="newtel2" value=<%= loja.getTelefone_2()%> />
             </td>
         </tr>
         <tr>
@@ -166,8 +166,8 @@
        newloja.setNome((String)request.getParameter("newnome"));
        newloja.setCNPJ(Integer.parseInt(request.getParameter("newcnpj")));
        newloja.setEmail((String)request.getParameter("newemail"));
-       newloja.setTelefone_1(Integer.parseInt(request.getParameter("newtel1")));
-       newloja.setTelefone_2(Integer.parseInt(request.getParameter("newtel2")));
+       newloja.setTelefone_1(request.getParameter("newtel1"));
+       newloja.setTelefone_2(request.getParameter("newtel2"));
        newloja.setURL((String)request.getParameter("newurl"));
        //newloja.setFoto((String)request.getParameter("newfoto"));
        if((String)request.getParameter("newfoto") == null){
