@@ -158,7 +158,7 @@
     </table>
     </form>
 <%
-        
+        action = request.getParameter("action");
         System.out.println("agora foi " + action);
         if(action.equals("Salvar")){
             System.out.println("agora foi");
