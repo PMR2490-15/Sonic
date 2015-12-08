@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/admin.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/loja.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/comunicadoLoja.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/buscarItemLoja.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/lojaUpdate.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/WEB-INF/classes/utils/Transacao.java</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/cadastroCliente.jsp</file>
+            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/index.jsp</file>
         </group>
     </open-files>
 </project-private>
