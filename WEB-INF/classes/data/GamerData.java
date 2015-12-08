@@ -18,7 +18,7 @@ public class GamerData {
         ps.setString(5, gamer.getTelefone());
         ps.setString(6, gamer.getCidade());
         ps.setString(7, gamer.getSuspenso_ate());
-        ps.setString(8, gamer.getAtivo());
+        ps.setBoolean(8, gamer.getAtivo());
      
         int result = ps.executeUpdate();
     }
@@ -43,7 +43,7 @@ public class GamerData {
         ps.setString(5, gamer.getCidade());
         ps.setString(6, gamer.getFoto());
         ps.setString(7, gamer.getSuspenso_ate());
-        ps.setString(8, gamer.getAtivo());
+        ps.setBoolean(8, gamer.getAtivo());
         ps.setInt(9, gamer.getUsuario_Id());
         int result = ps.executeUpdate();
     } // atualizar
@@ -64,7 +64,7 @@ public class GamerData {
         gamer.setCidade(rs.getString("cidade"));
         gamer.setFoto(rs.getString("foto"));
         gamer.setSuspenso_ate(rs.getString("suspenso_ate"));
-        gamer.setAtivo(rs.getString("ativo"));
+        gamer.setAtivo(rs.getBoolean("ativo"));
         return gamer;
     } // buscar
 
@@ -81,12 +81,12 @@ public class GamerData {
             i.setUsuario_Id (rs.getInt("usuario_id"));
             i.setNome (rs.getString("nome"));
             System.out.println(" got " + i.getNome());
-            i.setCpf("cpf");
-            i.setEmail("email");
-            i.setTelefone("telefone");
-            i.setCidade("cidade");
-            i.setSuspenso_ate("suspenso_ate");
-            i.setAtivo("ativo");
+            i.setCpf(rs.getString("cpf"));
+            i.setEmail(rs.getString("email"));
+            i.setTelefone(rs.getString("telefone"));
+            i.setCidade(rs.getString("cidade"));
+            i.setSuspenso_ate(rs.getString("suspenso_ate"));
+            i.setAtivo(rs.getBoolean("ativo"));
             Items.add(i);
         }
         return Items;

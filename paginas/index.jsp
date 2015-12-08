@@ -58,21 +58,19 @@
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%  
+     action = request.getParameter("action");
      if (action.equals("loja")) {
-       int id = 500; //simular ID
-       session.setAttribute("User_ID", Integer.toString(id));
+       session.setAttribute("User_ID", "500"); // simular ID
        pageContext.forward("loja.jsp");
      }
      
      if (action.equals("admin")) {
-         int id = 1000; //simular ID
-         session.setAttribute("User_ID", Integer.toString(id));
+         session.setAttribute("User_ID", "1000"); // simular ID
        pageContext.forward("admin.jsp");
      }
 
      if (action.equals("gamer")) {
-         int id = 3; //simular ID
-         session.setAttribute("User_ID", Integer.toString(id));
+         session.setAttribute("User_ID", "3"); // simular ID
          pageContext.forward("gamer.jsp");
        }
      if (action.equals("Login :D")){
@@ -82,30 +80,8 @@
        UsuarioDO usuario = tn.buscar(username);
        if (usuario == null || !password.equals((String)usuario.getSenha())) {
 %>         
-<p style="color:red"> <em>NOME OU SENHA DE USUÁRIO INCORRETO!</em></p>
-           <form action="./index.jsp" method="post">
-            <table>
-              <tr>
-                 <td>Nome de usuário </td>
-                 <td><input type="text" name="nomeUsuario" />
-              </tr>
-              <tr>
-                 <td>Senha </td>
-                 <td><input type="password" name="senha" />  
-              </tr>
-              <tr>
-                  <td></td>
-                  <td>
-                      <input type="submit" name="action" value="Login :D" />
-                      <input type="submit" name="forgotPassword" value="Esqueci minha senha :/" />
-                      <input type="submit" name="action" value="loja" />
-                      <input type="submit" name="action" value="gamer" />
-                      <input type="submit" name="action" value="admin" />
-                  </td>
-              </tr>
-            </table>
-            
-          </form>
+            <p style="color:red"> <em>NOME OU SENHA DE USUÁRIO INCORRETO!</em></p>
+            <input type="hidden" name="action" value="" />
 <%
        
        }else{
@@ -162,6 +138,6 @@
 	<p>PMR2490 - Sistemas de Informação
         <br>Escola Politécnida da USP</p>
     </div>
-        </div>    
+        </div>
     </body>
 </html>

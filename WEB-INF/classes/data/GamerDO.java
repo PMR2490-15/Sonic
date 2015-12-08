@@ -19,7 +19,7 @@ public class GamerDO {
     private String _cidade;
     private String _foto;
     private String _suspenso_ate;
-    private String _ativo;
+    private boolean _ativo;
 
     public int getUsuario_Id() {
         return _usuario_id;
@@ -85,11 +85,11 @@ public class GamerDO {
         this._suspenso_ate = _suspenso_ate;
     }
     
-     public String getAtivo() {
+     public boolean getAtivo() {
         return _ativo;
     }
 
-    public void setAtivo(String _ativo) {
+    public void setAtivo(boolean _ativo) {
         this._ativo = _ativo;
     }
     

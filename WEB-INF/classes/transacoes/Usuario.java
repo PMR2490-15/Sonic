@@ -18,8 +18,8 @@ public class Usuario {
      try {
 
        tr.begin();
-         UsuarioData cdata = new UsuarioData();
-         cdata.incluir(usuario, tr);
+         UsuarioData udata = new UsuarioData();
+         udata.incluir(usuario, tr);
        tr.commit();
        return true;
        
