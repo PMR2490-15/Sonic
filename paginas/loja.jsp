@@ -19,6 +19,14 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
+    String buscarUser = request.getParameter("buscarUser");
+    String buscarItem = request.getParameter("buscarItem");
+    if(buscarUser == null){
+        buscarUser="Idle";
+    }
+    if(buscarItem == null){
+        buscarItem="Idle";
+    }
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Loja lojatn = new Loja();
     LojaDO loja = new LojaDO();
@@ -53,25 +61,36 @@
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="busca" /></td>
+                        <td><input type="text" name="buscar" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
                 </tr>                                
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                     </td>
                     <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
         </tbody>
     </table>
 </div>
+
+<%  
+    if(!buscarUser.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(lojaID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarUsuarioLoja.jsp");
+    }
+    else if(!buscarItem.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(lojaID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarItemLoja.jsp");
+    }
+%>  
 
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
@@ -88,7 +107,7 @@
             <a href="./lojaUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Editar Conta</a>
         </div> 
 </div>  
-
+  
     <%--centro--%>
 <div id="center">
     <table>
@@ -137,10 +156,6 @@
         </tr>
     </table>
 </div>
-    
-<%  
-
-%>  
                 
 <%-- Rodape --%>
         <div id="footer">
