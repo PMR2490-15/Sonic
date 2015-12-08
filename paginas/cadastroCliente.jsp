@@ -35,38 +35,50 @@
                  <td align="left">
                     <select name="tipo"> 
                     <option value="1">Loja</option> 
-                    <option value="2">Gamer</option>                                           
+                    <option value="gamer">Gamer</option>                                           
                    </select>
+                     
                    </td>
               </tr>
-              <tr>
-                 <td>Nome </td>
-                 <td><input type="password" name="senha" />  
+            <%
+                String n = request.getParameter("tipo");
+                if(n.equals("gamer")){
+            %>
+            <p> blabla</p>
+            <tr>
+                  <td>Nome </td>
+                 <td><input type="text" name="userName"  />  
               </tr>
               <tr>
                  <td>CPF </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="cpf"  />  
               </tr>
-              <tr>
+              
+            <%
+                }
+                %>
+                <tr>
                  <td>CNPJ </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="cnpj" />  
               </tr>
               <tr>
                  <td>Cidade </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="cidade"  />  
               </tr>
               <tr>
                  <td>Email </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="email"  />  
               </tr>
               <tr>
                  <td>Telefone 1 </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="tel1" />  
               </tr>
               <tr>
                  <td>Telefone 2 </td>
-                 <td><input type="password" name="senha" />  
+                 <td><input type="text" name="tel2"  />  
               </tr>
+              <td>Senha </td>
+                 <td><input type="password" name="senha"  />
               
               <tr>
                   <td></td>
@@ -82,30 +94,31 @@
 <%        
        }
 %>
+
 <! ------------------------------------------------------------------------->
 <!--   faz a pesquisa e tenta fazer o login                               -->
 <%  
-     if (action.equals("loja")) {
-       int id = 500; //simular ID
-       session.setAttribute("User_ID", Integer.toString(id));
-       pageContext.forward("loja.jsp");
-     }
-     
-     if (action.equals("admin")) {
-         int id = 1000; //simular ID
-         session.setAttribute("User_ID", Integer.toString(id));
-       pageContext.forward("admin.jsp");
-     }
 
-     if (action.equals("gamer")) {
-         int id = 3; //simular ID
-         session.setAttribute("User_ID", Integer.toString(id));
-         pageContext.forward("gamer.jsp");
-       }
-     if (action.equals("Login :D")){
-       String username = request.getParameter("nomeUsuario");
+     if (action.equals("enviar")){
+       String username = request.getParameter("userName");
+       String cpf = request.getParameter("cpf");
+       String cnpj = request.getParameter("cnpj");
+       String cidade = request.getParameter("cidade");
+       String email = request.getParameter("email");
+       String tel1 = request.getParameter("tel1");
+       String tel2 = request.getParameter("tel2");
        String password = request.getParameter("senha");
        Usuario tn = new Usuario();
+       data.UsuarioDO user = new data.UsuarioDO();
+       user.setNome_Usuario(username);
+       user.setSenha(password);
+       tn.incluir(user);
+       data.GamerDO gamer = new data.GamerDO();
+       gamer.setCidade(cidade);
+       gamer.setNome(username);
+       gamer.setCpf(cpf);
+       gamer.setEmail(email);
+       
        UsuarioDO usuario = tn.buscar(username);
        if (usuario == null || !password.equals((String)usuario.getSenha())) {
 %>         
