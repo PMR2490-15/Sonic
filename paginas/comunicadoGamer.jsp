@@ -60,7 +60,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Logo.png"></td>
+                    <td><img id="foto" src=<%= gamer.getFoto()%>></td>
                 </tr>
                 <tr>
                     <table>
@@ -94,15 +94,15 @@
             <a href="./update.jsp">Wishlist</a>
         </div>
         <div class="options">
-            <a href="./comunicadoGamer.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
-        </div> 
-</div>  
+            <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
+        </div>
+</div> 
 
 <%--centro--%>
 <div id="center">

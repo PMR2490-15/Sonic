@@ -4,6 +4,10 @@
     Created on : 01/10/2009, 18:45:32
     Author     : MB
 --%>
+<%@page import="data.UsuarioDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.Administrador" %>
+<%@ page import="data.AdministradorDO" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -18,12 +22,14 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
+    if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
+    int adminID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Administrador admintn = new Administrador();
+    AdministradorDO admin = new AdministradorDO();
+    admin = admintn.buscar(adminID);
+    String nome = admin.getNome();
 %>
 
         <div id="poli">

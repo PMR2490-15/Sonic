@@ -25,15 +25,8 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    
-    if ( session.getAttribute("enviar") == null) {
-       session.setAttribute("enviar", "algo");
-    }
-    
-     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
-     
+    int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Gamer gamertn = new Gamer();
-    
     GamerDO gamer = new GamerDO();
     gamer = gamertn.buscar(gamerID);
     String nome = gamer.getNome();
@@ -61,7 +54,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Logo.png"></td>
+                    <td><img id="foto" src=<%= gamer.getFoto()%>></td>
                 </tr>
                 <tr>
                     <table>
@@ -85,14 +78,7 @@
         </tbody>
     </table>
 </div>
-<%
-if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-    pageContext.forward("buscarItemGamer");
-}
-else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-    pageContext.forward("buscarUsuarioGamer");
-}
-%>
+
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
@@ -102,18 +88,54 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
             <a href="./update.jsp">Wishlist</a>
         </div>
         <div class="options">
-            <a href="./comunicadoGamer.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
-        </div> 
-</div>  
+            <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
+        </div>
+</div> 
 
 <div id="center">
-    
+    <table>
+        <tr>
+               <h4>Dados do Gamer</h4>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>CPF:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer.getCpf()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>e-mail:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer.getEmail()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Telefone:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer.getTelefone()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Cidade:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer.getCidade()%></hd>
+            </td>
+        </tr>
+    </table>
 </div>
 <%-- Rodape --%>
         <div id="footer">

@@ -67,7 +67,6 @@
                         <!--<input type="file" name="newfoto" accept="image/*" />-->
                     </td>
                 </tr>
-         
         </tbody>
     </table>
 </div>

@@ -52,34 +52,22 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=index.jsp>
+            <form method="post" action=gamerUpdate.jsp>
                 <tr>
                     <td align="center">
                         <h3>Bem vindo <%= nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Logo.png"></td>
+                    <td><img id="foto" src=<%= gamer.getFoto()%>></td>
                 </tr>
                 <tr>
-                    <table>
-                        <tr>
-                        <td><input type="text" name="usuario" /></td>
-                        <td align="right"><img id="lupa" src="images/lupa.png"></td>
-                        </tr>
-                    </table>
-                </tr>                                
-                <tr>
-                    <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
-                    </td>
                     <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
-                        <input type="hidden" name="campo_controle" />
+                        Trocar foto
+                        <input type="text" name="newfoto" value=<%=gamer.getFoto()%>  />
+                        <!--<input type="file" name="newfoto" accept="image/*" />-->
                     </td>
                 </tr>
-            </form>
         </tbody>
     </table>
 </div>
@@ -93,14 +81,14 @@
             <a href="./update.jsp">Wishlist</a>
         </div>
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./gamerUpdate.jsp">Editar Conta</a>
-        </div> 
+            <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
+        </div>
 </div> 
 
     <%--centro--%>
@@ -114,7 +102,7 @@
                 <hdl>Nome:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newnome" />
+                <input type="text" name="newnome" value=<%= gamer.getNome()%> />
             </td>
         </tr>
         <tr>
@@ -122,7 +110,7 @@
                 <hdl>CPF:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newcnpj" />
+                <input type="text" name="newcpf" value=<%= gamer.getCpf()%> />
             </td>
         </tr>
         <tr>
@@ -130,7 +118,7 @@
                 <hdl>e-mail:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newemail" />
+                <input type="text" name="newemail" value=<%= gamer.getEmail()%> />
             </td>
         </tr>
         <tr>
@@ -138,14 +126,22 @@
                 <hdl>Telefone:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel1"  />
+                <input type="text" name="newtel" value=<%= gamer.getTelefone()%> />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Cidade:</hdl>
+            </td>
+            <td align="center">
+                <input type="text" name="newcidade" value=<%= gamer.getCidade()%> />
             </td>
         </tr>
         <tr>
             <td>
             </td>
             <td align="center">
-                <input type="submit"  value="Salvar"/>
+                <input type="submit"  name="action" value="Salvar"/>
             </td>
         </tr>
         <tr>
@@ -158,10 +154,7 @@
     </table>
     </form>
 <%
-        action = request.getParameter("action");
-        System.out.println("agora foi " + action);
-        if(action.equals("Salvar")){
-            System.out.println("agora foi");
+       if(action.equals("Salvar")){
        GamerDO newgamer = new GamerDO();
        Gamer newgamertn = new Gamer();
        newgamer.setUsuario_Id(gamer.getUsuario_Id());
@@ -169,7 +162,7 @@
        newgamer.setCpf(request.getParameter("newcpf"));
        newgamer.setEmail((String)request.getParameter("newemail"));
        newgamer.setTelefone(request.getParameter("newtel"));
-       //newloja.setFoto((String)request.getParameter("newfoto"));
+       newgamer.setCidade(request.getParameter("newcidade"));
        if((String)request.getParameter("newfoto") == null){
            newgamer.setFoto(gamer.getFoto());
        } else{
@@ -178,11 +171,9 @@
        newgamer.setSuspenso_ate(gamer.getSuspenso_ate());
        newgamer.setAtivo(gamer.getAtivo());
        newgamertn.atualizar(newgamer);
-       //session.setAttribute("User_ID", Integer.toString(gamerID));
-       pageContext.forward("gamer.jsp");
-              
-            }
-        
+       session.setAttribute("User_ID", Integer.toString(gamerID));
+       pageContext.forward("gamer.jsp");   
+       }
 %>
 </div>
                

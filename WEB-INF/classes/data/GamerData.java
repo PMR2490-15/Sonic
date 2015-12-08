@@ -34,16 +34,17 @@ public class GamerData {
     public void atualizar(GamerDO gamer, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "update GAMER set nome=?, cpf=?, email=?, telefone=?, "
-                + "cidade=?, suspenso_ate=? , ativo=? where usuario_id=?";
+                + "cidade=?, foto=? , suspenso_ate=? , ativo=? where usuario_id=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, gamer.getNome());
         ps.setString(2, gamer.getCpf());
         ps.setString(3, gamer.getEmail());
         ps.setString(4, gamer.getTelefone());
         ps.setString(5, gamer.getCidade());
-        ps.setString(6, gamer.getSuspenso_ate());
-        ps.setString(7, gamer.getAtivo());
-        ps.setInt(8, gamer.getUsuario_Id());
+        ps.setString(6, gamer.getFoto());
+        ps.setString(7, gamer.getSuspenso_ate());
+        ps.setString(8, gamer.getAtivo());
+        ps.setInt(9, gamer.getUsuario_Id());
         int result = ps.executeUpdate();
     } // atualizar
 
@@ -61,6 +62,7 @@ public class GamerData {
         gamer.setEmail(rs.getString("email"));
         gamer.setTelefone(rs.getString("telefone"));
         gamer.setCidade(rs.getString("cidade"));
+        gamer.setFoto(rs.getString("foto"));
         gamer.setSuspenso_ate(rs.getString("suspenso_ate"));
         gamer.setAtivo(rs.getString("ativo"));
         return gamer;

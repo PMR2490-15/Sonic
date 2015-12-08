@@ -19,15 +19,8 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    
-    if ( session.getAttribute("enviar") == null) {
-       session.setAttribute("enviar", "algo");
-    }
-    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
-    
     Loja lojatn = new Loja();
-    
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
@@ -79,14 +72,7 @@
         </tbody>
     </table>
 </div>
-<%
-if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-    pageContext.forward("buscarItemLoja");
-}
-else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-    pageContext.forward("buscarUsuarioLoja");
-}
-%>
+
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
@@ -107,7 +93,7 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
 <div id="center">
     <table>
         <tr>
-               <h4>Dados da loja</h4>
+               <h4>Dados da Loja</h4>
         </tr>
         <tr>
             <td align="right">
@@ -153,13 +139,7 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
 </div>
     
 <%  
-     if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-       pageContext.forward("buscarUsuarioLoja.jsp");
-     }
-     
-     if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-       pageContext.forward("buscarItemLoja.jsp");
-     }
+
 %>  
                 
 <%-- Rodape --%>
