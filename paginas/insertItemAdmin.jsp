@@ -41,8 +41,7 @@
     
     <%                  
                     String action = request.getParameter("action");
-                    if ( null == action ) {
-                        action = "CreateItem";
+                 
 %>
 
     <table border="1px"  style="none">
@@ -106,9 +105,13 @@
         </div> 
 </div> 
 
+<%
+                    if ( null == action ) {
+                        action = "CreateItem";
+%>
                         <%--Centro--%>
         <div id="center">
-            <form action="./insetItemAdmin.jsp" method="post">
+            <form action="./insertItemAdmin.jsp" method="post">
             <table>
                 <tr>
                <h4>Incluir item ao invetário:</h4>
@@ -138,9 +141,7 @@
                                         </td>
                 </tr>
                 <tr>
-                    <td>
-                    <label for="tipo">Tipo:</label>
-                    </td>
+                   
                     <td align="left">
                     <tr>
                                     <td>Tipo: </td>

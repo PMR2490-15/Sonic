@@ -1,6 +1,9 @@
 package data;
 
+import static data.ComunicadoData.formataData;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import utils.Transacao;
 
@@ -13,7 +16,7 @@ public class ItemData {
         ps.setString(1, item.getNome());
         ps.setInt(2, item.getTipo());
         ps.setString(3, item.getProdutora());
-        ps.setString(4, item.getLancamento());
+        ps.setDate(4, formataData(item.getLancamento()));
      
         int result = ps.executeUpdate();
     }
@@ -91,4 +94,17 @@ public class ItemData {
         return Items;
     } // pesquisarPorNome
 
+        public static java.sql.Date formataData(String data) throws Exception {   
+        if (data == null || data.equals(""))  
+            return null;  
+          
+        java.sql.Date date = null;  
+        try {  
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
+            date = new java.sql.Date( ((java.util.Date)formatter.parse(data)).getTime() );  
+        } catch (Exception e) {              
+            throw e;
+        }  
+        return date;  
+    }
 } // ContatoData
