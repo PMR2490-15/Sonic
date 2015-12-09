@@ -63,7 +63,7 @@ public class ItemInventario {
 	 return null;
   } // buscar
 
-  public List pesquisar(String nome) {
+  public List pesquisar(String nome, int us_id) {
      if ( isEmpty(nome) )
         return null;
 
@@ -71,7 +71,7 @@ public class ItemInventario {
      try {
 	     tr.beginReadOnly();
            ItemInventarioData item_data = new ItemInventarioData();
-           List v = item_data.pesquisaNome(nome, tr);
+           List v = item_data.pesquisaNome(nome, us_id, tr);
 		 tr.commit();
 		 return v;
      } catch(Exception e) {

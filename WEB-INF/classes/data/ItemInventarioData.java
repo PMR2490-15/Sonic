@@ -63,11 +63,12 @@ public class ItemInventarioData {
         return item;
     }
     
-    public List<ItemInventarioDO> pesquisaNome(String nome, Transacao tr) throws Exception{
+    public List<ItemInventarioDO> pesquisaNome(String nome, int us_id, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.NOME like ?;";
+        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and USUARIO_ID = ? and I.NOME like ?;";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, nome);
+        ps.setInt(1, us_id);
+        ps.setString(2, nome);
         ResultSet rs = ps.executeQuery();
         System.out.println("query executada");
         List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();

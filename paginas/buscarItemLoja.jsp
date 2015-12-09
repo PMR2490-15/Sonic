@@ -24,10 +24,6 @@
        pageContext.forward("index.jsp");
     }
     
-    if( session.getAttribute("enviar") == null ) {
-        session.setAttribute("enviar", "idle");
-    }
-    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
     
     Loja lojatn = new Loja();
@@ -64,19 +60,17 @@
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="buscar" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
                 </tr>                                
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                     </td>
                     <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
@@ -101,6 +95,7 @@
 </div>  
 
     <%--centro--%>
+    <div id="center">
 <%
     String busca = (String)session.getAttribute("busca");
     String estado = "";
@@ -114,8 +109,8 @@
     ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
-    listItemInv = tnII.pesquisar(busca);
-    if ( listItemInv != null ) {
+    listItemInv = tnII.pesquisar(busca, lojaID);
+    if ( listItemInv != null && listItemInv.size() > 0 ) {
 %>
         <table>
 <%
@@ -149,17 +144,6 @@
 <%      } %>
         </table>
 
-<%--
-for (int i=0; i < size; i++) {
-            action = (String)session.getAttribute("action"+String.valueOf(i));
-            if (action.equals("Visualizar")) {
-                session.setAttribute("idItemInventario",
-                                     String.valueOf(listItemInv.get(i).getId()));
-                pageContext.forward("anuncioGamer.jsp");
-                break;
-            }
-        }
---%>
 <%
     } else {
 %>
@@ -167,16 +151,7 @@ for (int i=0; i < size; i++) {
 <%
     }
 %>
-    
-<%
-     if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-       pageContext.forward("buscarUsuarioLoja.jsp");
-     }
-     
-     if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-       pageContext.forward("buscarItemLoja.jsp");
-     }
-%>
+    </div>
 
 <%-- Rodape --%>
         <div id="footer">

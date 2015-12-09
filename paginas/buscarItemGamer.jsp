@@ -24,10 +24,6 @@
        pageContext.forward("index.jsp");
     }
     
-    if( session.getAttribute("enviar") == null ) {
-        session.setAttribute("enviar", "idle");
-    }
-    
     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
     
     Gamer gamertn = new Gamer();
@@ -52,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=index.jsp>
+            <form method="post" action=gamer.jsp>
                 <tr>
                     <td align="center">
                         <h3>Bem vindo <%= nome %> !!</h3>
@@ -64,19 +60,17 @@
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="buscar" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
                 </tr>                                
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                     </td>
                     <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
@@ -93,17 +87,18 @@
             <a href="./update.jsp">Wishlist</a>
         </div>
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp">Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./insert.jsp">Editar Conta</a>
+            <a href="./gamerUpdate.jsp">Editar Conta</a>
         </div> 
 </div>
 
-<div id="center">
+<%--centro--%>
+    <div id="center">
 <%
     String busca = (String)session.getAttribute("busca");
     String estado = "";
@@ -117,8 +112,8 @@
     ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
-    listItemInv = tnII.pesquisar(busca);
-    if ( listItemInv != null ) {
+    listItemInv = tnII.pesquisar(busca, gamerID);
+    if ( listItemInv != null && listItemInv.size() > 0 ) {
 %>
         <table>
 <%
@@ -138,36 +133,28 @@
             else                                      {tipo = "troca & venda";}
 %>
             <tr>
-                <input type="hidden" name="action<% String.valueOf(i); %>" value="null" />
-                <td align="left"><% item.getNome(); %></td>
-                <td align="right"><% estado.toString(); %></td>
-                <td align="right">Para <% tipo.toString(); %></td>
-                <% if(itemInv.getTipoTransacao() != 2) { %>
-                <td align="right">R$ <% preco.toString(); %></td><% } %>
-                <td><input type="submit" name="action<% String.valueOf(i); %>" value="Visualizar"/></td>
+                <input type="hidden" name="action<%= String.valueOf(i) %>" value="null" />
+                <td align="left"><%= item.getNome() %></td>
+                <td align="right"><%= estado.toString() %></td>
+                <td align="right">Para <%= tipo.toString() %></td>
+                <%
+                if(itemInv.getTipoTransacao() != 2) {
+                %>
+                    <td align="right">R$ <%= preco.toString() %></td>
+                <% } %>
+                <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Visualizar"/></td>
             </tr>
 <%      } %>
         </table>
-<%
-        for (int i=0; i < size; i++) {
-            action = (String)session.getAttribute("action"+String.valueOf(i));
-            if (action.equals("Visualizar")) {
-                session.setAttribute("idItemInventario",
-                                     String.valueOf(listItemInv.get(i).getId()));
-                pageContext.forward("anuncioGamer.jsp");
-                break;
-            }
-        }
-    }
 
-    else {
+<%
+    } else {
 %>
         <p>Nenhum game encontrado! ;'(</p>
 <%
     }
 %>
-
-</div>
+    </div>
 
 <%-- Rodape --%>
         <div id="footer">

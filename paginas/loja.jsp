@@ -1,9 +1,9 @@
-<%@page import="data.UsuarioDO"%>
-<%@page import="java.util.List"%>
+<%@ page import="data.UsuarioDO"%>
+<%@ page import="java.util.List"%>
 <%@ page import="transacoes.Loja" %>
 <%@ page import="data.LojaDO" %>
 <%@ page import="java.util.Vector" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -37,6 +37,19 @@
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
+%>
+
+<%  
+    if(!buscarUser.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(lojaID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarUsuarioLoja.jsp");
+    }
+    else if(!buscarItem.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(lojaID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarItemLoja.jsp");
+    }
 %>
 
 <%-- cabeçalho--%>
@@ -85,18 +98,7 @@
     </table>
 </div>
 
-<%  
-    if(!buscarUser.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(lojaID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarUsuarioLoja.jsp");
-    }
-    else if(!buscarItem.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(lojaID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarItemLoja.jsp");
-    }
-%>
+
 
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>

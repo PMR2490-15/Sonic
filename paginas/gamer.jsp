@@ -1,10 +1,3 @@
-
-<%-- 
-    Document   : gamer.jsp
-    Created on : 01/10/2009, 18:45:32
-    Author     : MB
---%>
-
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="transacoes.Gamer" %>
 <%@ page import="data.GamerDO" %>
@@ -42,6 +35,19 @@
     gamer = gamertn.buscar(gamerID);
     String nome = gamer.getNome();
 %>
+
+<%  
+    if(!buscarUser.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(gamerID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarUsuarioGamer.jsp");
+    }
+    else if(!buscarItem.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(gamerID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarItemGamer.jsp");
+    }
+%>
 <%-- cabeçalho--%>
     <div id="poli">
         <h1>POLI GAMES</h1>
@@ -58,7 +64,7 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=index.jsp>
+            <form method="post" action=gamer.jsp>
                 <tr>
                     <td align="center">
                         <h3>Bem vindo <%=nome %> !!</h3>
@@ -80,26 +86,13 @@
                         <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                     </td>
                     <td align="left"> 
-                        <input type="submit" name="buscarUser" value="Buscar Item"/>
+                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
         </tbody>
     </table>
 </div>
-                
-<%  
-    if(!buscarUser.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(gamerID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarUsuarioGamer.jsp");
-    }
-    else if(!buscarItem.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(gamerID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarItemGamer.jsp");
-    }
-%> 
 
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
