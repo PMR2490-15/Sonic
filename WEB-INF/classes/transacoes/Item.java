@@ -62,6 +62,22 @@ public class Item {
 	}
 	return null;
     } // buscar
+    
+    public ItemDO buscar(String nomeItem) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    ItemData item_data = new ItemData();
+	    ItemDO i = item_data.buscar(nomeItem, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("erro ao buscar" + nomeItem);
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar
 
     public List<ItemDO> pesquisar(String nome) {
         if ( isEmpty(nome) )

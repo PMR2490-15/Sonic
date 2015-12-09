@@ -5,8 +5,10 @@
     Author     : MB
 --%>
 <%@page import="data.UsuarioDO"%>
+<%@page import="data.ItemDO"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Administrador" %>
+<%@ page import="transacoes.Item" %>
 <%@ page import="data.AdministradorDO" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -36,6 +38,13 @@
             <h1>POLI GAMES</h1>
         </div>
 <div id="left">
+    
+    <%                  
+                    String action = request.getParameter("action");
+                    if ( null == action ) {
+                        action = "CreateItem";
+%>
+
     <table border="1px"  style="none">
         <thead>
             <tr>
@@ -102,11 +111,14 @@
             <form action="./insetItemAdmin.jsp" method="post">
             <table>
                 <tr>
+               <h4>Incluir item ao invetário:</h4>
+        </tr>
+                <tr>
                     <td>
                      <label for="nome">Nome: </label>
                     </td>
                     <td align="left">
-                     <input type="text" name="nomeItem">
+                     <input type="text" name="nome_Item"/>
                     </td>
                 </tr>
                 <tr>
@@ -114,7 +126,7 @@
                      <label for="produtora">Produtora: </label>
                     </td>
                     <td align="left">
-                     <input type="text" name="prodtora">
+                     <input type="text" name="produtora"/>
                     </td>
                 </tr>
                 <tr>
@@ -122,32 +134,81 @@
                      <label>Lançamento: </label>
                     </td>
                     <td align="left">
-                     <input type="text" name="dia" size="2" maxlength="2" value="dd"> 
-                    <input type="text" name="mes" size="2" maxlength="2" value="mm"> 
-                    <input type="text" name="ano" size="4" maxlength="4" value="aaaa">
-                    </td>
+                     <input type="text" name="lancamento" value="dd-mm-aaaa"/> 
+                                        </td>
                 </tr>
                 <tr>
                     <td>
                     <label for="tipo">Tipo:</label>
                     </td>
                     <td align="left">
-                    <select name="tipo"> 
-                    <option value="1">ROM</option> 
-                    <option value="2">CONSOLE</option> 
-                    <option value="3">ACESSORIO</option> 
-                    <option value="4">OUTRO</option>                      
-                   </select>
+                    <tr>
+                                    <td>Tipo: </td>
+                                        <td align="left">
+                                            <input type="radio" name="tipoItem" value="1" checked> ROM
+                                            <input type="radio" name="tipoItem" value="2"> CONSOLE
+                                            <input type="radio" name="tipoItem" value="3"> ACESSORIO
+                                            <input type="radio" name="tipoItem" value="4"> OUTRO
+                                        </td>
+                                </tr>
                    </td>
                   </tr>                  
                   <tr>
-                      <td><input type="submit" name="" value="Enviar"></td>
+                      <td><input type="submit" name="action"value="Enviar" /></td>
+                       
                   </tr>
                 
             </table>
             </form>
         </div>
-        
+        <%
+            }
+                %>
+                           
+        <% 
+             if (action.equals("Enviar")){
+                 
+                        ItemDO buscar = new ItemDO();
+                        Item tn = new Item();                   
+                        buscar = tn.buscar(request.getParameter("nome_Item"));
+                        if(buscar != null || (request.getParameter("produtora")).equals("") || (request.getParameter("lancamento")).equals("")){
+                            action="erro";
+                        }
+                        else{
+                            session.setAttribute("nome_Item", request.getParameter("nome_Item"));
+                            session.setAttribute("produtora", request.getParameter("produtora"));
+                            session.setAttribute("tipoItem", request.getParameter("tipoItem"));
+                            session.setAttribute("lancamento", request.getParameter("lancamento"));
+                            
+                                     
+                        ItemDO novo = new ItemDO();
+                        novo.setNome((String)session.getAttribute("nome_Item"));
+                        novo.setProdutora((String)session.getAttribute("produtora"));
+                        novo.setTipo(Integer.parseInt((String)session.getAttribute("tipoItem")));
+                        novo.setLancamento((String)session.getAttribute("lancamento"));
+                        tn.incluir(novo);
+                        action="createOK";
+                        
+                        }
+                        
+                    }
+                        //----------------------------------------------
+                    if(action.equals("erro")){
+%>
+                        <h3>Item já existe ou campo não preenchido</h3>
+                        <a href="./insertItemAdmin.jsp">Voltar</a>
+<%
+                    }
+                    
+                    if (action.equals("createOK")){
+%>
+                        <h3>Cadastro completo</h3>
+                        <a href="./admin.jsp">Voltar</a>
+<%
+                    }
+                    
+        %>
+                            
         <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação

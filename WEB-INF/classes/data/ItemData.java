@@ -53,6 +53,22 @@ public class ItemData {
         item.setProdutora(rs.getString("produtora"));
         return item;
     } // buscar
+    
+    public ItemDO buscar(String nomeItem, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from item where  nome=?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nomeItem);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        ItemDO item = new ItemDO();
+        item.setId (rs.getInt("id"));
+        item.setNome (rs.getString("nome"));
+        item.setTipo(rs.getInt("tipo"));
+        item.setLancamento(rs.getString("lancamento"));
+        item.setProdutora(rs.getString("produtora"));
+        return item;
+    } // buscar
 
     public List<ItemDO> pesquisarPorNome(String nome, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
