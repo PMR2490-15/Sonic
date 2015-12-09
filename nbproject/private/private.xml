@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/loja.jsp</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/comunicadoLoja.jsp</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/buscarItemLoja.jsp</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/lojaUpdate.jsp</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/WEB-INF/classes/utils/Transacao.java</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/cadastroCliente.jsp</file>
-            <file>file:/C:/Users/Soyama/Desktop/SI/Git/Sonic/paginas/index.jsp</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/paginas/buscarItemAdmin.jsp</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/WEB-INF/classes/transacoes/ItemInventario.java</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/paginas/buscarItemGamer.jsp</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/paginas/buscarItemLoja.jsp</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/WEB-INF/classes/data/ItemInventarioData.java</file>
+            <file>file:/C:/Users/Bandana/Documents/GitHub/Sonic/paginas/gamer.jsp</file>
         </group>
     </open-files>
 </project-private>

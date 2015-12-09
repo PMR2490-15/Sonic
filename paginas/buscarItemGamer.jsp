@@ -112,7 +112,7 @@
     ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
-    listItemInv = tnII.pesquisar(busca, gamerID);
+    listItemInv = tnII.pesquisar(busca);
     if ( listItemInv != null && listItemInv.size() > 0 ) {
 %>
         <table>
@@ -138,16 +138,29 @@
                 <td align="right"><%= estado.toString() %></td>
                 <td align="right">Para <%= tipo.toString() %></td>
                 <%
-                if(itemInv.getTipoTransacao() != 2) {
+                if(itemInv.getTipoTransacao() != 2 && preco != null) {
                 %>
                     <td align="right">R$ <%= preco.toString() %></td>
                 <% } %>
-                <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Visualizar"/></td>
+                <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Comprar"/>
+                    <input type="hidden" name="view" value="<%= String.valueOf(i)%>"/> </td>
             </tr>
 <%      } %>
         </table>
 
 <%
+        
+for (int i=0; i < size; i++) {
+            action = (String)session.getAttribute("action"+String.valueOf(i));
+            if (action.equals("Visualizar")) {
+                session.setAttribute("idItemInventario",
+                                     String.valueOf(listItemInv.get(i).getId()));
+                pageContext.forward("anuncioGamer.jsp");
+                break;
+            }
+        }
+
+
     } else {
 %>
         <p>Nenhum game encontrado! ;'(</p>

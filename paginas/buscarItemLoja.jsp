@@ -109,7 +109,7 @@
     ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
-    listItemInv = tnII.pesquisar(busca, lojaID);
+    listItemInv = tnII.pesquisar(busca);
     if ( listItemInv != null && listItemInv.size() > 0 ) {
 %>
         <table>
@@ -143,6 +143,7 @@
             </tr>
 <%      } %>
         </table>
+
 
 <%
     } else {
