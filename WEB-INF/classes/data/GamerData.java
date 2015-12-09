@@ -8,8 +8,7 @@ public class GamerData {
     
     public void incluir(GamerDO gamer, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into GAMER (USUARIO_ID,NOME,CPF,EMAIL,TELEFONE,"
-                + "CIDADE,SUSPENSO_ATE,ATIVO,) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into GAMER (USUARIO_ID,NOME,CPF,EMAIL,TELEFONE,CIDADE,FOTO,SUSPENSO_ATE,ATIVO) values (?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, gamer.getUsuario_Id());
         ps.setString(2, gamer.getNome());
@@ -17,8 +16,9 @@ public class GamerData {
         ps.setString(4, gamer.getEmail());
         ps.setString(5, gamer.getTelefone());
         ps.setString(6, gamer.getCidade());
-        ps.setString(7, gamer.getSuspenso_ate());
-        ps.setBoolean(8, gamer.getAtivo());
+        ps.setString(7, gamer.getFoto());
+        ps.setString(8, gamer.getSuspenso_ate());
+        ps.setBoolean(9, gamer.getAtivo());
      
         int result = ps.executeUpdate();
     }

@@ -8,12 +8,13 @@ public class UsuarioData {
 
   public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into usuario (username, senha, pergunta, resposta) values (?, ?, ?, ?)";
+     String sql = "insert into usuario (username, senha, tipo, pergunta, resposta) values (?, ?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome_Usuario());
      ps.setString(2, usuario.getSenha());
-     ps.setString(3, usuario.getPergunta());
-     ps.setString(4, usuario.getResposta());
+     ps.setInt(3, usuario.getTipo());
+     ps.setString(4, usuario.getPergunta());
+     ps.setString(5, usuario.getResposta());
      int result = ps.executeUpdate();
   }
   
