@@ -106,7 +106,10 @@
                 </div>
                 <div class="options"> 
                     <a href="./adminUpdate.jsp">Editar Conta</a>
-                </div> 
+                </div>
+                <div class="options"> 
+                    <a href="./adminCreate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Criar ADM</a>
+                </div>
             </div>
 
             <%--centro--%>

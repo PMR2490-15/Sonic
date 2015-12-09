@@ -100,6 +100,9 @@
         <div class="options"> 
             <a href="./adminUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Editar Conta</a>
         </div> 
+        <div class="options"> 
+            <a href="./adminCreate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Criar ADM</a>
+        </div> 
 </div>  
 
                         <%--Centro--%>

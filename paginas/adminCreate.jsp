@@ -2,7 +2,9 @@
 <%-- 
     Document   : adminUpdate.jsp
 --%>
-
+<%@page import="transacoes.Administrador"%>
+<%@page import="data.AdministradorDO"%>
+<%@page import="transacoes.Usuario" %>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Administrador" %>
@@ -26,7 +28,7 @@
     }
     String action = request.getParameter("action");
     if(action == null){
-        action="Idle";
+        action="CreateAdmin";
     }
     int adminID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Administrador admintn = new Administrador();
@@ -51,7 +53,6 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=adminUpdate.jsp>
                 <tr>
                     <td align="center">
                         <h3>Administrador <%= nome %> !!</h3>
@@ -81,17 +82,45 @@
 </div>  
 
     <%--centro--%>
+<%
+            if(action.equals("CreateAdmin")){
+%>
 <div id="center">
+    <form method="post" action=adminUpdate.jsp>
     <table>
         <tr>
                <h4>Dados do Administrador</h4>
         </tr>
         <tr>
             <td align="right">
+                <hdl>Nome de usuário:</hdl>
+            </td>
+            <td><input type="text" name="userName"  /></td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Senha:</hdl>
+            </td>
+            <td><input type="password" name="senha"  /></td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Pergunta de segurança:</hdl>
+            </td>
+            <td><input type="text" name="pergunta"></td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Resposta:</hdl>
+            </td>
+            <td><input type="text" name="resposta"></td>
+        </tr>        
+        <tr>
+            <td align="right">
                 <hdl>Nome:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newnome" value=<%= admin.getNome()%> />
+                <input type="text" name="newnome" />
             </td>
         </tr>
         <tr>
@@ -99,7 +128,7 @@
                 <hdl>CPF:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newcpf" value=<%= admin.getCPF()%> />
+                <input type="text" name="newcpf" />
             </td>
         </tr>
         <tr>
@@ -107,7 +136,7 @@
                 <hdl>e-mail:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newemail" value=<%= admin.getEmail()%> />
+                <input type="text" name="newemail" />
             </td>
         </tr>
         <tr>
@@ -115,14 +144,14 @@
                 <hdl>Telefone:</hdl>
             </td>
             <td align="center">
-                <input type="text" name="newtel" value=<%= admin.getTelefone()%> />
+                <input type="text" name="newtel" />
             </td>
         </tr>
         <tr>
             <td>
             </td>
             <td align="center">
-                <input type="submit" name="action" value="Salvar"/>
+                <input type="submit" name="action" value="Concluir"/>
             </td>
         </tr>
         <tr>
@@ -135,7 +164,24 @@
     </table>
     </form>
 <%
-   if(action.equals("Salvar")){
+            }
+%>
+<%
+   if(action.equals("Concluir")){
+        UsuarioDO buscar = new UsuarioDO();
+        Usuario tn = new Usuario();                   
+        buscar = tn.buscar(request.getParameter("userName"));
+        if(buscar != null || (request.getParameter("senha")).equals("") || (request.getParameter("pergunta")).equals("") || (request.getParameter("resposta")).equals("")){
+            action="erro";
+        }
+        else{
+            session.setAttribute("userName", request.getParameter("userName"));
+            session.setAttribute("senha", request.getParameter("senha"));
+            session.setAttribute("tipo", request.getParameter("tipo"));
+            session.setAttribute("pergunta", request.getParameter("pergunta"));
+            session.setAttribute("resposta", request.getParameter("resposta"));
+            
+        }
        AdministradorDO newadmin = new AdministradorDO();
        Administrador newadmintn = new Administrador();
        newadmin.setUsuarioId(admin.getUsuarioId());
