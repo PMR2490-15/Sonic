@@ -131,28 +131,21 @@
                pageContext.forward("admin.jsp");
            }
        }
-     
-         // avisar usuario que o login nao pode ser efetuado
-%>
-<%---
-          Nome de usuário ou senha incorretos!
-          <form action="./index.html" method="post">
-          </form>
-     --%>    
-<%   //  }// else {
-           // session.setAttribute("nomeUsuario", nome);
-           // session.setAttribute("idUsuario", usuario.getId());*/
-           // pageContext.forward("gamer.jsp");
-       //} // login efetuado
      } // login
 
      
     else if (action.equals("Esqueci minha senha :/")) {
-        String nomeUsuario = (String)session.getAttribute("nomeUsuario");
+        String nomeUsuario = (String)request.getAttribute("nomeUsuario");
         Usuario tn = new Usuario();
         UsuarioDO usuario = tn.buscar(nomeUsuario);
         if (!usuario.equals(null)) {
+            session.setAttribute("nomeUsuario", nomeUsuario);
             pageContext.forward("recuperarSenha.jsp");
+        }
+        else {
+%>
+        <input type="hidden" name="action" value="" />
+<%
         }
     } // forgotPassword
 %>

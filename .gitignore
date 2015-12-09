@@ -14,3 +14,9 @@ build/web/WEB-INF/classes/FiltroLogin.class
 *.properties
 
 *.xml
+
+WEB-INF/classes/utils/Transacao.java
+
+*.class
+
+*.properties
