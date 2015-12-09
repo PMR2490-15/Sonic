@@ -18,12 +18,13 @@ public class AdministradorData {
     
     public void incluir(AdministradorDO administrador, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into Administrador (nome, cpf, email, telefone) values (?, ?, ?, ?)";
+     String sql = "insert into Administrador (usuario_id, nome, cpf, email, telefone) values (?, ?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, administrador.getNome());
-     ps.setString(2, administrador.getCPF());
-     ps.setString(1, administrador.getEmail());
-     ps.setString(2, administrador.getTelefone());
+     ps.setInt(1, administrador.getUsuarioId());
+     ps.setString(2, administrador.getNome());
+     ps.setString(3, administrador.getCPF());
+     ps.setString(4, administrador.getEmail());
+     ps.setString(5, administrador.getTelefone());
      int result = ps.executeUpdate();
   }
 

@@ -86,7 +86,7 @@
             if(action.equals("CreateAdmin")){
 %>
 <div id="center">
-    <form method="post" action=adminUpdate.jsp>
+    <form method="post" action=adminCreate.jsp>
     <table>
         <tr>
                <h4>Dados do Administrador</h4>
@@ -157,7 +157,7 @@
         <tr>
             <td align="left">
                 <div class="voltar">
-                    <a href="./admin.jsp">Voltar<%session.setAttribute("User_ID", Integer.toString(adminID));%></a>
+                    <a href="./admin.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Voltar</a>
                 </div>
             </td>
         </tr>
@@ -174,27 +174,47 @@
         if(buscar != null || (request.getParameter("senha")).equals("") || (request.getParameter("pergunta")).equals("") || (request.getParameter("resposta")).equals("")){
             action="erro";
         }
-        else{
-            session.setAttribute("userName", request.getParameter("userName"));
-            session.setAttribute("senha", request.getParameter("senha"));
-            session.setAttribute("tipo", request.getParameter("tipo"));
-            session.setAttribute("pergunta", request.getParameter("pergunta"));
-            session.setAttribute("resposta", request.getParameter("resposta"));
-            
+        else{              
+            UsuarioDO novo = new UsuarioDO();
+            novo.setNome_Usuario((String)request.getParameter("userName"));
+            novo.setSenha((String)request.getParameter("senha"));
+            novo.setTipo(3);
+            novo.setPergunta((String)request.getParameter("pergunta"));
+            novo.setResposta((String)request.getParameter("resposta"));
+            tn.incluir(novo);
+            UsuarioDO buscarid = new UsuarioDO();
+            buscarid = tn.buscar((String)request.getParameter("userName"));
+            AdministradorDO newadmin = new AdministradorDO();
+            Administrador newadmintn = new Administrador();
+            newadmin.setUsuarioId(buscarid.getId());
+            newadmin.setNome((String)request.getParameter("newnome"));
+            newadmin.setCPF((request.getParameter("newcpf")));
+            newadmin.setEmail((String)request.getParameter("newemail"));
+            newadmin.setTelefone((request.getParameter("newtel")));
+            newadmintn.incluir(newadmin);
+            action="CreateOK";
         }
-       AdministradorDO newadmin = new AdministradorDO();
-       Administrador newadmintn = new Administrador();
-       newadmin.setUsuarioId(admin.getUsuarioId());
-       newadmin.setNome((String)request.getParameter("newnome"));
-       newadmin.setCPF((request.getParameter("newcpf")));
-       newadmin.setEmail((String)request.getParameter("newemail"));
-       newadmin.setTelefone((request.getParameter("newtel")));
-       newadmintn.atualizar(newadmin);
-       session.setAttribute("User_ID", Integer.toString(adminID));
-       pageContext.forward("admin.jsp");
    }        
 %>
+
+<%
+   if(action.equals("erro")){
+%>       
+<div id="center">    
+    <h3>Nome de Usuário já existe ou campo não preenchido</h3>
+    <a href="./adminCreate.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Voltar</a>
+<%
+   }  
+   if(action.equals("CreateOK")){
+%>
+<div id="center">  
+    <h3>Cadastro completo</h3>
+    <a href="./admin.jsp" <%session.setAttribute("User_ID", Integer.toString(adminID));%>>Voltar</a>
+<%
+   }  
+%>  
 </div>
+        
                
     
 <%-- Rodape --%>
