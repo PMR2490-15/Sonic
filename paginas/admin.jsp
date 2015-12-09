@@ -113,7 +113,8 @@
         <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
-            <br>Escola Politécnida da USP</p>
+            <br>Escola Politécnida da USP
+            <br><a href="./logout.jsp" align="center" style="color:red"><b>Logout</b></a></p>
         </div>
         </div>
     </body>
