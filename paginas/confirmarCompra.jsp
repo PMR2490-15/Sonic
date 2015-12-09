@@ -1,6 +1,9 @@
-<%@ page import="data.UsuarioDO" %>
+
 <%@ page import="transacoes.Gamer" %>
 <%@ page import="data.GamerDO" %>
+<%@ page import="data.ItemInventarioDO" %>
+<%@ page import="data.ItemInventarioData" %>
+<%@ page import="transacoes.Usuario" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -55,6 +58,11 @@
     
 <%-- Tabela do lado esquerdo --%>
 <div id="left">
+    <%
+    String action = request.getParameter("action");
+                    if ( null == action ) {
+                        action = "confirmaCompra";
+                        %>
     <table border="1px"  style="none">
         <thead>
             <tr>
@@ -92,6 +100,9 @@
             </form>
         </tbody>
     </table>
+<%
+    }
+%>
 </div>
 
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
@@ -129,6 +140,17 @@
         
     </table>
 </div>
+<%
+    if(action.equals("SIM")){
+        //incluir item no inventário do comprador
+        transacoes.ItemInventario trIn = new transacoes.ItemInventario();
+        ItemInventarioDO ni= new ItemInventarioDO();
+        int uv_ID = ni.getUsuarioId();
+        ni.setUsuarioId(Integer.parseInt("User_ID"));
+        trIn.atualizar(ni);
+    
+    }
+  %>
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
