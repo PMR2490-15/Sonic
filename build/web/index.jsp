@@ -46,6 +46,7 @@
                       <input type="submit" name="action" value="loja" />
                       <input type="submit" name="action" value="gamer" />
                       <input type="submit" name="action" value="admin" />
+                      <input type="submit" name="action" value="busca" />
                   </td>
               </tr>
             </table>
@@ -75,6 +76,14 @@
          session.setAttribute("User_ID", Integer.toString(id));
          pageContext.forward("gamer.jsp");
        }
+     
+     if (action.equals("busca")) {
+         int id = 500; //simular ID
+         session.setAttribute("User_ID", Integer.toString(id));
+         session.setAttribute("busca", "Berzerk");
+         pageContext.forward("buscarItemLoja.jsp");
+       }
+     
      if (action.equals("Login :D")){
        String username = request.getParameter("nomeUsuario");
        String password = request.getParameter("senha");

@@ -8,8 +8,8 @@ public class Transacao {
   static final String ODBC_DRIVER = "com.mysql.jdbc.Driver";
 
   static final String DSN = "jdbc:mysql://localhost:3306/mpj";
-  static final String USER = "root";
-  static final String PWD = "";
+  static final String USER = "aluno";
+  static final String PWD = "epusp";
   
   private Connection _conexao = null;
   private boolean _readOnly = false;

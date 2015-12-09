@@ -1,3 +1,5 @@
+<%@page import="data.GamerDO"%>
+<%@page import="transacoes.Gamer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="data.ItemDO"%>
@@ -18,7 +20,21 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    String nome = (String)session.getAttribute("user_name");
+    if ( session.getAttribute("User_ID") == null) {
+       pageContext.forward("index.jsp");
+    }
+    
+    if( session.getAttribute("enviar") == null ) {
+        session.setAttribute("enviar", "idle");
+    }
+    
+    int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    
+    Gamer gamertn = new Gamer();
+    
+    GamerDO gamer = new GamerDO();
+    gamer = gamertn.buscar(gamerID);
+    String nome = gamer.getNome();
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -90,15 +106,19 @@
 <div id="center">
 <%
     String busca = (String)session.getAttribute("busca");
-    String estado, preco, tipo, action;
+    String estado = "";
+    String preco = "";
+    String tipo = "";
+    String action = "";
+    
     int size;
     List<ItemInventarioDO> listItemInv = new ArrayList<ItemInventarioDO>();
-    ItemInventarioDO itemInv;
-    ItemDO item;
+    ItemInventarioDO itemInv = new ItemInventarioDO();
+    ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
     listItemInv = tnII.pesquisar(busca);
-    if (! listItemInv.equals(null)) {
+    if ( listItemInv != null ) {
 %>
         <table>
 <%

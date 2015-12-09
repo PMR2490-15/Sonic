@@ -19,20 +19,26 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
+    
     String buscarUser = request.getParameter("buscarUser");
     String buscarItem = request.getParameter("buscarItem");
+    
     if(buscarUser == null){
         buscarUser="Idle";
     }
     if(buscarItem == null){
         buscarItem="Idle";
     }
+    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
+   
     Loja lojatn = new Loja();
+    
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
 %>
+
 <%-- cabeçalho--%>
     <div id="poli">
         <h1>POLI GAMES</h1>
@@ -90,7 +96,7 @@
        session.setAttribute("busca", request.getParameter("buscar"));
        pageContext.forward("buscarItemLoja.jsp");
     }
-%>  
+%>
 
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>

@@ -12,7 +12,7 @@ public class ItemInventarioData {
     
     public void incluir(ItemInventarioDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into ITEM_INVENTARIO (usid, itid, id, estado, preco, tipo_transacao, preco_promo, limite_promo);"
+        String sql = "insert into ITEM_INVENTARIO (USUARIO_ID, ITEM_ID, id, estado, preco, tipo_transacao, preco_promo, limite_promo);"
                 + " values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(2, item.getItemId());
@@ -35,7 +35,7 @@ public class ItemInventarioData {
     
     public void atualizar(ItemInventarioDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update ITEM_INVENTARIO set USID=?, ITID=?, ID=?, ESTADO=?, PRECO=?, TIPO_TRANSACAO=?;";
+        String sql = "update ITEM_INVENTARIO set USUARIO_ID=?, ITEM_ID=?, ID=?, ESTADO=?, PRECO=?, TIPO_TRANSACAO=?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, item.getUsuarioId());
         ps.setInt(2, item.getItemId());
@@ -54,8 +54,8 @@ public class ItemInventarioData {
         ResultSet rs = ps.executeQuery();
         rs.next();
         ItemInventarioDO item = new ItemInventarioDO();
-        item.setId(rs.getInt("usid"));
-        item.setId(rs.getInt("itid"));
+        item.setId(rs.getInt("USUARIO_ID"));
+        item.setId(rs.getInt("ITEM_ID"));
         item.setId(rs.getInt("id"));
         item.setId(rs.getInt("estado"));
         item.setId(rs.getInt("preco"));
@@ -65,7 +65,7 @@ public class ItemInventarioData {
     
     public List<ItemInventarioDO> pesquisaNome(String nome, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.NOME like \"%?%\";";
+        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.NOME like ?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nome);
         ResultSet rs = ps.executeQuery();
@@ -73,8 +73,8 @@ public class ItemInventarioData {
         List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
-           item.setUsuarioId(rs.getInt("usid"));
-           item.setItemId(rs.getInt("itid"));
+           item.setUsuarioId(rs.getInt("USUARIO_ID"));
+           item.setItemId(rs.getInt("ITEM_ID"));
            item.setId(rs.getInt("id"));
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getString("preco"));
@@ -86,7 +86,7 @@ public class ItemInventarioData {
     
     public List<ItemInventarioDO> pesquisaTipo(int tipo, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.TIPO = ?;";
+        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.TIPO = ?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, tipo);
         ResultSet rs = ps.executeQuery();
@@ -94,8 +94,8 @@ public class ItemInventarioData {
         List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
-           item.setUsuarioId(rs.getInt("usid"));
-           item.setItemId(rs.getInt("itid"));
+           item.setUsuarioId(rs.getInt("USUARIO_ID"));
+           item.setItemId(rs.getInt("ITEM_ID"));
            item.setId(rs.getInt("id"));
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getString("preco"));
@@ -107,7 +107,7 @@ public class ItemInventarioData {
     
     public List<ItemInventarioDO> pesquisaProdutora(String prod, Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "select I.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.PRODUTORA like \"?\";";
+        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.PRODUTORA like \"?\";";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, prod);
         ResultSet rs = ps.executeQuery();
@@ -115,8 +115,8 @@ public class ItemInventarioData {
         List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
         while (rs.next()) {
            ItemInventarioDO item = new ItemInventarioDO();
-           item.setUsuarioId(rs.getInt("usid"));
-           item.setItemId(rs.getInt("itid"));
+           item.setUsuarioId(rs.getInt("USUARIO_ID"));
+           item.setItemId(rs.getInt("ITEM_ID"));
            item.setId(rs.getInt("id"));
            item.setEstado(rs.getInt("estado"));
            item.setPreco(rs.getString("preco"));

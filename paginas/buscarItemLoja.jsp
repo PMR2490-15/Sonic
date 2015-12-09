@@ -24,6 +24,10 @@
        pageContext.forward("index.jsp");
     }
     
+    if( session.getAttribute("enviar") == null ) {
+        session.setAttribute("enviar", "idle");
+    }
+    
     int lojaID = Integer.parseInt((String)session.getAttribute("User_ID"));
     
     Loja lojatn = new Loja();
@@ -79,14 +83,7 @@
         </tbody>
     </table>
 </div>
-<%
-if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
-    pageContext.forward("buscarItemLoja");
-}
-else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
-    pageContext.forward("buscarUsuarioLoja");
-}
-%>
+
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
@@ -106,15 +103,19 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
     <%--centro--%>
 <%
     String busca = (String)session.getAttribute("busca");
-    String estado, preco, tipo, action;
+    String estado = "";
+    String preco = "";
+    String tipo = "";
+    String action = "";
+    
     int size;
     List<ItemInventarioDO> listItemInv = new ArrayList<ItemInventarioDO>();
-    ItemInventarioDO itemInv;
-    ItemDO item;
+    ItemInventarioDO itemInv = new ItemInventarioDO();
+    ItemDO item = new ItemDO();
     Item tnI = new Item();
     ItemInventario tnII = new ItemInventario();
     listItemInv = tnII.pesquisar(busca);
-    if (! listItemInv.equals(null)) {
+    if ( listItemInv != null ) {
 %>
         <table>
 <%
@@ -134,18 +135,22 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
             else                                      {tipo = "troca & venda";}
 %>
             <tr>
-                <input type="hidden" name="action<% String.valueOf(i); %>" value="null" />
-                <td align="left"><% item.getNome(); %></td>
-                <td align="right"><% estado.toString(); %></td>
-                <td align="right">Para <% tipo.toString(); %></td>
-                <% if(itemInv.getTipoTransacao() != 2) { %>
-                <td align="right">R$ <% preco.toString(); %></td><% } %>
-                <td><input type="submit" name="action<% String.valueOf(i); %>" value="Visualizar"/></td>
+                <input type="hidden" name="action<%= String.valueOf(i) %>" value="null" />
+                <td align="left"><%= item.getNome() %></td>
+                <td align="right"><%= estado.toString() %></td>
+                <td align="right">Para <%= tipo.toString() %></td>
+                <%
+                if(itemInv.getTipoTransacao() != 2) {
+                %>
+                    <td align="right">R$ <%= preco.toString() %></td>
+                <% } %>
+                <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Visualizar"/></td>
             </tr>
 <%      } %>
         </table>
-<%
-        for (int i=0; i < size; i++) {
+
+<%--
+for (int i=0; i < size; i++) {
             action = (String)session.getAttribute("action"+String.valueOf(i));
             if (action.equals("Visualizar")) {
                 session.setAttribute("idItemInventario",
@@ -154,16 +159,16 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
                 break;
             }
         }
-    }
-
-    else {
+--%>
+<%
+    } else {
 %>
         <p>Nenhum game encontrado! ;'(</p>
 <%
     }
 %>
     
-<%  
+<%
      if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
        pageContext.forward("buscarUsuarioLoja.jsp");
      }
@@ -171,8 +176,8 @@ else if (((String)session.getAttribute("enviar")).equals("Buscar Usuário")) {
      if (((String)session.getAttribute("enviar")).equals("Buscar Item")) {
        pageContext.forward("buscarItemLoja.jsp");
      }
-%>  
-                
+%>
+
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
