@@ -43,7 +43,7 @@
     if(!buscarUser.equals("Idle")){
        session.setAttribute("User_ID", Integer.toString(lojaID));
        session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarUsuarioLoja.jsp");
+       pageContext.forward("buscarPessoaLoja.jsp");
     }
     else if(!buscarItem.equals("Idle")){
        session.setAttribute("User_ID", Integer.toString(lojaID));

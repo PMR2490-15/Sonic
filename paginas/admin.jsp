@@ -1,10 +1,3 @@
-
-<%-- 
-    Document   : admin.jsp
-    Created on : 01/10/2009, 18:45:32
-    Author     : MB
---%>
-
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Administrador" %>
@@ -27,6 +20,17 @@
     if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
+    
+    String buscarUser = request.getParameter("buscarUser");
+    String buscarItem = request.getParameter("buscarItem");
+    
+    if(buscarUser == null){
+        buscarUser="Idle";
+    }
+    if(buscarItem == null){
+        buscarItem="Idle";
+    }
+    
     int adminID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Administrador admintn = new Administrador();
     AdministradorDO admin = new AdministradorDO();
@@ -34,6 +38,18 @@
     String nome = admin.getNome();
 %>
 
+<%  
+    if(!buscarUser.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(adminID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarPesoaAdmin.jsp");
+    }
+    else if(!buscarItem.equals("Idle")){
+       session.setAttribute("User_ID", Integer.toString(adminID));
+       session.setAttribute("busca", request.getParameter("buscar"));
+       pageContext.forward("buscarItemAdmin.jsp");
+    }
+%>
         <div id="poli">
             <h1>POLI GAMES</h1>
         </div>
@@ -59,7 +75,7 @@
                 <tr>
                     <table>
                         <tr>
-                            <td><input type="text" name="usuario" /></td>
+                            <td><input type="text" name="buscar" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
@@ -70,7 +86,7 @@
                         <input type="hidden" name="campo_controle" />
                     </td>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
                 </tr>

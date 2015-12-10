@@ -76,5 +76,26 @@ public class UsuarioData {
      usuario.setResposta(rs.getString("resposta"));
      return usuario;
   } // buscar
+  
+  public List<UsuarioDO> pesquisarNome(String nome, Transacao tr) throws Exception{
+        Connection con = tr.obterConexao();
+        String sql = "select * from USUARIO user where username like ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, "%"+nome+"%");
+        ResultSet rs = ps.executeQuery();
+        System.out.println("query executada");
+        List<UsuarioDO> usuarios = new ArrayList<UsuarioDO>();
+        while (rs.next()) {
+           UsuarioDO usuario = new UsuarioDO();
+           usuario.setId(rs.getInt("id"));
+           usuario.setNome_Usuario(rs.getString("username"));
+           usuario.setSenha(rs.getString("senha"));
+           usuario.setTipo(rs.getInt("tipo"));
+           usuario.setPergunta(rs.getString("pergunta"));
+           usuario.setResposta(rs.getString("resposta"));
+           usuarios.add(usuario);
+        }
+        return usuarios;
+    }
 
 } // ContatoData

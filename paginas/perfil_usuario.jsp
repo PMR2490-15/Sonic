@@ -58,7 +58,7 @@
     if(action == null){
         action="Idle";
     }
-    int ID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    int ID = Integer.parseInt((String)session.getAttribute("Requested_ID"));
     //int tipo = 2;
     Usuario usuariotn = new Usuario();
     UsuarioDO perfilUsuario = new UsuarioDO();

@@ -24,3 +24,7 @@ WEB-INF/classes/utils/Transacao.java
 *.xml
 
 *.properties
+
+*.properties
+
+*.class
