@@ -18,15 +18,14 @@
         <h1>POLI GAMES</h1>
     </div>
     
-    <p> Neste site você pode encontrar todos os seus jogos favoritos. Venda ou 
-            troque seus jogos de maneira segura, rápida e fácil! </p>
+    <p> Neste site você pode encontrar todos os seus jogos favoritos. Venda seus jogos de maneira rápida e fácil! </p>
         
     <div id="left"> 
         
         <div id="left2">
 <%          String action = request.getParameter("action");
             if ( null == action ) {
-            action = "showLoginForm";
+                action = "showLoginForm";
 %>
                 <form action="./index.jsp" method="post">
                     <table>

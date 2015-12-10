@@ -36,7 +36,7 @@
                             <table>
                                 <tr>
                                     <td>Pergunta de segurança </td>
-                                    <td><p><em><% user.getPergunta().toString(); %></em></p></td>
+                                    <td><em><% user.getPergunta().toString(); %></em></td>
                                 </tr>
                                 <tr>
                                     <td>Resposta </td>
