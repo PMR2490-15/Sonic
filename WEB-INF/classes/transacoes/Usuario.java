@@ -97,6 +97,23 @@ public class Usuario {
 	 return null;
   } // buscar
   
+    public List pesquisar(String nome) {
+     
+     Transacao tr = new Transacao();
+     try {
+	     tr.beginReadOnly();
+           UsuarioData usuario_data = new UsuarioData();
+           List v = usuario_data.pesquisarNome(nome, tr);
+		 tr.commit();
+		 return v;
+     } catch(Exception e) {
+         System.out.println("erro ao pesquisar " + nome);
+         e.printStackTrace();
+     }
+     return null;
+  } // pesquisar
+
+  
   public UsuarioDO alterarsenha(int idobj) throws Exception{
      Transacao tr = new Transacao();
 	 try{

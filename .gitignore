@@ -28,3 +28,5 @@ WEB-INF/classes/utils/Transacao.java
 *.properties
 
 *.class
+
+build/web/WEB-INF/classes/transacoes/Usuario.class
