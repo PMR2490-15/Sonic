@@ -36,15 +36,15 @@
                             <table>
                                 <tr>
                                     <td>Pergunta de segurança </td>
-                                    <td><p><em><% user.getPergunta().toString(); %></em></p></td>
+                                    <td><h3><em><% user.getPergunta().toString(); %></em></h3></td>
                                 </tr>
                                 <tr>
                                     <td>Resposta </td>
-                                    <td><input type="text" name="resposta"></td>
+                                    <td><input type="text" name="resposta" /></td>
                                 </tr>
                                 <tr>
                                     <td>Nova senha </td>
-                                    <td><input type="passsword" name="senha"></td>
+                                    <td><input type="passsword" name="senha" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>

@@ -18,15 +18,14 @@
         <h1>POLI GAMES</h1>
     </div>
     
-    <p> Neste site você pode encontrar todos os seus jogos favoritos. Venda ou 
-            troque seus jogos de maneira segura, rápida e fácil! </p>
+    <p> Neste site você pode encontrar todos os seus jogos favoritos. Venda seus jogos de maneira rápida e fácil! </p>
         
     <div id="left"> 
         
         <div id="left2">
 <%          String action = request.getParameter("action");
             if ( null == action ) {
-            action = "showLoginForm";
+                action = "showLoginForm";
 %>
                 <form action="./index.jsp" method="post">
                     <table>
@@ -46,7 +45,6 @@
                                 <input type="submit" name="action" value="loja" />
                                 <input type="submit" name="action" value="gamer" />
                                 <input type="submit" name="action" value="admin" />
-                                <input type="submit" name="action" value="busca" />
                             </td>
                         </tr>
                     </table>
@@ -67,12 +65,6 @@
                 int id = 3; //simular ID
                 session.setAttribute("User_ID", Integer.toString(id));
                 pageContext.forward("gamer.jsp");
-            }
-            if (action.equals("busca")) {
-                int id = 500; //simular ID
-                session.setAttribute("User_ID", Integer.toString(id));
-                session.setAttribute("busca", "Berzerk");
-                pageContext.forward("buscarItemLoja.jsp");
             }
             if (action.equals("Login :D")){
                 String username = request.getParameter("nomeUsuario");
@@ -122,12 +114,12 @@
             } // login
 
             else if (action.equals("Esqueci minha senha :/")) {
-                String nomeUsuario = (String)request.getAttribute("nomeUsuario");
+                String username = request.getParameter("nomeUsuario");
                 Usuario tn = new Usuario();
-                UsuarioDO usuario = tn.buscar(nomeUsuario);
+                UsuarioDO usuario = tn.buscar(username);
                 if (!usuario.equals(null)) {
-                    session.setAttribute("nomeUsuario", nomeUsuario);
-                    pageContext.forward("recuperarSenha.jsp");
+                    session.setAttribute("nomeUsuario", username);
+                    pageContext.forward("./recuperarSenha.jsp");
                 }
                 else {
 %>

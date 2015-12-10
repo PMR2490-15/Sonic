@@ -26,12 +26,12 @@
             if ( null == action ) {
                 action = "showLogoutForm";
 %>
-                <table>
-                    <tr>
-                        <td><input type="hidden" name="action" value="Logout! :(" /></td>
-                        <td><input type="hidden" name="action" value="Pensando bem... :D" /></td>
-                    </tr>
-                </table>
+                    <table>
+                        <tr>
+                            <td><input type="submit" name="action" value="Logout! :(" /></td>
+                            <td><input type="submit" name="action" value="Pensando bem... :D" /></td>
+                        </tr>
+                    </table>
 <%        
             }
 
