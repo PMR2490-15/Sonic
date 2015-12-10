@@ -31,6 +31,12 @@
                 GamerDO gamer = new GamerDO();
                 gamer = gamertn.buscar(gamerID);
                 String nome = gamer.getNome();
+                
+                String buscarItem = request.getParameter("buscarItem");
+    
+                if(buscarItem == null){
+                    buscarItem="Idle";
+                }
 
                 String itemID = request.getParameter("itemID");
                 if (itemID == null) {
@@ -69,12 +75,12 @@
                                 <td align="right"><img id="lupa" src="images/lupa.png"></td>
                             </tr>
                         </table>
-                        </tr>
+                        </tr>                                
                         <tr>
-                            <td align="right">
+                            <td align="right"> 
                                 <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                             </td>
-                            <td align="left">
+                            <td align="left"> 
                                 <input type="submit" name="buscarItem" value="Buscar Item"/>
                             </td>
                         </tr>
@@ -87,7 +93,7 @@
             <div>
                 <div class="options">
                     <a href="./insert.jsp">Inventário</a>
-                </div>
+                </div> 
                 <div class="options">
                     <a href="./update.jsp">Wishlist</a>
                 </div>
@@ -97,9 +103,9 @@
                 <div class="options">
                     <a href="./search.jsp">Histórico</a>
                 </div>
-                <div class="options">
+                <div class="options"> 
                     <a href="./gamerUpdate.jsp">Editar Conta</a>
-                </div>
+                </div> 
             </div>
 
             <%
@@ -107,13 +113,27 @@
                     session.setAttribute("ItemID", itemID);
                     session.setAttribute("VendedorID", request.getParameter("vendedorID") );
                     pageContext.forward("confirmarCompra.jsp");
-
                 }
-
+                
+                if(!buscarItem.equals("Idle")){
+                    session.setAttribute("User_ID", Integer.toString(gamerID));
+                    session.setAttribute("busca", request.getParameter("buscar"));
+                    buscarItem = "Idle";
+                }
             %>
 
             <%--centro--%>
             <div id="center">
+                <form method="post" action=compraGamer.jsp>
+                    <table>
+                        <tr>
+                            <td><input type="text" name="buscar" /></td>
+                            <td align="right"><img id="lupa" src="images/lupa.png"></td>
+                            <td><input type="submit" name="buscarItem" value="Buscar Item"/></td>
+                        </tr>
+                    </table>
+                </form>
+                
                 <%
                     String busca = (String) session.getAttribute("busca");
                     String estado = "";
@@ -130,7 +150,8 @@
                     listItemInv = tnII.pesquisar(busca);
                     if (listItemInv != null && listItemInv.size() > 0) {
                 %>
-                <form method="post" action=buscarItemGamer.jsp>
+                
+                <form method="post" action=compraGamer.jsp>
 
                     <table>
                         <%

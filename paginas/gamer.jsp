@@ -80,13 +80,10 @@
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
-                </tr>                                
+                </tr>
                 <tr>
                     <td align="right"> 
                         <input type="submit" name="buscarUser" value="Buscar Usuário"/>
-                    </td>
-                    <td align="left"> 
-                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
@@ -100,7 +97,7 @@
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
-            <a href="./update.jsp">Wishlist</a>
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
         </div>
         <div class="options">
             <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
