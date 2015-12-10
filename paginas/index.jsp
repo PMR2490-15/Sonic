@@ -117,12 +117,13 @@
                 String username = request.getParameter("nomeUsuario");
                 Usuario tn = new Usuario();
                 UsuarioDO usuario = tn.buscar(username);
-                if (!usuario.equals(null)) {
+                if (usuario.equals(null)) {
+                    
+                    pageContext.forward("./index.jsp");
+                }
+                else {
                     session.setAttribute("nomeUsuario", username);
                     pageContext.forward("./recuperarSenha.jsp");
-                }
-                else if (usuario.equals(null)) {
-                    pageContext.forward("./index.jsp");
                 }
             } // forgotPassword
 %>

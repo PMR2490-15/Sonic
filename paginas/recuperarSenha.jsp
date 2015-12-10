@@ -24,19 +24,25 @@
     
             <p> Responda a sua  pergunta de segurança e defina uma nova senha ;) </p>
             <div id="left"> 
-                <div id="left2">
 <%                  
+                    String username = (String)session.getAttribute("nomeUsuario");
                     Usuario tn = new Usuario();
-                    UsuarioDO user = tn.buscar((String)session.getAttribute("userName"));
+                    UsuarioDO user = new UsuarioDO(); 
+                            user = tn.buscar("username");
                     String action = request.getParameter("action");
-                    if ( null == action ) {
+                    
+                    %>
+                    esta escrito no user <%= username %>
+<%     
+                    if ( "Esqueci minha senha :/" != action ) {
                         action = "redefinePassword";
 %>
                         <form action="./recuperarSenha.jsp" method="post">
                             <table>
+                                <tbody>
                                 <tr>
                                     <td>Pergunta de segurança </td>
-                                    <td><h3><em><% user.getPergunta().toString(); %></em></h3></td>
+                                    <td><em><% user.getPergunta().toString(); %></em></td>
                                 </tr>
                                 <tr>
                                     <td>Resposta </td>
@@ -52,6 +58,7 @@
                                         <input type="submit" name="action" value="Redefinir" />
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </form>
 <%
@@ -80,7 +87,6 @@
                     }
 %>
 </div>
-    </div>
     <div id="right">
         
     </div>

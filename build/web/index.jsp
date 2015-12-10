@@ -73,7 +73,7 @@
                 UsuarioDO usuario = tn.buscar(username);
                 if (usuario == null || !password.equals((String)usuario.getSenha())) {
 %>         
-                <p style="color:red"> <em>NOME OU SENHA DE USUÁRIO INCORRETO!</em></p>
+                <p style="color:red"> <em>NOME DE USUARIO OU SENHA INCORRETOS!</em></p>
                 <form action="./index.jsp" method="post">
                     <table>
                         <tr>
@@ -117,14 +117,13 @@
                 String username = request.getParameter("nomeUsuario");
                 Usuario tn = new Usuario();
                 UsuarioDO usuario = tn.buscar(username);
-                if (!usuario.equals(null)) {
-                    session.setAttribute("nomeUsuario", username);
-                    pageContext.forward("./recuperarSenha.jsp");
+                if (usuario.equals(null)) {
+                    
+                    pageContext.forward("./index.jsp");
                 }
                 else {
-%>
-                    <input type="hidden" name="action" value="" />
-<%
+                    session.setAttribute("nomeUsuario", username);
+                    pageContext.forward("./recuperarSenha.jsp");
                 }
             } // forgotPassword
 %>
