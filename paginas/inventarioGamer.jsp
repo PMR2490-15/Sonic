@@ -169,7 +169,7 @@
         
     } else {
 %>
-        <p>Nenhum game encontrado! ;'(</p>
+        <p class="list">Nenhum game encontrado! ;'(</p>
 <%
     }
 %>
