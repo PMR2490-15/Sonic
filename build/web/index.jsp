@@ -1,6 +1,11 @@
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Usuario" %>
+<%@ page import="transacoes.Loja" %>
+<%@ page import="data.LojaDO" %>
+<%@ page import="transacoes.Gamer" %>
+<%@ page import="data.GamerDO" %>
+<%@ page import="java.util.Date , java.text.DateFormat ,java.text.SimpleDateFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -99,13 +104,67 @@
 <%
                 }else{
                     if(usuario.getTipo() == 1){
+                    Gamer gamertn = new Gamer();
+                    GamerDO gamer = new GamerDO();
+                    gamer = gamertn.buscar(usuario.getId());
+                    String suspensodata = gamer.getSuspenso_ate();
+                    if(suspensodata == null){
                         session.setAttribute("User_ID", Integer.toString(usuario.getId()));
                         pageContext.forward("gamer.jsp");
+                    }else{
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = new Date();
+                        String atual = dateFormat.format(date);
+                        int ano = Integer.parseInt(suspensodata.substring(0,4));
+                        int mes = Integer.parseInt(suspensodata.substring(5,7));
+                        int dia = Integer.parseInt(suspensodata.substring(8,10));
+                        int anoatual = Integer.parseInt(atual.substring(0,4));
+                        int mesatual = Integer.parseInt(atual.substring(5,7));
+                        int diaatual = Integer.parseInt(atual.substring(8,10));
+                        if(anoatual>ano || (anoatual==ano && mesatual>mes) || (anoatual==ano && mesatual==mes && diaatual>dia)){        
+                            session.setAttribute("User_ID", Integer.toString(usuario.getId()));
+                            pageContext.forward("gamer.jsp");
+                        }else{
+%>
+    <p style="color:red"> <em>USUÁRIO SUSPENSO ATÉ <%= Integer.toString(dia)%>/<%= Integer.toString(mes)%>/<%= Integer.toString(ano)%>!</em></p>
+    <div class="voltar">
+                    <a href="./index.jsp">Voltar</a>
+    </div>
+<%
                     }
-                    if(usuario.getTipo() == 2){
+                }
+           }
+           if(usuario.getTipo() == 2){
+               Loja lojatn = new Loja();
+               LojaDO loja = new LojaDO();
+               loja = lojatn.buscar(usuario.getId());
+               String suspensodata = loja.getSuspenso_ate();
+               if(suspensodata == null){
+                   session.setAttribute("User_ID", Integer.toString(usuario.getId()));
+                   pageContext.forward("loja.jsp");
+               }else{
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    String atual = dateFormat.format(date);
+                    int ano = Integer.parseInt(suspensodata.substring(0,4));
+                    int mes = Integer.parseInt(suspensodata.substring(5,7));
+                    int dia = Integer.parseInt(suspensodata.substring(8,10));
+                    int anoatual = Integer.parseInt(atual.substring(0,4));
+                    int mesatual = Integer.parseInt(atual.substring(5,7));
+                    int diaatual = Integer.parseInt(atual.substring(8,10));
+                    if(anoatual>ano || (anoatual==ano && mesatual>mes) || (anoatual==ano && mesatual==mes && diaatual>dia)){        
                         session.setAttribute("User_ID", Integer.toString(usuario.getId()));
                         pageContext.forward("loja.jsp");
+                    }else{
+%>
+    <p style="color:red"> <em>USUÁRIO SUSPENSO ATÉ <%= Integer.toString(dia)%>/<%= Integer.toString(mes)%>/<%= Integer.toString(ano)%>!</em></p>
+    <div class="voltar">
+                    <a href="./index.jsp">Voltar</a>
+    </div>
+<%
                     }
+               }
+           }
                     if(usuario.getTipo() == 3){
                         session.setAttribute("User_ID", Integer.toString(usuario.getId()));
                         pageContext.forward("admin.jsp");

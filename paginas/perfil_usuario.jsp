@@ -145,7 +145,7 @@
 <%-- Fim da tabela do lado esquerdo e inicio da tabela do meio --%>
 
 <div>
-        <%-- <div class="options">
+        <%--<div class="options">
             <a href="./insert.jsp">Inventário</a>
         </div> 
         <div class="options">
@@ -160,6 +160,10 @@
         <div class="options"> 
             <a href="./insert.jsp">Editar Conta</a>
         </div> --%>
+        <div class="options">
+                <a href="./inventarioGamer.jsp">Acessar Inventário</a>
+        </div>
+        
 </div>  
 
 
@@ -231,9 +235,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="left"> 
-                        <h>Inventário</h>
-                    </td>
+                    
                 </tr>
             </form>
         </tbody>
@@ -271,14 +273,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="left"> 
-                        <h>Inventário</h>
-                    </td>
+                    
                 </tr>
                 <tr>
-                    <td align="left"> 
-                        <h>Wishlist</h>
-                    </td>
                 </tr>
             </form>
         </tbody>

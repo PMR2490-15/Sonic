@@ -1,3 +1,8 @@
+<%-- 
+    Document   : buscarPessoaGamer
+    Created on : 09.12.2015, 12:25:20
+    Author     : Rafael
+--%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.GamerDO"%>
 <%@page import="data.GamerData"%>
@@ -15,6 +20,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
 
 <html>
     <head>
@@ -107,23 +115,6 @@
         </div> 
 </div>
 
-<% 
-if (!view.equals("idle")) {
-    session.setAttribute("Requested_ID", request.getParameter("view"));
-    // session.setAttribute("Requested_ID", "2");
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println("view "+view);
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    pageContext.forward("perfil_usuario.jsp");
-} 
-%>
 
 <%--centro--%>
     <div id="center">
@@ -138,13 +129,19 @@ if (!view.equals("idle")) {
     String cidade = "";
     String site = "";
     int tipo = 0;
-    String action = "";
+    String action = request.getParameter("action");
     
     int size;
     List<UsuarioDO> listusuario = new ArrayList<UsuarioDO>();
     UsuarioDO usuario = new UsuarioDO();
     Usuario tn = new Usuario();
     listusuario = tn.pesquisar(busca);
+    
+    if (!view.equals("idle")) {
+        session.setAttribute("Requested_ID", request.getParameter("view"));
+        pageContext.forward("perfil_usuario.jsp");
+    } 
+
     if ( listusuario != null && listusuario.size() > 0 ) {
 %>
         <table>
@@ -182,6 +179,7 @@ if (!view.equals("idle")) {
         cidade = perfil.getCidade();
     }
 %>
+        <form method="post" action=buscarPessoaGamer.jsp>
             <tr>
                 <input type="hidden" name="action<%= String.valueOf(i) %>" value="null" />
                 <td align="left"><%= nomePessoa %></td>
@@ -193,6 +191,7 @@ if (!view.equals("idle")) {
                 <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Ver perfil"/>
                     <input type="hidden" name="view" value="<%= String.valueOf(usuario.getId())%>"/> </td>
             </tr>
+        </form>
 <%      } %>
         </table>
 

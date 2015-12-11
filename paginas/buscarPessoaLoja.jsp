@@ -1,3 +1,8 @@
+<%-- 
+    Document   : buscarPessoaLoja
+    Created on : 09.12.2015, 12:25:20
+    Author     : Rafael
+--%>
 <%@page import="data.LojaDO"%>
 <%@page import="transacoes.Loja"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,7 +18,6 @@
 <%@page import="data.AdministradorData"%>
 <%@page import="transacoes.Administrador"%>
 <%@page import="data.LojaData"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -39,6 +43,11 @@
     LojaDO loja = new LojaDO();
     loja = lojatn.buscar(lojaID);
     String nome = loja.getNome();
+    
+    String view = request.getParameter("view");
+        if (view == null) {
+            view = "idle";
+        }
 %>
 <%-- cabeçalho--%>
     <div id="poli">
@@ -104,6 +113,10 @@
 
     <%--centro--%>
     <div id="center">
+        
+        
+        
+        
 <%
     String busca = (String)session.getAttribute("busca");
     String nomeUsuario = "";
@@ -115,15 +128,23 @@
     String cidade = "";
     String site = "";
     int tipo = 0;
-    String action = "";
+    String action = request.getParameter("action");
     
     int size;
     List<UsuarioDO> listusuario = new ArrayList<UsuarioDO>();
     UsuarioDO usuario = new UsuarioDO();
     Usuario tn = new Usuario();
     listusuario = tn.pesquisar(busca);
+        
+    if (!view.equals("idle")) {
+        session.setAttribute("Requested_ID", request.getParameter("view"));
+        System.out.println(view);
+        pageContext.forward("perfil_usuario.jsp");
+    } 
+    
     if ( listusuario != null && listusuario.size() > 0 ) {
 %>
+    <form method="post" action=buscarPessoaLoja.jsp>
         <table>
 <%
         size = listusuario.size();
@@ -163,15 +184,16 @@
                 <input type="hidden" name="action<%= String.valueOf(i) %>" value="null" />
                 <td align="left"><%= nomePessoa %></td>
                 <td align="right"><%= email %></td>
-                <td align="right">Para <%= telefone %></td>
-                <td align="right">Para <%= telefone2 %></td>
-                <td align="right">Para <%= cidade %></td>
-                <td align="right">Para <%= site %></td>
+                <td align="right"> <%= telefone %></td>
+                <td align="right"> <%= telefone2 %></td>
+                <td align="right"> <%= cidade %></td>
+                <td align="right"> <%= site %></td>
                 <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Ver perfil"/>
-                    <input type="hidden" name="view" value="<%= String.valueOf(i)%>"/> </td>
+                    <input type="hidden" name="view" value="<%= String.valueOf(idPessoa)%>"/> </td>
             </tr>
 <%      } %>
         </table>
+    </form>
 
 <%
 
