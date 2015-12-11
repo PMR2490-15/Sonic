@@ -144,7 +144,6 @@
     
     if ( listusuario != null && listusuario.size() > 0 ) {
 %>
-    <form method="post" action=buscarPessoaLoja.jsp>
         <table>
 <%
         size = listusuario.size();
@@ -180,6 +179,7 @@
         cidade = perfil.getCidade();
     }
 %>
+        <form method="post" action=buscarPessoaLoja.jsp>
             <tr>
                 <input type="hidden" name="action<%= String.valueOf(i) %>" value="null" />
                 <td align="left"><%= nomePessoa %></td>
@@ -191,9 +191,9 @@
                 <td><input type="submit" name="action<%= String.valueOf(i) %>" value="Ver perfil"/>
                     <input type="hidden" name="view" value="<%= String.valueOf(idPessoa)%>"/> </td>
             </tr>
+        </form>        
 <%      } %>
         </table>
-    </form>
 
 <%
 
