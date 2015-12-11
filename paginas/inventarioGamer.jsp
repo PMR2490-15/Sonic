@@ -117,11 +117,11 @@ Author     : Rafael
     <div id="center">
 
         <div class="options2">
-            <a href="./inventarioGamer.jsp" <%session.setAttribute("action", "incluir");%> >Incluir Item</a>
+            <a href="./criarItemInventario.jsp" <%session.setAttribute("action", "incluir");%> >Incluir Item</a>
         </div>
 
         <div class="options2">
-            <a href="./inventarioGamer.jsp" <%session.setAttribute("action", "excluir");%>>Excluir Item</a>
+            <a href="./excluirItemInventario.jsp" <%session.setAttribute("action", "excluir");%>>Excluir Item</a>
         </div>
 
         <%

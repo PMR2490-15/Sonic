@@ -75,7 +75,6 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
                     <form method="post" action=gamer.jsp>
                         <tr>
                             <td align="center">
@@ -102,7 +101,6 @@
                             </td>
                         </tr>
                     </form>
-                </tbody>
             </table>
         </div>
         
@@ -154,6 +152,7 @@
             ItemDO buscar = new ItemDO();
             Item tn = new Item();                   
             buscar = tn.buscar(request.getParameter("nome_Item"));
+            session.setAttribute("nome_Item", (String)request.getParameter("nome_Item"));
             if(buscar == null ){
                 action="erro";
             }
@@ -178,29 +177,33 @@
                     </table>
                 </form>
                 <%
-                if(action.equals("OK")){
-                    if("precoItem" == null){
+                   }
+}
+                 else if(action.equals("OK")){
+                    if(request.getParameter("precoItem") == null){
                         %>
                         <h3>Item já existe ou campo não preenchido</h3>
                         <%
                     }
-                    else{    
+                    else{
+                        ItemDO buscar1 = new ItemDO();
+                        Item tn = new Item();                   
+                        buscar1 = tn.buscar((String)session.getAttribute("nome_Item"));
                         ItemInventarioDO novo = new ItemInventarioDO();
                         ItemInventario tn2 = new ItemInventario();
-                        novo.setUsuarioId(Integer.parseInt((String)session.getAttribute("User_ID")) );
-                        novo.setItemId(buscar.getId());
+                        novo.setUsuarioId(gamerID);
+                        novo.setItemId(buscar1.getId());
                         novo.setEstado(1);
-                        novo.setPreco(((String)session.getAttribute("precoItem")));
+                        novo.setPreco(((String)request.getParameter("precoItem")));
                         novo.setTipoTransacao(1);
                         tn2.incluir(novo);
                         action="createOK";                        
                     }       
-
                 }
+                
 
-            }
-
-        }
+            
+        
             //----------------------------------------------
         if(action.equals("erro")){
 %>

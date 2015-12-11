@@ -12,7 +12,7 @@ public class ItemInventarioData {
     
     public void incluir(ItemInventarioDO item, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into ITEM_INVENTARIO (USUARIO_ID, ITEM_ID, id, estado, preco, tipo_transacao, preco_promo, limite_promo);"
+        String sql = "insert into ITEM_INVENTARIO (USUARIO_ID, ITEM_ID, id, estado, preco, tipo_transacao);"
                 + " values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(2, item.getItemId());
