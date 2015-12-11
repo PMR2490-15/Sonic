@@ -79,6 +79,22 @@ public class ItemInventario {
      return null;
   } // pesquisar
 
+  public List pesquisarUsuario(int idUser) {
+     
+     Transacao tr = new Transacao();
+     try {
+	     tr.beginReadOnly();
+           ItemInventarioData item_data = new ItemInventarioData();
+           List v = item_data.pesquisaIdUser(idUser, tr);
+		 tr.commit();
+		 return v;
+     } catch(Exception e) {
+         System.out.println("erro ao pesquisar " + idUser);
+         e.printStackTrace();
+     }
+     return null;
+  } // pesquisar por usuario 
+  
   private boolean isEmpty(String s) {
      if (null == s)
        return true;
