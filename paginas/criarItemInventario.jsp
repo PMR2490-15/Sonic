@@ -127,8 +127,6 @@
             
         <%--Centro--%>    
         <div id="center">
-    
-        <div id="center">
             <form action="./criarItemInventario.jsp" method="post">
             <table>
                 <tr>
@@ -144,7 +142,7 @@
                 </tr>                
                     <tr>
                         <td>
-                            <input type="submit" name="action"value="Enviar" />
+                            <input type="submit" name="action"value="Buscar" />
                         </td>                       
                     </tr>                
             </table>
@@ -152,11 +150,11 @@
         </div>
             
         <% 
-        if (action.equals("Enviar")){                 
+        if (action.equals("Buscar")){                 
             ItemDO buscar = new ItemDO();
             Item tn = new Item();                   
             buscar = tn.buscar(request.getParameter("nome_Item"));
-            if(buscar != null || (request.getParameter("produtora")).equals("") || (request.getParameter("lancamento")).equals("")){
+            if(buscar == null ){
                 action="erro";
             }
             else{                 
@@ -175,7 +173,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" name="action"value="OK" /></td>
+                        <td><input type="submit" name="action" value="OK" /></td>
                     </tr>
                     </table>
                 </form>
@@ -219,8 +217,7 @@
         }
 
 %>		
-        </div>
-        <%-- Rodape --%>
+         <%-- Rodape --%>
             <div id="footer">
                 <p>PMR2490 - Sistemas de Informação
                 <br>Escola Politécnida da USP</p>
