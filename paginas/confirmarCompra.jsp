@@ -1,12 +1,15 @@
 
 <%@ page import="transacoes.Gamer" %>
 <%@ page import="data.GamerDO" %>
+<%@ page import="data.ItemDO" %>
+<%@ page import="data.ItemData" %>
 <%@ page import="data.ItemInventarioDO" %>
 <%@ page import="data.ItemInventarioData" %>
 <%@ page import="data.TransacaoDO" %>
 <%@ page import="data.TransacaoData" %>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="transacoes.ItemInventario" %>
+<%@ page import="transacoes.Item" %>
 <%@ page import="transacoes.Historico" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -127,10 +130,40 @@
     GamerDO gamer2 = new GamerDO();
     gamer2 = gamertn2.buscar(idVendedor);
     %>
+    
+    <%
+    String estado = "";
+    String preco = "";
+
+    Item tnI = new Item();
+    ItemDO item = new ItemDO();
+    
+    ItemInventario tnII = new ItemInventario();
+    ItemInventarioDO itemInv = new ItemInventarioDO();
+        
+    itemInv = tnII.buscar(invId);
+    item = tnI.buscar(itemInv.getItemId());
+    
+    if (itemInv.getEstado() == 1)
+    {
+        estado = "novo";
+    } else if (itemInv.getEstado() == 2) {
+        estado = "como novo";
+    } else {
+        estado = "usado";
+    }
+    
+    preco = itemInv.getPreco();
+    
+    %>
 
     <%
     if( action == "confirmaCompra") {
     %>
+    <table>
+        <tr>
+            <td>
+                
     <table>
         <tr>
                <h4>Dados do vendedor</h4>
@@ -168,6 +201,52 @@
             </td>
         </tr>
     </table>
+            
+            </td>
+            
+            <td>
+                <table>
+        <tr>
+               <h4>Dados do item</h4>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Nome:</hdl>
+            </td>
+            <td align="left">
+                <hd><%= item.getNome() %></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Produtora:</hdl>
+            </td>
+            <td align="left">
+                <hd><%= item.getProdutora() %></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Estado:</hdl>
+            </td>
+            <td align="left">
+                <hd><%= estado %></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Preço:</hdl>
+            </td>
+            <td align="left">
+                <hd>R$ <%= preco.toString() %></hd>
+            </td>
+        </tr>
+    </table>
+            </td>
+            
+        </tr>
+    </table>
+            
     <table>
         <tr>
                <h4>Confirmar compra?</h4>

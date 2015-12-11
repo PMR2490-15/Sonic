@@ -62,12 +62,12 @@ public class ItemInventarioData {
         ResultSet rs = ps.executeQuery();
         rs.next();
         ItemInventarioDO item = new ItemInventarioDO();
-        item.setId(rs.getInt("USUARIO_ID"));
-        item.setId(rs.getInt("ITEM_ID"));
-        item.setId(rs.getInt("id"));
-        item.setId(rs.getInt("estado"));
-        item.setId(rs.getInt("preco"));
-        item.setId(rs.getInt("tipo_transacao"));
+           item.setUsuarioId(rs.getInt("USUARIO_ID"));
+           item.setItemId(rs.getInt("ITEM_ID"));
+           item.setId(rs.getInt("id"));
+           item.setEstado(rs.getInt("estado"));
+           item.setPreco(rs.getString("preco"));
+           item.setTipoTransacao(rs.getInt("tipo_transacao"));
         return item;
     }
     
