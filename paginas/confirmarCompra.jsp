@@ -3,7 +3,11 @@
 <%@ page import="data.GamerDO" %>
 <%@ page import="data.ItemInventarioDO" %>
 <%@ page import="data.ItemInventarioData" %>
+<%@ page import="data.TransacaoDO" %>
+<%@ page import="data.TransacaoData" %>
 <%@ page import="transacoes.Usuario" %>
+<%@ page import="transacoes.ItemInventario" %>
+<%@ page import="transacoes.Historico" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -141,14 +145,46 @@
     </table>
 </div>
 <%
+    int idUser = Integer.parseInt((String)session.getAttribute("User_ID"));
+    int idVendedor = Integer.parseInt((String)session.getAttribute("VendedorID"));;  
+    int invId = Integer.parseInt((String)session.getAttribute("ItemID"));
     if(action.equals("SIM")){
         //incluir item no inventário do comprador
-        transacoes.ItemInventario trIn = new transacoes.ItemInventario();
-        ItemInventarioDO ni= new ItemInventarioDO();
-        int uv_ID = ni.getUsuarioId();
-        ni.setUsuarioId(Integer.parseInt("User_ID"));
-        trIn.atualizar(ni);
-    
+        ItemInventarioDO buscar = new ItemInventarioDO();        
+        ItemInventario tn = new ItemInventario();                   
+        buscar = tn.buscar(invId);
+        if(buscar != null ){
+            action="erro";
+        }
+        else{
+            buscar.setUsuarioId(idUser);
+            tn.atualizar(buscar);
+            
+            TransacaoDO novo = new TransacaoDO();
+            Historico tn2 = new Historico();
+            novo.setItem_id1(invId);
+            novo.setUser_id1(idUser);
+            novo.setUser_id2(idVendedor);
+            tn2.incluir(novo);
+            
+            action = "vendaOk";
+        }
+        
+    }
+    if(action.equals("erro") || action.equals("NAO")){
+%>
+        <h3>A venda não foi realizada</h3>
+        <a href="./comprarGamer.jsp">Voltar</a>
+<%
+    }
+                   
+    if (action.equals("vendaOK")){
+
+
+%>
+        <h3>venda Realizada com sucesso</h3>
+        <a href="./comprarGamer.jsp">Voltar</a>
+<%
     }
   %>
 <%-- Rodape --%>
