@@ -103,7 +103,7 @@
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
+             <a href="./inventarioLoja.jsp" <%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Inventário</a>
         </div> 
         <div class="options">
             <a href="./comunicadoLoja.jsp"<%session.setAttribute("User_ID", Integer.toString(lojaID));%>>Comunicados</a>

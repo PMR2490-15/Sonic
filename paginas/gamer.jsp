@@ -94,7 +94,7 @@
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
         </div> 
         <div class="options">
             <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
