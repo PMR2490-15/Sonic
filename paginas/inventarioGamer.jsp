@@ -27,13 +27,23 @@
     <body>
         <div style="background-image:url('images/spm2.jpg'); padding: 1px  ">
 <%
-    // VERIFICACAO MANUAL DO LOGIN
-    /*if ( session.getAttribute("user_name") == null) {
+   if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    */
-    String nome = (String)session.getAttribute("user_name");
+    
+    String buscarUser = request.getParameter("buscarUser");
+    
+    if(buscarUser == null){
+        buscarUser="Idle";
+    }
+    
+    int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
+    Gamer gamertn = new Gamer();
+    GamerDO gamer = new GamerDO();
+    gamer = gamertn.buscar(gamerID);
+    String nome = gamer.getNome();
 %>
+
 <%-- cabeçalho--%>
     <div id="poli">
         <h1>POLI GAMES</h1>
@@ -50,31 +60,26 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action=index.jsp>
+            <form method="post" action=gamer.jsp>
                 <tr>
                     <td align="center">
-                        <h3>Bem vindo <%= nome %> !!</h3>
+                        <h3>Bem vindo <%=nome %> !!</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td><img id="foto" src="images/Logo.png"></td>
+                    <td><img id="foto" src=<%= gamer.getFoto()%>></td>
                 </tr>
                 <tr>
                     <table>
                         <tr>
-                        <td><input type="text" name="usuario" /></td>
+                        <td><input type="text" name="buscar" /></td>
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
-                </tr>                                
+                </tr>
                 <tr>
                     <td align="right"> 
-                        <input type="submit" name="enviar" value="Buscar Usuário"/>
-                        <input type="hidden" name="campo_controle" />
-                    </td>
-                    <td align="left"> 
-                        <input type="submit" name="enviar" value="Buscar Item"/>
-                        <input type="hidden" name="campo_controle" />
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
                     </td>
                 </tr>
             </form>
@@ -85,21 +90,21 @@
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./inventarioGamer.jsp">Inventário</a>
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
         </div> 
         <div class="options">
-            <a href="./wishlistGamer.jsp">Wishlist</a>
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
         </div>
         <div class="options">
-            <a href="./remove.jsp">Comunicados</a>
+            <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
         </div>
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
         <div class="options"> 
-            <a href="./atualizarGamer.jsp">Editar Conta</a>
-        </div> 
-</div>  
+            <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
+        </div>
+</div>
 
 <div id="center">
     

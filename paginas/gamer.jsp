@@ -20,13 +20,9 @@
     }
     
     String buscarUser = request.getParameter("buscarUser");
-    String buscarItem = request.getParameter("buscarItem");
     
     if(buscarUser == null){
         buscarUser="Idle";
-    }
-    if(buscarItem == null){
-        buscarItem="Idle";
     }
     
     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
@@ -41,11 +37,6 @@
        session.setAttribute("User_ID", Integer.toString(gamerID));
        session.setAttribute("busca", request.getParameter("buscar"));
        pageContext.forward("buscarPessoaGamer.jsp");
-    }
-    else if(!buscarItem.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(gamerID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarItemGamer.jsp");
     }
 %>
 <%-- cabeçalho--%>

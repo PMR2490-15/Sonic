@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : atualizarGamer
     Created on : 06.12.2015, 17:09:20
     Author     : Rafael
@@ -40,7 +40,7 @@
     <div id="poli">
         <h1>POLI GAMES</h1>
     </div>
-    
+
 <%-- Tabela do lado esquerdo --%>
 <div id="left">
     <table border="1px"  style="none">
@@ -62,7 +62,7 @@
                     <td><img id="foto" src=<%= gamer.getFoto()%>></td>
                 </tr>
                 <tr>
-                    <td align="left"> 
+                    <td align="left">
                         Trocar foto
                         <input type="text" name="newfoto" value=<%=gamer.getFoto()%>  />
                         <!--<input type="file" name="newfoto" accept="image/*" />-->
@@ -71,14 +71,14 @@
         </tbody>
     </table>
 </div>
-                    
+
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
         </div> 
         <div class="options">
-            <a href="./update.jsp">Wishlist</a>
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
         </div>
         <div class="options">
             <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
@@ -172,12 +172,12 @@
        newgamer.setAtivo(gamer.getAtivo());
        newgamertn.atualizar(newgamer);
        session.setAttribute("User_ID", Integer.toString(gamerID));
-       pageContext.forward("gamer.jsp");   
+       pageContext.forward("gamer.jsp");
        }
 %>
 </div>
-               
-    
+
+
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação

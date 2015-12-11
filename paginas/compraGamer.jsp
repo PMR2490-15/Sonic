@@ -31,9 +31,9 @@
                 GamerDO gamer = new GamerDO();
                 gamer = gamertn.buscar(gamerID);
                 String nome = gamer.getNome();
-                
+
                 String buscarItem = request.getParameter("buscarItem");
-    
+
                 if(buscarItem == null){
                     buscarItem="Idle";
                 }
@@ -48,65 +48,62 @@
                 <h1>POLI GAMES</h1>
             </div>
 
-            <%-- Tabela do lado esquerdo --%>
-            <div id="left">
-                <table border="1px"  style="none">
-                    <thead>
+<%-- Tabela do lado esquerdo --%>
+<div id="left">
+    <table border="1px"  style="none">
+        <thead>
+            <tr>
+                <th align="center" class="conta">
+                    <a href="./gamer.jsp">Minha Conta</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <form method="post" action=gamer.jsp>
+                <tr>
+                    <td align="center">
+                        <h3>Bem vindo <%=nome %> !!</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img id="foto" src=<%= gamer.getFoto()%>></td>
+                </tr>
+                <tr>
+                    <table>
                         <tr>
-                            <th align="center" class="conta">
-                                <a href="./gamer.jsp">Minha Conta</a>
-                            </th>
+                        <td><input type="text" name="buscar" /></td>
+                        <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <form method="post" action=gamer.jsp>
-                        <tr>
-                            <td align="center">
-                                <h3>Bem vindo <%= nome%> !!</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img id="foto" src="images/Logo.png"></td>
-                        </tr>
-                        <tr>
-                        <table>
-                            <tr>
-                                <td><input type="text" name="buscar" /></td>
-                                <td align="right"><img id="lupa" src="images/lupa.png"></td>
-                            </tr>
-                        </table>
-                        </tr>                                
-                        <tr>
-                            <td align="right"> 
-                                <input type="submit" name="buscarUser" value="Buscar Usuário"/>
-                            </td>
-                            <td align="left"> 
-                                <input type="submit" name="buscarItem" value="Buscar Item"/>
-                            </td>
-                        </tr>
-                    </form>
-                    </tbody>
-                </table>
-            </div>
+                    </table>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <input type="submit" name="buscarUser" value="Buscar Usuário"/>
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+</div>
 
-            <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
-            <div>
-                <div class="options">
-                    <a href="./insert.jsp">Inventário</a>
-                </div> 
-                <div class="options">
-                    <a href="./update.jsp">Wishlist</a>
-                </div>
-                <div class="options">
-                    <a href="./comunicadoGamer.jsp">Comunicados</a>
-                </div>
-                <div class="options">
-                    <a href="./search.jsp">Histórico</a>
-                </div>
-                <div class="options"> 
-                    <a href="./gamerUpdate.jsp">Editar Conta</a>
-                </div> 
-            </div>
+<%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
+<div>
+        <div class="options">
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
+        </div>
+        <div class="options">
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
+        </div>
+        <div class="options">
+            <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
+        </div>
+        <div class="options">
+            <a href="./search.jsp">Histórico</a>
+        </div>
+        <div class="options">
+            <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
+        </div>
+</div>
 
             <%
                 if (!itemID.equals("idle")) {
@@ -114,7 +111,7 @@
                     session.setAttribute("VendedorID", request.getParameter("vendedorID") );
                     pageContext.forward("confirmarCompra.jsp");
                 }
-                
+
                 if(!buscarItem.equals("Idle")){
                     session.setAttribute("User_ID", Integer.toString(gamerID));
                     session.setAttribute("busca", request.getParameter("buscar"));
@@ -133,7 +130,7 @@
                         </tr>
                     </table>
                 </form>
-                
+
                 <%
                     String busca = (String) session.getAttribute("busca");
                     String estado = "";
@@ -147,10 +144,10 @@
                     ItemDO item = new ItemDO();
                     Item tnI = new Item();
                     ItemInventario tnII = new ItemInventario();
-                    listItemInv = tnII.pesquisar(busca);
+                    listItemInv = tnII.pesquisarExceto(busca, gamerID);
                     if (listItemInv != null && listItemInv.size() > 0) {
                 %>
-                
+
                 <form method="post" action=compraGamer.jsp>
 
                     <table>
@@ -170,20 +167,15 @@
 
                                 preco = itemInv.getPreco();
 
-                                if (itemInv.getTipoTransacao() == 1) {
-                                    tipo = "venda";
-                                } else if (itemInv.getTipoTransacao() == 2) {
-                                    tipo = "troca";
-                                } else {
-                                    tipo = "troca & venda";
-                                }
+                        if (itemInv.getTipoTransacao() == 1) {
+
                         %>
                         <tr>
                         <input type="hidden" name="action<%= String.valueOf(i)%>" value="null" />
                         <td align="left"><%= item.getNome()%></td>
                         <td align="right"><%= estado.toString()%></td>
                         <%
-                            if (itemInv.getTipoTransacao() != 2 && preco != null) {
+                            if ( preco != null) {
                         %>
                         <td align="right">R$ <%= preco.toString()%></td>
                         <% } else { %>
@@ -193,7 +185,10 @@
                             <input type="hidden" name="itemID" value="<%= String.valueOf(itemInv.getId())%>"/>
                         <input type="hidden" name="vendedorID" value="<%= String.valueOf(itemInv.getUsuarioId())%>"/></td>
                         </tr>
-                        <%      } %>
+
+                        <% } %>
+
+                        <% } %>
                     </table>
 
                     <%

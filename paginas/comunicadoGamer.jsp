@@ -1,5 +1,5 @@
 
-<%-- 
+<%--
     Document   : gamer.jsp
     Created on : 01/10/2009, 18:45:32
     Author     : MB
@@ -13,7 +13,7 @@
 <%@ page import="data.GamerDO" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.util.Date , java.text.DateFormat ,java.text.SimpleDateFormat" %>
-         
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -30,7 +30,7 @@
        pageContext.forward("index.jsp");
     }
     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
-    
+
     Gamer gamertn = new Gamer();
     GamerDO gamer = new GamerDO();
     gamer = gamertn.buscar(gamerID);
@@ -41,7 +41,7 @@
     <div id="poli">
         <h1>POLI GAMES</h1>
     </div>
-    
+
 <%-- Tabela do lado esquerdo --%>
 <div id="left">
     <table border="1px"  style="none">
@@ -69,13 +69,13 @@
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
-                </tr>                                
+                </tr>
                 <tr>
-                    <td align="right"> 
+                    <td align="right">
                         <input type="submit" name="enviar" value="Buscar Usuário"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
-                    <td align="left"> 
+                    <td align="left">
                         <input type="submit" name="enviar" value="Buscar Item"/>
                         <input type="hidden" name="campo_controle" />
                     </td>
@@ -84,14 +84,14 @@
         </tbody>
     </table>
 </div>
-                    
+
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
-        </div> 
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
+        </div>
         <div class="options">
-            <a href="./update.jsp">Wishlist</a>
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
         </div>
         <div class="options">
             <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
@@ -99,10 +99,10 @@
         <div class="options">
             <a href="./search.jsp">Histórico</a>
         </div>
-        <div class="options"> 
+        <div class="options">
             <a href="./gamerUpdate.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Editar Conta</a>
         </div>
-</div> 
+</div>
 
 <%--centro--%>
 <div id="center">
@@ -144,7 +144,7 @@
                     <input type="submit" name="enviar" value="enviar" />
                     <input type="hidden" name="action" value="sendMsg" />
                 </form>
-                
+
                 <%
                 } else if (action.equals("sendMsg")) {
                     String destinatario = request.getParameter("nome");
@@ -199,7 +199,7 @@
 
                 %>
 
-                          
+
             </td>
         </tr>
 
@@ -239,7 +239,7 @@
                         for (int i = 0; i < Math.min(msg_rem.size(),2); i++)
                         {
                             ComunicadoDO comunicado = (ComunicadoDO) msg_rem.elementAt(i);
-                            
+
                             transacoes.Usuario tn_user = new transacoes.Usuario();
                             UsuarioDO user = tn_user.buscar(comunicado.getIdDest());
                     %>
@@ -247,11 +247,11 @@
                         <td><%= user.getNome_Usuario()%></td>
                         <td><%= comunicado.getComunicado()%></td>
                         <td><%= comunicado.getData()%></td>
-                    </tr>        
+                    </tr>
                     <%
-                        } // for i      
-                    %>        
-                </table>            
+                        } // for i
+                    %>
+                </table>
                 <%
                     } // contatos retornados
                 %>
@@ -288,7 +288,7 @@
                         for (int i = 0; i < Math.min(msg_dest.size(),2); i++)
                         {
                             ComunicadoDO comunicado = (ComunicadoDO) msg_dest.elementAt(i);
-                            
+
                             transacoes.Usuario tn_user = new transacoes.Usuario();
                             UsuarioDO user = tn_user.buscar(comunicado.getIdrem());
                     %>
@@ -296,11 +296,11 @@
                         <td><%= user.getNome_Usuario() %></td>
                         <td><%= comunicado.getComunicado()%></td>
                         <td><%= comunicado.getData()%></td>
-                    </tr>        
+                    </tr>
                     <%
-                        } // for i      
-                    %>        
-                </table>            
+                        } // for i
+                    %>
+                </table>
                 <%
                     } // contatos retornados
                 %>
@@ -310,7 +310,7 @@
     </table>
 
 </div>
-    
+
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação

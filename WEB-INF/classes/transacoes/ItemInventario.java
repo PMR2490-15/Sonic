@@ -46,6 +46,23 @@ public class ItemInventario {
 	 }
 	 return false;
   } // atualizar
+  
+  public boolean remover(ItemInventarioDO item) throws Exception {
+     Transacao tr = new Transacao();
+	 try{
+	   // inserir validacoes de regras de negocio
+	   tr.begin();
+  	     ItemInventarioData item_data = new ItemInventarioData();
+	     item_data.remover(item, tr);
+	   tr.commit();
+	   return true;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao atualizar" + item.getItemId());
+	   e.printStackTrace();
+	 }
+	 return false;
+  } // atualizar
 
   public ItemInventarioDO buscar(int idobj) throws Exception{
      Transacao tr = new Transacao();
@@ -70,6 +87,22 @@ public class ItemInventario {
 	     tr.beginReadOnly();
            ItemInventarioData item_data = new ItemInventarioData();
            List v = item_data.pesquisaNome(nome, tr);
+		 tr.commit();
+		 return v;
+     } catch(Exception e) {
+         System.out.println("erro ao pesquisar " + nome);
+         e.printStackTrace();
+     }
+     return null;
+  } // pesquisar
+  
+  public List pesquisarExceto(String nome, int us_id) {
+     
+     Transacao tr = new Transacao();
+     try {
+	     tr.beginReadOnly();
+           ItemInventarioData item_data = new ItemInventarioData();
+           List v = item_data.pesquisaNomeExceto(nome, us_id, tr);
 		 tr.commit();
 		 return v;
      } catch(Exception e) {

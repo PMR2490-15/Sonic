@@ -46,9 +46,17 @@ public class ItemInventarioData {
         int result = ps.executeUpdate();
     }
     
+    public void remover(ItemInventarioDO item, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from ITEM_INVENTARIO where ID=?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, item.getId());
+        int result = ps.executeUpdate();
+    }
+    
     public ItemInventarioDO buscarID(int id, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from ITEM where ID=?;";
+        String sql = "select * from ITEM_INVENTARIO where ID=?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -68,6 +76,28 @@ public class ItemInventarioData {
         String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and I.NOME like  ?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, "%"+nome+"%");
+        ResultSet rs = ps.executeQuery();
+        System.out.println("query executada");
+        List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();
+        while (rs.next()) {
+           ItemInventarioDO item = new ItemInventarioDO();
+           item.setUsuarioId(rs.getInt("USUARIO_ID"));
+           item.setItemId(rs.getInt("ITEM_ID"));
+           item.setId(rs.getInt("id"));
+           item.setEstado(rs.getInt("estado"));
+           item.setPreco(rs.getString("preco"));
+           item.setTipoTransacao(rs.getInt("tipo_transacao"));
+           itens.add(item);
+        }
+        return itens;
+    }
+    
+    public List<ItemInventarioDO> pesquisaNomeExceto(String nome, int us_id, Transacao tr) throws Exception{
+        Connection con = tr.obterConexao();
+        String sql = "select II.* from ITEM_INVENTARIO II, ITEM I where II.ITEM_ID = I.ID and II.USUARIO_ID != ? and I.NOME like  ?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, us_id);
+        ps.setString(2, "%"+nome+"%");
         ResultSet rs = ps.executeQuery();
         System.out.println("query executada");
         List<ItemInventarioDO> itens = new ArrayList<ItemInventarioDO>();

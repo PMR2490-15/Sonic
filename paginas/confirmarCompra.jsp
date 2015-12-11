@@ -25,17 +25,13 @@
    if ( session.getAttribute("User_ID") == null) {
        pageContext.forward("index.jsp");
     }
-    
+
     String buscarUser = request.getParameter("buscarUser");
-    String buscarItem = request.getParameter("buscarItem");
-    
+
     if(buscarUser == null){
         buscarUser="Idle";
     }
-    if(buscarItem == null){
-        buscarItem="Idle";
-    }
-    
+
     int gamerID = Integer.parseInt((String)session.getAttribute("User_ID"));
     Gamer gamertn = new Gamer();
     GamerDO gamer = new GamerDO();
@@ -43,23 +39,19 @@
     String nome = gamer.getNome();
 %>
 
-<%  
-    if(!buscarUser.equals("Idle")){
+<%
+    if(!buscarUser.equals("Idle"))
+    {
        session.setAttribute("User_ID", Integer.toString(gamerID));
        session.setAttribute("busca", request.getParameter("buscar"));
        pageContext.forward("buscarUsuarioGamer.jsp");
-    }
-    else if(!buscarItem.equals("Idle")){
-       session.setAttribute("User_ID", Integer.toString(gamerID));
-       session.setAttribute("busca", request.getParameter("buscar"));
-       pageContext.forward("buscarItemGamer.jsp");
     }
 %>
 <%-- cabeçalho--%>
     <div id="poli">
         <h1>POLI GAMES</h1>
     </div>
-    
+
 <%-- Tabela do lado esquerdo --%>
 <div id="left">
     <%
@@ -92,13 +84,10 @@
                         <td align="right"><img id="lupa" src="images/lupa.png"></td>
                         </tr>
                     </table>
-                </tr>                                
+                </tr>
                 <tr>
-                    <td align="right"> 
+                    <td align="right">
                         <input type="submit" name="buscarUser" value="Buscar Usuário"/>
-                    </td>
-                    <td align="left"> 
-                        <input type="submit" name="buscarItem" value="Buscar Item"/>
                     </td>
                 </tr>
             </form>
@@ -112,10 +101,10 @@
 <%-- Fim da tabela do lado esquerdo e inicio das opçoes no topo --%>
 <div>
         <div class="options">
-            <a href="./insert.jsp">Inventário</a>
+            <a href="./inventarioGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Inventário</a>
         </div> 
         <div class="options">
-            <a href="./confirmarCompra.jsp">Wishlist</a>
+            <a href="./compraGamer.jsp" <% session.setAttribute("busca", ""); %> >Comprar</a>
         </div>
         <div class="options">
             <a href="./comunicadoGamer.jsp" <%session.setAttribute("User_ID", Integer.toString(gamerID));%>>Comunicados</a>
@@ -129,64 +118,116 @@
 </div> 
 
 <div id="center">
+    <%
+    int idUser = Integer.parseInt((String)session.getAttribute("User_ID"));
+    int idVendedor = Integer.parseInt((String)session.getAttribute("VendedorID"));;
+    int invId = Integer.parseInt((String)session.getAttribute("ItemID"));
+
+    Gamer gamertn2 = new Gamer();
+    GamerDO gamer2 = new GamerDO();
+    gamer2 = gamertn2.buscar(idVendedor);
+    %>
+
+    <%
+    if( action == "confirmaCompra") {
+    %>
+    <table>
+        <tr>
+               <h4>Dados do vendedor</h4>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>CPF:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer2.getCpf()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>e-mail:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer2.getEmail()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Telefone:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer2.getTelefone()%></hd>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <hdl>Cidade:</hdl>
+            </td>
+            <td align="left">
+                <hd><%=gamer2.getCidade()%></hd>
+            </td>
+        </tr>
+    </table>
     <table>
         <tr>
                <h4>Confirmar compra?</h4>
         </tr>
         <tr>
+            <form method="post" action=confirmarCompra.jsp>
             <td align="right">
                 <input type="submit" name="action" value="SIM" />
             </td>
             <td align="left">
                 <input type="submit" name="action" value="NAO" />
             </td>
+            </form>
         </tr>
-        
+
     </table>
-</div>
-<%
-    int idUser = Integer.parseInt((String)session.getAttribute("User_ID"));
-    int idVendedor = Integer.parseInt((String)session.getAttribute("VendedorID"));;  
-    int invId = Integer.parseInt((String)session.getAttribute("ItemID"));
+    <% } %>
+
+    <%
     if(action.equals("SIM")){
         //incluir item no inventário do comprador
-        ItemInventarioDO buscar = new ItemInventarioDO();        
-        ItemInventario tn = new ItemInventario();                   
+        ItemInventarioDO buscar = new ItemInventarioDO();
+        ItemInventario tn = new ItemInventario();
         buscar = tn.buscar(invId);
-        if(buscar != null ){
+        if(buscar == null ){
             action="erro";
         }
         else{
             buscar.setUsuarioId(idUser);
-            tn.atualizar(buscar);
-            
+            tn.remover(buscar);
+
             TransacaoDO novo = new TransacaoDO();
             Historico tn2 = new Historico();
             novo.setItem_id1(invId);
             novo.setUser_id1(idUser);
             novo.setUser_id2(idVendedor);
             tn2.incluir(novo);
-            
-            action = "vendaOk";
+
+            action = "vendaOK";
         }
-        
+
     }
     if(action.equals("erro") || action.equals("NAO")){
 %>
         <h3>A venda não foi realizada</h3>
-        <a href="./comprarGamer.jsp">Voltar</a>
+        <a href="./compraGamer.jsp">Voltar</a>
 <%
     }
-                   
+
     if (action.equals("vendaOK")){
 
 
 %>
         <h3>venda Realizada com sucesso</h3>
-        <a href="./comprarGamer.jsp">Voltar</a>
+        <a href="./compraGamer.jsp">Voltar</a>
 <%
     }
   %>
+</div>
+
 <%-- Rodape --%>
         <div id="footer">
             <p>PMR2490 - Sistemas de Informação
