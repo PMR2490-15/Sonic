@@ -106,11 +106,7 @@
 </div>
 
             <%
-                if (!itemID.equals("idle")) {
-                    session.setAttribute("ItemID", itemID);
-                    session.setAttribute("VendedorID", request.getParameter("vendedorID") );
-                    pageContext.forward("confirmarCompra.jsp");
-                }
+                
 
                 if(!buscarItem.equals("Idle")){
                     session.setAttribute("User_ID", Integer.toString(gamerID));
@@ -145,11 +141,19 @@
                     Item tnI = new Item();
                     ItemInventario tnII = new ItemInventario();
                     listItemInv = tnII.pesquisarExceto(busca, gamerID);
+                    
+                    if (!itemID.equals("idle")) {
+                    session.setAttribute("ItemID", itemID);
+                    session.setAttribute("VendedorID", request.getParameter("vendedorID") );
+                    pageContext.forward("confirmarCompra.jsp");
+                    System.out.print("id item");
+                    System.out.println(itemID);
+                }
+                    
                     if (listItemInv != null && listItemInv.size() > 0) {
                 %>
 
-                <form method="post" action=compraGamer.jsp>
-
+                
                     <table>
                         <%
                             size = listItemInv.size();
@@ -170,9 +174,12 @@
                         if (itemInv.getTipoTransacao() == 1) {
 
                         %>
+                        <form method="post" action=compraGamer.jsp>
+
                         <tr>
-                        <input type="hidden" name="action<%= String.valueOf(i)%>" value="null" />
-                        <td align="left"><%= item.getNome()%></td>
+                        
+                        <td align="left"><%= item.getNome()%>
+                        <input type="hidden" name="action<%= String.valueOf(i)%>" value="null" /></td>
                         <td align="right"><%= estado.toString()%></td>
                         <%
                             if ( preco != null) {
@@ -185,6 +192,7 @@
                             <input type="hidden" name="itemID" value="<%= String.valueOf(itemInv.getId())%>"/>
                         <input type="hidden" name="vendedorID" value="<%= String.valueOf(itemInv.getUsuarioId())%>"/></td>
                         </tr>
+                        </form>
 
                         <% } %>
 
@@ -198,7 +206,6 @@
                     <%
                         }
                     %>
-                </form>
             </div>
 
 

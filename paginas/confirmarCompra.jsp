@@ -125,7 +125,8 @@
     int idUser = Integer.parseInt((String)session.getAttribute("User_ID"));
     int idVendedor = Integer.parseInt((String)session.getAttribute("VendedorID"));;
     int invId = Integer.parseInt((String)session.getAttribute("ItemID"));
-
+    System.out.println(idVendedor);
+    System.out.println(invId);
     Gamer gamertn2 = new Gamer();
     GamerDO gamer2 = new GamerDO();
     gamer2 = gamertn2.buscar(idVendedor);
@@ -143,6 +144,7 @@
         
     itemInv = tnII.buscar(invId);
     item = tnI.buscar(itemInv.getItemId());
+    System.out.println(itemInv.getItemId());
     
     if (itemInv.getEstado() == 1)
     {
